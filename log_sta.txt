@@ -1,1503 +1,0 @@
-nohup: ignoring input
-[1,0]<stderr>:reading subtitles:   0%|          | 0/21793 [00:00<?, ?it/s][1,3]<stderr>:reading subtitles:   0%|          | 0/21793 [00:00<?, ?it/s][1,2]<stderr>:reading subtitles:   0%|          | 0/21793 [00:00<?, ?it/s][1,1]<stderr>:reading subtitles:   0%|          | 0/21793 [00:00<?, ?it/s][1,0]<stderr>:reading subtitles:   4%|▍         | 965/21793 [00:00<00:02, 9649.62it/s][1,3]<stderr>:reading subtitles:   4%|▍         | 904/21793 [00:00<00:02, 9038.03it/s][1,2]<stderr>:reading subtitles:   4%|▎         | 789/21793 [00:00<00:02, 7888.99it/s][1,1]<stderr>:reading subtitles:   3%|▎         | 710/21793 [00:00<00:02, 7097.99it/s][1,0]<stderr>:reading subtitles:  12%|█▏        | 2549/21793 [00:00<00:01, 10930.76it/s][1,3]<stderr>:reading subtitles:  11%|█▏        | 2468/21793 [00:00<00:01, 10347.47it/s][1,2]<stderr>:reading subtitles:  11%|█         | 2343/21793 [00:00<00:02, 9255.89it/s][1,1]<stderr>:reading subtitles:  10%|█         | 2251/21793 [00:00<00:02, 8467.89it/s][1,0]<stderr>:reading subtitles:  16%|█▌        | 3440/21793 [00:00<00:01, 10233.73it/s][1,3]<stderr>:reading subtitles:  15%|█▍        | 3265/21793 [00:00<00:01, 9496.38it/s] [1,2]<stderr>:reading subtitles:  14%|█▎        | 2993/21793 [00:00<00:02, 8210.74it/s][1,1]<stderr>:reading subtitles:  13%|█▎        | 2863/21793 [00:00<00:02, 7510.13it/s][1,0]<stderr>:reading subtitles:  20%|██        | 4451/21793 [00:00<00:01, 9657.92it/s] [1,1]<stderr>:reading subtitles:  20%|██        | 4446/21793 [00:00<00:01, 8915.49it/s][1,3]<stderr>:reading subtitles:  20%|██        | 4451/21793 [00:00<00:01, 9248.23it/s][1,2]<stderr>:reading subtitles:  20%|██        | 4451/21793 [00:00<00:02, 8510.85it/s][1,0]<stderr>:reading subtitles:  28%|██▊       | 6045/21793 [00:00<00:01, 10952.50it/s][1,3]<stderr>:reading subtitles:  28%|██▊       | 6022/21793 [00:00<00:01, 10549.79it/s][1,1]<stderr>:reading subtitles:  25%|██▍       | 5346/21793 [00:00<00:01, 8247.23it/s][1,2]<stderr>:reading subtitles:  28%|██▊       | 6050/21793 [00:00<00:01, 9899.22it/s][1,0]<stderr>:reading subtitles:  32%|███▏      | 7066/21793 [00:00<00:01, 9910.42it/s] [1,3]<stderr>:reading subtitles:  32%|███▏      | 7020/21793 [00:00<00:01, 9454.83it/s] [1,1]<stderr>:reading subtitles:  29%|██▉       | 6357/21793 [00:00<00:01, 7857.29it/s][1,2]<stderr>:reading subtitles:  32%|███▏      | 7038/21793 [00:00<00:01, 8931.33it/s][1,0]<stderr>:reading subtitles:  40%|███▉      | 8693/21793 [00:00<00:01, 11226.68it/s][1,3]<stderr>:reading subtitles:  40%|███▉      | 8618/21793 [00:00<00:01, 10773.97it/s][1,1]<stderr>:reading subtitles:  37%|███▋      | 7955/21793 [00:00<00:01, 9270.72it/s][1,2]<stderr>:reading subtitles:  40%|███▉      | 8670/21793 [00:00<00:01, 10333.82it/s][1,0]<stderr>:reading subtitles:  45%|████▌     | 9852/21793 [00:00<00:01, 10007.89it/s][1,3]<stderr>:reading subtitles:  45%|████▍     | 9746/21793 [00:00<00:01, 9456.66it/s] [1,2]<stderr>:reading subtitles:  45%|████▍     | 9796/21793 [00:00<00:01, 8936.36it/s] [1,1]<stderr>:reading subtitles:  41%|████▏     | 8995/21793 [00:00<00:01, 7881.04it/s][1,0]<stderr>:reading subtitles:  52%|█████▏    | 11402/21793 [00:00<00:00, 11198.05it/s][1,3]<stderr>:reading subtitles:  52%|█████▏    | 11300/21793 [00:01<00:00, 10714.32it/s][1,2]<stderr>:reading subtitles:  52%|█████▏    | 11400/21793 [00:01<00:01, 10305.11it/s][1,1]<stderr>:reading subtitles:  49%|████▊     | 10589/21793 [00:01<00:01, 9289.54it/s][1,0]<stderr>:reading subtitles:  58%|█████▊    | 12603/21793 [00:01<00:00, 9430.62it/s] [1,3]<stderr>:reading subtitles:  57%|█████▋    | 12474/21793 [00:01<00:01, 9035.13it/s] [1,1]<stderr>:reading subtitles:  54%|█████▍    | 11877/21793 [00:01<00:01, 8433.86it/s][1,0]<stderr>:reading subtitles:  65%|██████▌   | 14193/21793 [00:01<00:00, 10740.57it/s][1,2]<stderr>:reading subtitles:  58%|█████▊    | 12576/21793 [00:01<00:01, 8287.17it/s] [1,3]<stderr>:reading subtitles:  64%|██████▍   | 14041/21793 [00:01<00:00, 10349.24it/s][1,1]<stderr>:reading subtitles:  62%|██████▏   | 13451/21793 [00:01<00:00, 9798.04it/s][1,2]<stderr>:reading subtitles:  65%|██████▌   | 14193/21793 [00:01<00:00, 9706.01it/s][1,3]<stderr>:reading subtitles:  72%|███████▏  | 15595/21793 [00:01<00:00, 11499.96it/s][1,1]<stderr>:reading subtitles:  69%|██████▉   | 15045/21793 [00:01<00:00, 11076.49it/s][1,0]<stderr>:reading subtitles:  72%|███████▏  | 15708/21793 [00:01<00:00, 9532.67it/s] [1,0]<stderr>:reading subtitles:  79%|███████▉  | 17270/21793 [00:01<00:00, 10793.33it/s][1,2]<stderr>:reading subtitles:  72%|███████▏  | 15708/21793 [00:01<00:00, 8753.86it/s][1,3]<stderr>:reading subtitles:  78%|███████▊  | 16890/21793 [00:01<00:00, 9436.26it/s] [1,1]<stderr>:reading subtitles:  75%|███████▍  | 16337/21793 [00:01<00:00, 9131.36it/s] [1,0]<stderr>:reading subtitles:  86%|████████▋ | 18843/21793 [00:01<00:00, 11914.35it/s][1,2]<stderr>:reading subtitles:  79%|███████▉  | 17300/21793 [00:01<00:00, 10120.45it/s][1,3]<stderr>:reading subtitles:  85%|████████▍ | 18438/21793 [00:01<00:00, 10688.10it/s][1,1]<stderr>:reading subtitles:  82%|████████▏ | 17923/21793 [00:01<00:00, 10462.86it/s][1,2]<stderr>:reading subtitles:  87%|████████▋ | 18911/21793 [00:01<00:00, 11390.42it/s][1,3]<stderr>:reading subtitles:  92%|█████████▏| 19993/21793 [00:01<00:00, 11793.40it/s][1,1]<stderr>:reading subtitles:  90%|████████▉ | 19512/21793 [00:01<00:00, 11656.44it/s][1,0]<stderr>:reading subtitles:  93%|█████████▎| 20356/21793 [00:01<00:00, 9785.38it/s] [1,0]<stderr>:reading subtitles: 100%|██████████| 21793/21793 [00:01<00:00, 11028.39it/s]
-[1,3]<stderr>:reading subtitles:  98%|█████████▊| 21327/21793 [00:02<00:00, 9185.03it/s] [1,2]<stderr>:reading subtitles:  93%|█████████▎| 20356/21793 [00:02<00:00, 9038.10it/s] [1,3]<stderr>:reading subtitles: 100%|██████████| 21793/21793 [00:02<00:00, 10662.29it/s]
-[1,1]<stderr>:reading subtitles:  96%|█████████▌| 20860/21793 [00:02<00:00, 9037.69it/s] [1,2]<stderr>:reading subtitles: 100%|██████████| 21793/21793 [00:02<00:00, 10348.78it/s]
-[1,1]<stderr>:reading subtitles: 100%|██████████| 21793/21793 [00:02<00:00, 10239.37it/s]
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90200
-[1,0]<stderr>:Computing moment similarity:   0%|          | 0/10895 [00:00<?, ?it/s][1,0]<stdout>:DESC_90200, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.86 RANDOM:  2/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.87 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_90200, THRESHOLD:0.88 RANDOM:  3/11; HERO:  3/11
-[1,0]<stderr>:Computing moment similarity:   0%|          | 1/10895 [00:03<9:50:53,  3.25s/it][1,0]<stdout>:DESC_90200, THRESHOLD:0.89 RANDOM:  3/15; HERO:  3/15
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90309
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.87 RANDOM:  4/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.88 RANDOM:  3/14; HERO:  2/14
-[1,0]<stdout>:DESC_90309, THRESHOLD:0.89 RANDOM:  3/15; HERO:  2/15
-[1,0]<stderr>:Computing moment similarity:   0%|          | 2/10895 [00:14<17:17:03,  5.71s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_92752
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.81 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.85 RANDOM:  3/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.86 RANDOM:  2/12; HERO:  2/12
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.87 RANDOM:  4/12; HERO:  3/12
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.88 RANDOM:  3/13; HERO:  4/13
-[1,0]<stdout>:DESC_92752, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95839
-[1,0]<stderr>:Computing moment similarity:   0%|          | 3/10895 [00:18<15:54:02,  5.26s/it][1,0]<stdout>:DESC_95839, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.86 RANDOM:  2/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.87 RANDOM:  2/12; HERO:  1/12
-[1,0]<stdout>:DESC_95839, THRESHOLD:0.88 RANDOM:  1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 4/10895 [00:21<13:25:03,  4.44s/it][1,0]<stdout>:DESC_95839, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_93909
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.85 RANDOM:  1/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.86 RANDOM:  3/10; HERO:  1/10
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.87 RANDOM:  2/11; HERO:  1/11
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.88 RANDOM:  5/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_93909, THRESHOLD:0.89 RANDOM:  3/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89405
-[1,0]<stderr>:Computing moment similarity:   0%|          | 5/10895 [00:24<11:44:47,  3.88s/it][1,0]<stdout>:DESC_89405, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.86 RANDOM:  4/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.87 RANDOM:  5/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.88 RANDOM:  4/11; HERO:  4/11
-[1,0]<stdout>:DESC_89405, THRESHOLD:0.89 RANDOM:  4/21; HERO:  4/21
-[1,0]<stderr>:Computing moment similarity:   0%|          | 6/10895 [00:35<19:01:47,  6.29s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_92446
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.80 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.82 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.84 RANDOM:  3/10; HERO:  3/10
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.85 RANDOM:  2/11; HERO:  3/11
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.86 RANDOM:  4/12; HERO:  3/12
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.87 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.88 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_92446, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 7/10895 [00:38<15:31:46,  5.13s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_91540
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.84 RANDOM:  3/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.86 RANDOM:  3/ 5; HERO:  4/ 5
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.87 RANDOM:  4/ 6; HERO:  4/ 6
-[1,0]<stdout>:DESC_91540, THRESHOLD:0.88 RANDOM:  5/ 8; HERO:  5/ 8
-[1,0]<stderr>:Computing moment similarity:   0%|          | 8/10895 [00:41<14:00:00,  4.63s/it][1,0]<stdout>:DESC_91540, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  8/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_87668
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.86 RANDOM:  5/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.87 RANDOM:  4/ 9; HERO:  4/ 9
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.88 RANDOM:  5/10; HERO:  4/10
-[1,0]<stdout>:DESC_87668, THRESHOLD:0.89 RANDOM:  7/14; HERO:  7/14
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91164
-[1,0]<stderr>:Computing moment similarity:   0%|          | 9/10895 [01:01<27:44:38,  9.17s/it][1,0]<stdout>:DESC_91164, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.85 RANDOM:  1/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.86 RANDOM:  5/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.87 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.88 RANDOM:  8/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_91164, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 10/10895 [01:03<20:45:58,  6.87s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_96577
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.83 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.85 RANDOM:  1/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.86 RANDOM:  4/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.87 RANDOM:  2/10; HERO:  2/10
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.88 RANDOM:  0/10; HERO:  3/10
-[1,0]<stdout>:DESC_96577, THRESHOLD:0.89 RANDOM:  3/11; HERO:  3/11
-[1,0]<stderr>:Computing moment similarity:   0%|          | 11/10895 [01:17<27:13:51,  9.01s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_97679
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.81 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.84 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.85 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.86 RANDOM:  2/10; HERO:  2/10
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.87 RANDOM:  2/10; HERO:  2/10
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.88 RANDOM:  3/13; HERO:  2/13
-[1,0]<stdout>:DESC_97679, THRESHOLD:0.89 RANDOM:  9/14; HERO:  3/14
-[1,0]<stderr>:Computing moment similarity:   0%|          | 12/10895 [01:25<26:24:19,  8.73s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_90143
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.80 RANDOM:  1/ 4; HERO: -2/ 4
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.81 RANDOM:  1/ 4; HERO: -2/ 4
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.82 RANDOM:  2/ 5; HERO: -2/ 5
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.83 RANDOM:  2/ 5; HERO: -2/ 5
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.84 RANDOM:  3/ 6; HERO: -2/ 6
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.85 RANDOM:  2/ 7; HERO: -2/ 7
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.86 RANDOM:  4/ 8; HERO: -2/ 8
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.87 RANDOM:  3/-1; HERO: -2/-1
-[1,0]<stdout>:DESC_90143, THRESHOLD:0.88 RANDOM:  4/-1; HERO: -2/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 13/10895 [01:28<21:28:11,  7.10s/it][1,0]<stdout>:DESC_90143, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96036
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.80 RANDOM:  3/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.87 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.88 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_96036, THRESHOLD:0.89 RANDOM:  4/10; HERO:  4/10
-[1,0]<stderr>:Computing moment similarity:   0%|          | 14/10895 [01:39<24:45:11,  8.19s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_89455
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.86 RANDOM:  5/ 8; HERO:  4/ 8
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.87 RANDOM:  3/10; HERO:  5/10
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.88 RANDOM:  7/18; HERO:  8/18
-[1,0]<stdout>:DESC_89455, THRESHOLD:0.89 RANDOM: 11/-1; HERO: 13/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92461
-[1,0]<stderr>:Computing moment similarity:   0%|          | 15/10895 [01:49<26:48:17,  8.87s/it][1,0]<stdout>:DESC_92461, THRESHOLD:0.80 RANDOM:  1/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.83 RANDOM:  3/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.87 RANDOM:  4/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_92461, THRESHOLD:0.88 RANDOM:  4/ 8; HERO:  3/ 8
-[1,0]<stderr>:Computing moment similarity:   0%|          | 16/10895 [01:52<21:25:57,  7.09s/it][1,0]<stdout>:DESC_92461, THRESHOLD:0.89 RANDOM:  6/12; HERO:  3/12
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92256
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.86 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.87 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_92256, THRESHOLD:0.88 RANDOM:  3/10; HERO:  2/10
-[1,0]<stderr>:Computing moment similarity:   0%|          | 17/10895 [02:16<36:46:50, 12.17s/it][1,0]<stdout>:DESC_92256, THRESHOLD:0.89 RANDOM:  4/13; HERO:  4/13
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89643
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.86 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.87 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89643, THRESHOLD:0.88 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stderr>:Computing moment similarity:   0%|          | 18/10895 [02:21<29:57:41,  9.92s/it][1,0]<stdout>:DESC_89643, THRESHOLD:0.89 RANDOM:  3/ 9; HERO:  2/ 9
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92345
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.87 RANDOM:  3/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_92345, THRESHOLD:0.88 RANDOM:  6/13; HERO:  1/13
-[1,0]<stderr>:Computing moment similarity:   0%|          | 19/10895 [02:24<23:48:36,  7.88s/it][1,0]<stdout>:DESC_92345, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96896
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.82 RANDOM:  2/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.83 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.85 RANDOM:  4/ 8; HERO:  5/ 8
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  5/ 9
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.87 RANDOM:  6/11; HERO:  5/11
-[1,0]<stdout>:DESC_96896, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  5/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 20/10895 [02:29<21:04:35,  6.98s/it][1,0]<stdout>:DESC_96896, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90377
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.81 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.83 RANDOM:  1/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.84 RANDOM:  4/11; HERO:  1/11
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.85 RANDOM:  2/13; HERO:  1/13
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.86 RANDOM:  2/13; HERO:  1/13
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.87 RANDOM:  3/14; HERO:  2/14
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.88 RANDOM:  8/16; HERO:  2/16
-[1,0]<stdout>:DESC_90377, THRESHOLD:0.89 RANDOM:  2/19; HERO:  2/19
-[1,0]<stderr>:Computing moment similarity:   0%|          | 21/10895 [02:35<20:03:13,  6.64s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_94356
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.85 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.86 RANDOM:  5/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.87 RANDOM:  3/10; HERO:  4/10
-[1,0]<stdout>:DESC_94356, THRESHOLD:0.88 RANDOM:  3/15; HERO:  4/15
-[1,0]<stderr>:Computing moment similarity:   0%|          | 22/10895 [02:41<19:38:50,  6.51s/it][1,0]<stdout>:DESC_94356, THRESHOLD:0.89 RANDOM:  2/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96534
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.84 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.85 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.86 RANDOM:  4/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.87 RANDOM:  3/10; HERO:  2/10
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.88 RANDOM:  4/13; HERO:  2/13
-[1,0]<stdout>:DESC_96534, THRESHOLD:0.89 RANDOM:  7/20; HERO:  2/20
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95782
-[1,0]<stderr>:Computing moment similarity:   0%|          | 23/10895 [02:54<26:07:41,  8.65s/it][1,0]<stdout>:DESC_95782, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.82 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.85 RANDOM:  3/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.86 RANDOM:  4/10; HERO:  1/10
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.87 RANDOM:  4/11; HERO:  1/11
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.88 RANDOM:  4/12; HERO:  1/12
-[1,0]<stdout>:DESC_95782, THRESHOLD:0.89 RANDOM:  8/26; HERO:  1/26
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92408
-[1,0]<stderr>:Computing moment similarity:   0%|          | 24/10895 [02:58<21:48:40,  7.22s/it][1,0]<stdout>:DESC_92408, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.82 RANDOM:  3/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.86 RANDOM:  6/11; HERO:  4/11
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.87 RANDOM:  6/13; HERO:  4/13
-[1,0]<stdout>:DESC_92408, THRESHOLD:0.88 RANDOM:  6/-1; HERO:  4/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 25/10895 [03:02<18:42:09,  6.19s/it][1,0]<stdout>:DESC_92408, THRESHOLD:0.89 RANDOM:  6/-1; HERO:  4/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89874
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.82 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.83 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.85 RANDOM:  2/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.86 RANDOM:  6/15; HERO:  1/15
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.87 RANDOM:  7/17; HERO:  2/17
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.88 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_89874, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 26/10895 [03:05<15:59:36,  5.30s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_96494
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.86 RANDOM:  1/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.87 RANDOM:  4/10; HERO:  4/10
-[1,0]<stdout>:DESC_96494, THRESHOLD:0.88 RANDOM:  4/13; HERO:  5/13
-[1,0]<stderr>:Computing moment similarity:   0%|          | 27/10895 [03:23<26:51:41,  8.90s/it][1,0]<stdout>:DESC_96494, THRESHOLD:0.89 RANDOM:  9/18; HERO:  5/18
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95200
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.80 RANDOM:  1/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.81 RANDOM:  1/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.83 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.86 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_95200, THRESHOLD:0.88 RANDOM:  3/10; HERO:  2/10
-[1,0]<stderr>:Computing moment similarity:   0%|          | 28/10895 [03:26<21:58:24,  7.28s/it][1,0]<stdout>:DESC_95200, THRESHOLD:0.89 RANDOM:  1/14; HERO:  2/14
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89773
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.80 RANDOM:  3/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.82 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.83 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.84 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.85 RANDOM:  5/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.86 RANDOM:  5/11; HERO:  1/11
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.87 RANDOM:  6/12; HERO:  1/12
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.88 RANDOM:  7/13; HERO:  1/13
-[1,0]<stdout>:DESC_89773, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 29/10895 [03:34<22:47:07,  7.55s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_97230
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.85 RANDOM:  5/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.86 RANDOM:  4/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.87 RANDOM:  4/10; HERO:  2/10
-[1,0]<stdout>:DESC_97230, THRESHOLD:0.88 RANDOM:  4/14; HERO:  2/14
-[1,0]<stderr>:Computing moment similarity:   0%|          | 30/10895 [03:40<20:57:10,  6.94s/it][1,0]<stdout>:DESC_97230, THRESHOLD:0.89 RANDOM: 14/-1; HERO:  2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94904
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  4/ 8
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.87 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.88 RANDOM:  5/-1; HERO:  5/-1
-[1,0]<stdout>:DESC_94904, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90727
-[1,0]<stderr>:Computing moment similarity:   0%|          | 31/10895 [03:57<29:53:49,  9.91s/it][1,0]<stdout>:DESC_90727, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.85 RANDOM:  4/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.86 RANDOM:  4/ 7; HERO:  6/ 7
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.87 RANDOM:  5/10; HERO:  7/10
-[1,0]<stdout>:DESC_90727, THRESHOLD:0.88 RANDOM:  6/13; HERO:  9/13
-[1,0]<stderr>:Computing moment similarity:   0%|          | 32/10895 [04:04<27:20:29,  9.06s/it][1,0]<stdout>:DESC_90727, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88161
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.87 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_88161, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 33/10895 [04:07<21:36:38,  7.16s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_89594
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.84 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.85 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.87 RANDOM:  3/10; HERO:  1/10
-[1,0]<stdout>:DESC_89594, THRESHOLD:0.88 RANDOM:  9/16; HERO:  1/16
-[1,0]<stderr>:Computing moment similarity:   0%|          | 34/10895 [04:09<17:41:15,  5.86s/it][1,0]<stdout>:DESC_89594, THRESHOLD:0.89 RANDOM: 11/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95219
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.81 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.84 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.85 RANDOM:  3/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.86 RANDOM:  4/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.87 RANDOM:  2/ 6; HERO:  4/ 6
-[1,0]<stdout>:DESC_95219, THRESHOLD:0.88 RANDOM:  3/10; HERO:  4/10
-[1,0]<stderr>:Computing moment similarity:   0%|          | 35/10895 [04:14<16:29:13,  5.47s/it][1,0]<stdout>:DESC_95219, THRESHOLD:0.89 RANDOM:  5/11; HERO:  4/11
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90021
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.84 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.86 RANDOM:  2/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.87 RANDOM:  2/12; HERO:  1/12
-[1,0]<stdout>:DESC_90021, THRESHOLD:0.88 RANDOM:  5/15; HERO:  1/15
-[1,0]<stderr>:Computing moment similarity:   0%|          | 36/10895 [04:27<23:32:58,  7.81s/it][1,0]<stdout>:DESC_90021, THRESHOLD:0.89 RANDOM:  6/21; HERO:  1/21
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90365
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.85 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.87 RANDOM:  4/11; HERO:  3/11
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.88 RANDOM:  2/18; HERO:  3/18
-[1,0]<stdout>:DESC_90365, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  3/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92398
-[1,0]<stderr>:Computing moment similarity:   0%|          | 37/10895 [04:32<20:38:16,  6.84s/it][1,0]<stdout>:DESC_92398, THRESHOLD:0.80 RANDOM:  1/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.81 RANDOM:  1/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.82 RANDOM:  2/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.83 RANDOM:  2/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.84 RANDOM:  1/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.85 RANDOM:  3/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.86 RANDOM:  6/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.87 RANDOM:  1/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92398, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96430
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.84 RANDOM:  1/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.87 RANDOM:  3/ 8; HERO:  4/ 8
-[1,0]<stdout>:DESC_96430, THRESHOLD:0.88 RANDOM:  3/16; HERO:  5/16
-[1,0]<stderr>:Computing moment similarity:   0%|          | 39/10895 [04:46<21:06:47,  7.00s/it][1,0]<stdout>:DESC_96430, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94364
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.81 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.82 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.83 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.84 RANDOM:  1/10; HERO:  2/10
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.85 RANDOM:  2/11; HERO:  3/11
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.86 RANDOM:  3/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.87 RANDOM:  3/-1; HERO:  6/-1
-[1,0]<stdout>:DESC_94364, THRESHOLD:0.88 RANDOM:  2/-1; HERO:  7/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 40/10895 [04:52<19:28:41,  6.46s/it][1,0]<stdout>:DESC_94364, THRESHOLD:0.89 RANDOM:  9/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92155
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.85 RANDOM:  4/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.86 RANDOM:  4/10; HERO:  1/10
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.87 RANDOM:  4/11; HERO:  1/11
-[1,0]<stdout>:DESC_92155, THRESHOLD:0.88 RANDOM:  3/14; HERO:  1/14
-[1,0]<stderr>:Computing moment similarity:   0%|          | 41/10895 [05:02<22:44:25,  7.54s/it][1,0]<stdout>:DESC_92155, THRESHOLD:0.89 RANDOM:  9/19; HERO:  1/19
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96074
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.84 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.85 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.86 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.87 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.88 RANDOM:  4/11; HERO:  2/11
-[1,0]<stdout>:DESC_96074, THRESHOLD:0.89 RANDOM:  4/14; HERO:  2/14
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88818
-[1,0]<stderr>:Computing moment similarity:   0%|          | 42/10895 [05:41<51:03:46, 16.94s/it][1,0]<stdout>:DESC_88818, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.85 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.87 RANDOM:  5/14; HERO:  4/14
-[1,0]<stdout>:DESC_88818, THRESHOLD:0.88 RANDOM:  8/21; HERO:  6/21
-[1,0]<stderr>:Computing moment similarity:   0%|          | 43/10895 [05:50<44:08:59, 14.65s/it][1,0]<stdout>:DESC_88818, THRESHOLD:0.89 RANDOM:  8/-1; HERO:  9/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96155
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.82 RANDOM:  5/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.86 RANDOM:  5/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.87 RANDOM:  5/10; HERO:  4/10
-[1,0]<stdout>:DESC_96155, THRESHOLD:0.88 RANDOM:  8/14; HERO:  9/14
-[1,0]<stderr>:Computing moment similarity:   0%|          | 44/10895 [05:57<37:38:30, 12.49s/it][1,0]<stdout>:DESC_96155, THRESHOLD:0.89 RANDOM: 12/18; HERO: 10/18
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89103
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.81 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.84 RANDOM:  1/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.86 RANDOM:  2/ 9; HERO:  4/ 9
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.87 RANDOM:  2/15; HERO:  9/15
-[1,0]<stdout>:DESC_89103, THRESHOLD:0.88 RANDOM:  3/19; HERO: 10/19
-[1,0]<stderr>:Computing moment similarity:   0%|          | 45/10895 [06:11<38:26:56, 12.76s/it][1,0]<stdout>:DESC_89103, THRESHOLD:0.89 RANDOM: 14/28; HERO: 14/28
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88638
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.85 RANDOM:  5/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.86 RANDOM:  3/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.87 RANDOM:  2/-1; HERO:  5/-1
-[1,0]<stdout>:DESC_88638, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  5/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 46/10895 [06:13<29:09:09,  9.67s/it][1,0]<stdout>:DESC_88638, THRESHOLD:0.89 RANDOM:  3/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90012
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.82 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.83 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.84 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.85 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.86 RANDOM:  1/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.87 RANDOM:  6/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_90012, THRESHOLD:0.88 RANDOM:  2/12; HERO:  3/12
-[1,0]<stderr>:Computing moment similarity:   0%|          | 47/10895 [06:16<22:28:16,  7.46s/it][1,0]<stdout>:DESC_90012, THRESHOLD:0.89 RANDOM:  6/-1; HERO:  3/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88964
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.80 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.84 RANDOM:  2/10; HERO:  1/10
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.85 RANDOM:  3/10; HERO:  1/10
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.86 RANDOM:  5/11; HERO:  1/11
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.87 RANDOM:  4/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_88964, THRESHOLD:0.88 RANDOM: 12/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 48/10895 [06:22<21:36:46,  7.17s/it][1,0]<stdout>:DESC_88964, THRESHOLD:0.89 RANDOM:  6/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89887
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.80 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.84 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.86 RANDOM:  1/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.87 RANDOM:  6/10; HERO:  1/10
-[1,0]<stdout>:DESC_89887, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 49/10895 [06:25<17:52:33,  5.93s/it][1,0]<stdout>:DESC_89887, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91840
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.87 RANDOM:  4/12; HERO:  3/12
-[1,0]<stdout>:DESC_91840, THRESHOLD:0.88 RANDOM:  5/15; HERO:  4/15
-[1,0]<stderr>:Computing moment similarity:   0%|          | 50/10895 [06:33<19:31:16,  6.48s/it][1,0]<stdout>:DESC_91840, THRESHOLD:0.89 RANDOM: 19/22; HERO:  7/22
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92704
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.86 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.87 RANDOM:  3/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92704, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  2/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 51/10895 [06:36<16:27:33,  5.46s/it][1,0]<stdout>:DESC_92704, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88024
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.87 RANDOM:  4/10; HERO:  6/10
-[1,0]<stdout>:DESC_88024, THRESHOLD:0.88 RANDOM:  8/17; HERO:  7/17
-[1,0]<stderr>:Computing moment similarity:   0%|          | 52/10895 [06:44<18:33:31,  6.16s/it][1,0]<stdout>:DESC_88024, THRESHOLD:0.89 RANDOM:  2/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88108
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.84 RANDOM:  5/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.85 RANDOM:  2/11; HERO:  2/11
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.86 RANDOM:  2/12; HERO:  2/12
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.87 RANDOM: -1/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_88108, THRESHOLD:0.88 RANDOM:  6/-1; HERO:  3/-1
-[1,0]<stderr>:Computing moment similarity:   0%|          | 53/10895 [06:48<17:06:42,  5.68s/it][1,0]<stdout>:DESC_88108, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  3/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_93654
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.80 RANDOM:  3/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.81 RANDOM:  3/-1; HERO:  3/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.82 RANDOM:  3/-1; HERO:  3/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.83 RANDOM:  3/-1; HERO:  3/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.84 RANDOM:  3/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.85 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.86 RANDOM:  4/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.87 RANDOM:  6/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.88 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_93654, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91203
-[1,0]<stderr>:Computing moment similarity:   0%|          | 54/10895 [06:48<12:04:08,  4.01s/it][1,0]<stdout>:DESC_91203, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.81 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.82 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.83 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.84 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.85 RANDOM:  2/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.86 RANDOM:  7/-1; HERO:  7/-1
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.87 RANDOM: 13/-1; HERO:  8/-1
-[1,0]<stdout>:DESC_91203, THRESHOLD:0.88 RANDOM: 16/-1; HERO:  8/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 55/10895 [06:51<10:35:33,  3.52s/it][1,0]<stdout>:DESC_91203, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96840
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.81 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.82 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.83 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.84 RANDOM:  6/10; HERO:  2/10
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.85 RANDOM:  2/10; HERO:  2/10
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.86 RANDOM:  4/11; HERO:  2/11
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.87 RANDOM:  4/11; HERO:  2/11
-[1,0]<stdout>:DESC_96840, THRESHOLD:0.88 RANDOM:  3/13; HERO:  3/13
-[1,0]<stderr>:Computing moment similarity:   1%|          | 56/10895 [06:56<11:46:00,  3.91s/it][1,0]<stdout>:DESC_96840, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  4/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96533
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.80 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.84 RANDOM:  4/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.86 RANDOM:  5/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.87 RANDOM:  8/14; HERO:  3/14
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.88 RANDOM:  8/17; HERO:  3/17
-[1,0]<stdout>:DESC_96533, THRESHOLD:0.89 RANDOM: 12/-1; HERO:  3/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 57/10895 [07:10<21:07:50,  7.02s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_90036
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.82 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.85 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.86 RANDOM:  2/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.87 RANDOM:  3/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_90036, THRESHOLD:0.88 RANDOM:  5/-1; HERO:  2/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 58/10895 [07:12<16:37:43,  5.52s/it][1,0]<stdout>:DESC_90036, THRESHOLD:0.89 RANDOM:  7/-1; HERO:  3/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90069
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.86 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.87 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_90069, THRESHOLD:0.88 RANDOM:  5/10; HERO:  2/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 59/10895 [07:25<23:10:50,  7.70s/it][1,0]<stdout>:DESC_90069, THRESHOLD:0.89 RANDOM:  3/13; HERO:  4/13
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92711
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.86 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.87 RANDOM:  4/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_92711, THRESHOLD:0.88 RANDOM:  2/ 9; HERO:  3/ 9
-[1,0]<stderr>:Computing moment similarity:   1%|          | 60/10895 [07:42<32:13:33, 10.71s/it][1,0]<stdout>:DESC_92711, THRESHOLD:0.89 RANDOM:  3/11; HERO:  3/11
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96810
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.80 RANDOM:  1/ 6; HERO: -2/ 6
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.81 RANDOM:  1/ 6; HERO: -2/ 6
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.82 RANDOM:  2/ 6; HERO: -2/ 6
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.83 RANDOM:  2/ 7; HERO: -2/ 7
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.84 RANDOM:  2/ 8; HERO: -2/ 8
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.85 RANDOM:  2/ 8; HERO: -2/ 8
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.86 RANDOM:  1/ 9; HERO: -2/ 9
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.87 RANDOM:  5/11; HERO: -2/11
-[1,0]<stdout>:DESC_96810, THRESHOLD:0.88 RANDOM:  4/16; HERO: -2/16
-[1,0]<stderr>:Computing moment similarity:   1%|          | 61/10895 [07:45<24:39:39,  8.19s/it][1,0]<stdout>:DESC_96810, THRESHOLD:0.89 RANDOM:  5/-1; HERO: -2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91731
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.80 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.81 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.83 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.84 RANDOM:  4/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.85 RANDOM:  4/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.86 RANDOM:  5/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.87 RANDOM:  3/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_91731, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 62/10895 [07:55<26:57:56,  8.96s/it][1,0]<stdout>:DESC_91731, THRESHOLD:0.89 RANDOM:  1/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88449
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.86 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.87 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88449, THRESHOLD:0.88 RANDOM:  3/ 9; HERO:  1/ 9
-[1,0]<stderr>:Computing moment similarity:   1%|          | 63/10895 [08:20<40:45:47, 13.55s/it][1,0]<stdout>:DESC_88449, THRESHOLD:0.89 RANDOM:  1/ 9; HERO:  2/ 9
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92688
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.86 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.87 RANDOM:  3/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.88 RANDOM:  3/12; HERO:  3/12
-[1,0]<stdout>:DESC_92688, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 64/10895 [08:23<31:19:25, 10.41s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_89071
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.87 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_89071, THRESHOLD:0.88 RANDOM:  3/-1; HERO:  4/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 65/10895 [08:26<24:36:52,  8.18s/it][1,0]<stdout>:DESC_89071, THRESHOLD:0.89 RANDOM:  2/-1; HERO:  6/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96974
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.87 RANDOM:  2/10; HERO:  3/10
-[1,0]<stdout>:DESC_96974, THRESHOLD:0.88 RANDOM:  3/-1; HERO: 11/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 66/10895 [08:30<20:40:54,  6.88s/it][1,0]<stdout>:DESC_96974, THRESHOLD:0.89 RANDOM:  3/-1; HERO: 13/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94706
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.88 RANDOM:  3/11; HERO:  3/11
-[1,0]<stdout>:DESC_94706, THRESHOLD:0.89 RANDOM:  3/15; HERO:  4/15
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96117
-[1,0]<stderr>:Computing moment similarity:   1%|          | 67/10895 [08:44<27:33:00,  9.16s/it][1,0]<stdout>:DESC_96117, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.85 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.86 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.87 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_96117, THRESHOLD:0.88 RANDOM:  5/ 9; HERO:  2/ 9
-[1,0]<stderr>:Computing moment similarity:   1%|          | 68/10895 [08:59<32:45:51, 10.89s/it][1,0]<stdout>:DESC_96117, THRESHOLD:0.89 RANDOM:  2/11; HERO:  2/11
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92855
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.81 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.84 RANDOM:  5/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.85 RANDOM:  6/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.86 RANDOM:  3/10; HERO:  1/10
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.87 RANDOM:  4/15; HERO:  1/15
-[1,0]<stdout>:DESC_92855, THRESHOLD:0.88 RANDOM:  7/17; HERO:  2/17
-[1,0]<stderr>:Computing moment similarity:   1%|          | 69/10895 [09:05<28:42:39,  9.55s/it][1,0]<stdout>:DESC_92855, THRESHOLD:0.89 RANDOM: 14/30; HERO:  2/30
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92624
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.86 RANDOM:  1/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.87 RANDOM:  4/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_92624, THRESHOLD:0.88 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stderr>:Computing moment similarity:   1%|          | 70/10895 [09:30<42:12:34, 14.04s/it][1,0]<stdout>:DESC_92624, THRESHOLD:0.89 RANDOM:  3/16; HERO:  3/16
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_97658
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.81 RANDOM:  3/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.83 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.84 RANDOM:  4/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.86 RANDOM:  2/10; HERO:  3/10
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.87 RANDOM:  5/11; HERO:  4/11
-[1,0]<stdout>:DESC_97658, THRESHOLD:0.88 RANDOM: 12/19; HERO:  9/19
-[1,0]<stderr>:Computing moment similarity:   1%|          | 71/10895 [09:33<32:15:32, 10.73s/it][1,0]<stdout>:DESC_97658, THRESHOLD:0.89 RANDOM:  2/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96333
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.86 RANDOM:  5/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.87 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_96333, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 72/10895 [09:37<26:29:01,  8.81s/it][1,0]<stdout>:DESC_96333, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95062
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.80 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.81 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.82 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.83 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.86 RANDOM:  4/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.87 RANDOM:  3/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_95062, THRESHOLD:0.88 RANDOM:  5/11; HERO:  6/11
-[1,0]<stderr>:Computing moment similarity:   1%|          | 73/10895 [09:42<22:42:49,  7.56s/it][1,0]<stdout>:DESC_95062, THRESHOLD:0.89 RANDOM:  7/15; HERO:  8/15
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96723
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.85 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.86 RANDOM:  1/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.87 RANDOM:  1/10; HERO:  3/10
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.88 RANDOM:  5/15; HERO:  4/15
-[1,0]<stdout>:DESC_96723, THRESHOLD:0.89 RANDOM: 20/26; HERO:  6/26
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92339
-[1,0]<stderr>:Computing moment similarity:   1%|          | 74/10895 [09:53<26:04:30,  8.67s/it][1,0]<stdout>:DESC_92339, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.86 RANDOM:  1/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.87 RANDOM:  4/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_92339, THRESHOLD:0.88 RANDOM:  2/-1; HERO:  2/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 75/10895 [09:56<20:41:29,  6.88s/it][1,0]<stdout>:DESC_92339, THRESHOLD:0.89 RANDOM:  3/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_97042
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.85 RANDOM:  2/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.86 RANDOM:  4/ 9; HERO:  4/ 9
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.87 RANDOM:  6/11; HERO:  4/11
-[1,0]<stdout>:DESC_97042, THRESHOLD:0.88 RANDOM:  5/-1; HERO:  4/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 76/10895 [10:01<19:03:26,  6.34s/it][1,0]<stdout>:DESC_97042, THRESHOLD:0.89 RANDOM:  3/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90114
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.81 RANDOM:  3/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.82 RANDOM:  3/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.84 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.85 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.86 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.87 RANDOM:  4/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.88 RANDOM:  4/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90114, THRESHOLD:0.89 RANDOM:  5/11; HERO:  5/11
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96007
-[1,0]<stderr>:Computing moment similarity:   1%|          | 77/10895 [10:17<27:53:11,  9.28s/it][1,0]<stdout>:DESC_96007, THRESHOLD:0.80 RANDOM:  4/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.83 RANDOM:  4/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.85 RANDOM:  4/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.87 RANDOM:  5/12; HERO:  7/12
-[1,0]<stdout>:DESC_96007, THRESHOLD:0.88 RANDOM:  5/26; HERO:  7/26
-[1,0]<stderr>:Computing moment similarity:   1%|          | 78/10895 [10:29<30:28:38, 10.14s/it][1,0]<stdout>:DESC_96007, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  7/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94623
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.84 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.85 RANDOM:  2/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.86 RANDOM: -1/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.87 RANDOM:  5/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_94623, THRESHOLD:0.88 RANDOM:  3/-1; HERO: -1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 79/10895 [10:32<23:41:55,  7.89s/it][1,0]<stdout>:DESC_94623, THRESHOLD:0.89 RANDOM:  3/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91396
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.85 RANDOM:  4/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.86 RANDOM:  4/10; HERO:  1/10
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.87 RANDOM:  7/13; HERO:  1/13
-[1,0]<stdout>:DESC_91396, THRESHOLD:0.88 RANDOM:  7/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 80/10895 [10:36<19:56:34,  6.64s/it][1,0]<stdout>:DESC_91396, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91408
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.80 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.83 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.85 RANDOM:  4/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.86 RANDOM:  3/13; HERO:  2/13
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.87 RANDOM:  6/16; HERO:  2/16
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.88 RANDOM:  2/-1; HERO:  3/-1
-[1,0]<stdout>:DESC_91408, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  4/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94406
-[1,0]<stderr>:Computing moment similarity:   1%|          | 81/10895 [10:40<17:31:05,  5.83s/it][1,0]<stdout>:DESC_94406, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_94406, THRESHOLD:0.88 RANDOM:  1/-1; HERO:  3/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 82/10895 [10:50<21:51:02,  7.27s/it][1,0]<stdout>:DESC_94406, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  3/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89760
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.86 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.87 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_89760, THRESHOLD:0.88 RANDOM:  2/10; HERO:  3/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 83/10895 [10:54<19:03:01,  6.34s/it][1,0]<stdout>:DESC_89760, THRESHOLD:0.89 RANDOM:  4/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88836
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.84 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.87 RANDOM:  2/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_88836, THRESHOLD:0.88 RANDOM:  2/10; HERO:  1/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 84/10895 [10:59<17:04:21,  5.69s/it][1,0]<stdout>:DESC_88836, THRESHOLD:0.89 RANDOM:  2/13; HERO:  1/13
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92062
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.80 RANDOM:  1/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.81 RANDOM:  3/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.85 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.87 RANDOM:  4/11; HERO:  1/11
-[1,0]<stdout>:DESC_92062, THRESHOLD:0.88 RANDOM:  7/13; HERO:  1/13
-[1,0]<stderr>:Computing moment similarity:   1%|          | 85/10895 [11:01<14:34:47,  4.86s/it][1,0]<stdout>:DESC_92062, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89966
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.86 RANDOM:  2/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.87 RANDOM:  2/10; HERO:  4/10
-[1,0]<stdout>:DESC_89966, THRESHOLD:0.88 RANDOM:  2/12; HERO:  4/12
-[1,0]<stderr>:Computing moment similarity:   1%|          | 86/10895 [11:08<16:17:42,  5.43s/it][1,0]<stdout>:DESC_89966, THRESHOLD:0.89 RANDOM:  3/14; HERO:  4/14
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94885
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.81 RANDOM:  3/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  4/ 6
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.86 RANDOM:  6/12; HERO:  6/12
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.87 RANDOM:  6/13; HERO:  9/13
-[1,0]<stdout>:DESC_94885, THRESHOLD:0.88 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 87/10895 [11:13<16:01:08,  5.34s/it][1,0]<stdout>:DESC_94885, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91125
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_91125, THRESHOLD:0.88 RANDOM:  2/12; HERO:  2/12
-[1,0]<stderr>:Computing moment similarity:   1%|          | 88/10895 [11:19<15:55:29,  5.30s/it][1,0]<stdout>:DESC_91125, THRESHOLD:0.89 RANDOM:  1/-1; HERO:  4/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_97903
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.80 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.81 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.82 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.83 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.84 RANDOM:  3/10; HERO:  2/10
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.85 RANDOM:  2/12; HERO:  2/12
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.86 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.87 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.88 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:DESC_97903, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90644
-[1,0]<stderr>:Computing moment similarity:   1%|          | 89/10895 [11:27<18:27:24,  6.15s/it][1,0]<stdout>:DESC_90644, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.87 RANDOM:  2/10; HERO:  2/10
-[1,0]<stdout>:DESC_90644, THRESHOLD:0.88 RANDOM:  2/13; HERO:  2/13
-[1,0]<stderr>:Computing moment similarity:   1%|          | 90/10895 [11:49<33:14:19, 11.07s/it][1,0]<stdout>:DESC_90644, THRESHOLD:0.89 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94628
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.80 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.81 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.82 RANDOM:  3/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.85 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.86 RANDOM:  4/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.87 RANDOM:  2/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.88 RANDOM:  4/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_94628, THRESHOLD:0.89 RANDOM:  4/11; HERO:  4/11
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90398
-[1,0]<stderr>:Computing moment similarity:   1%|          | 91/10895 [12:10<41:45:20, 13.91s/it][1,0]<stdout>:DESC_90398, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.87 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90398, THRESHOLD:0.88 RANDOM:  3/12; HERO:  2/12
-[1,0]<stderr>:Computing moment similarity:   1%|          | 92/10895 [12:13<32:24:54, 10.80s/it][1,0]<stdout>:DESC_90398, THRESHOLD:0.89 RANDOM:  5/13; HERO:  4/13
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94129
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.87 RANDOM:  4/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_94129, THRESHOLD:0.88 RANDOM:  5/10; HERO:  1/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 93/10895 [12:22<30:26:42, 10.15s/it][1,0]<stdout>:DESC_94129, THRESHOLD:0.89 RANDOM:  2/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94508
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.80 RANDOM:  3/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.81 RANDOM:  3/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.82 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.84 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.85 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.87 RANDOM:  5/ 8; HERO:  5/ 8
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.88 RANDOM:  6/ 9; HERO:  6/ 9
-[1,0]<stdout>:DESC_94508, THRESHOLD:0.89 RANDOM:  5/19; HERO:  7/19
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_91185
-[1,0]<stderr>:Computing moment similarity:   1%|          | 94/10895 [12:52<48:13:25, 16.07s/it][1,0]<stdout>:DESC_91185, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.82 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.83 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.84 RANDOM:  5/10; HERO:  2/10
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.85 RANDOM:  5/12; HERO:  2/12
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.86 RANDOM:  2/13; HERO:  2/13
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.87 RANDOM:  1/-1; HERO:  3/-1
-[1,0]<stdout>:DESC_91185, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 95/10895 [12:59<40:05:50, 13.37s/it][1,0]<stdout>:DESC_91185, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  4/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90308
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.80 RANDOM:  3/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.84 RANDOM:  4/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.87 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_90308, THRESHOLD:0.88 RANDOM:  3/10; HERO:  2/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 96/10895 [13:09<37:31:25, 12.51s/it][1,0]<stdout>:DESC_90308, THRESHOLD:0.89 RANDOM:  3/15; HERO:  2/15
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96535
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.86 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_96535, THRESHOLD:0.88 RANDOM:  3/10; HERO:  3/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 97/10895 [13:24<39:12:54, 13.07s/it][1,0]<stdout>:DESC_96535, THRESHOLD:0.89 RANDOM:  7/13; HERO:  7/13
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95152
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.83 RANDOM:  5/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.85 RANDOM:  2/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.86 RANDOM:  2/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.87 RANDOM: -1/-1; HERO:  3/-1
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  5/-1
-[1,0]<stdout>:DESC_95152, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  9/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_93318
-[1,0]<stderr>:Computing moment similarity:   1%|          | 98/10895 [13:28<31:02:40, 10.35s/it][1,0]<stdout>:DESC_93318, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.82 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.86 RANDOM:  3/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.87 RANDOM:  1/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.88 RANDOM:  6/10; HERO:  2/10
-[1,0]<stdout>:DESC_93318, THRESHOLD:0.89 RANDOM:  5/10; HERO:  2/10
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_97205
-[1,0]<stderr>:Computing moment similarity:   1%|          | 99/10895 [13:51<42:21:56, 14.13s/it][1,0]<stdout>:DESC_97205, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.84 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.85 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.86 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.87 RANDOM:  3/10; HERO:  2/10
-[1,0]<stdout>:DESC_97205, THRESHOLD:0.88 RANDOM:  2/11; HERO:  2/11
-[1,0]<stderr>:Computing moment similarity:   1%|          | 100/10895 [13:55<33:33:41, 11.19s/it][1,0]<stdout>:DESC_97205, THRESHOLD:0.89 RANDOM:  2/12; HERO:  3/12
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88131
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.85 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.86 RANDOM:  5/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.87 RANDOM:  4/13; HERO:  1/13
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.88 RANDOM:  7/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_88131, THRESHOLD:0.89 RANDOM:  5/-1; HERO:  2/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 101/10895 [13:59<26:33:25,  8.86s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_88514
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.80 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.81 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.82 RANDOM:  1/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.83 RANDOM:  5/11; HERO:  1/11
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.84 RANDOM:  4/11; HERO:  1/11
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.85 RANDOM:  2/14; HERO:  1/14
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.86 RANDOM:  4/15; HERO:  1/15
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.87 RANDOM:  7/19; HERO:  1/19
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.88 RANDOM:  6/-1; HERO:  1/-1
-[1,0]<stdout>:DESC_88514, THRESHOLD:0.89 RANDOM:  2/-1; HERO:  1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_95150
-[1,0]<stderr>:Computing moment similarity:   1%|          | 102/10895 [14:02<21:42:49,  7.24s/it][1,0]<stdout>:DESC_95150, THRESHOLD:0.80 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.81 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.82 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.83 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.84 RANDOM: -1/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.85 RANDOM: -1/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.86 RANDOM:  2/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.87 RANDOM:  2/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_95150, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_90680
-[1,0]<stderr>:Computing moment similarity:   1%|          | 103/10895 [14:05<17:57:46,  5.99s/it][1,0]<stdout>:DESC_90680, THRESHOLD:0.80 RANDOM:  1/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.84 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.85 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.86 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.88 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_90680, THRESHOLD:0.89 RANDOM:  5/ 9; HERO:  4/ 9
-[1,0]<stderr>:Computing moment similarity:   1%|          | 104/10895 [14:18<24:03:50,  8.03s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_90767
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.80 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.81 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.82 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.84 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.85 RANDOM:  2/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.87 RANDOM:  2/10; HERO:  4/10
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.88 RANDOM:  2/11; HERO:  5/11
-[1,0]<stdout>:DESC_90767, THRESHOLD:0.89 RANDOM:  4/22; HERO:  5/22
-[1,0]<stderr>:Computing moment similarity:   1%|          | 105/10895 [14:36<33:28:42, 11.17s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_96178
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.86 RANDOM:  2/11; HERO:  3/11
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.87 RANDOM:  3/11; HERO:  4/11
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.88 RANDOM:  3/13; HERO:  4/13
-[1,0]<stdout>:DESC_96178, THRESHOLD:0.89 RANDOM:  8/15; HERO:  5/15
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94535
-[1,0]<stderr>:Computing moment similarity:   1%|          | 106/10895 [14:51<36:17:30, 12.11s/it][1,0]<stdout>:DESC_94535, THRESHOLD:0.80 RANDOM:  3/ 4; HERO: -2/ 4
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.81 RANDOM:  2/ 5; HERO: -2/ 5
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.82 RANDOM:  3/ 5; HERO: -2/ 5
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.83 RANDOM:  4/ 5; HERO: -2/ 5
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.84 RANDOM:  4/ 6; HERO: -2/ 6
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.85 RANDOM:  3/ 6; HERO: -2/ 6
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.86 RANDOM:  3/ 8; HERO: -2/ 8
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.87 RANDOM:  5/ 9; HERO: -2/ 9
-[1,0]<stdout>:DESC_94535, THRESHOLD:0.88 RANDOM: -1/-1; HERO: -2/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 107/10895 [14:56<30:11:22, 10.07s/it][1,0]<stdout>:DESC_94535, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_87297
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.81 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.84 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.87 RANDOM:  1/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.88 RANDOM:  3/11; HERO:  1/11
-[1,0]<stdout>:DESC_87297, THRESHOLD:0.89 RANDOM:  2/13; HERO:  1/13
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_93989
-[1,0]<stderr>:Computing moment similarity:   1%|          | 108/10895 [15:06<29:47:14,  9.94s/it][1,0]<stdout>:DESC_93989, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.81 RANDOM:  3/ 4; HERO:  3/ 4
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  3/ 5
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  4/ 5
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  4/ 6
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.85 RANDOM:  3/ 7; HERO:  4/ 7
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.86 RANDOM:  4/ 7; HERO:  5/ 7
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.87 RANDOM:  4/ 9; HERO:  5/ 9
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  7/-1
-[1,0]<stdout>:DESC_93989, THRESHOLD:0.89 RANDOM: -1/-1; HERO: -1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 109/10895 [15:22<35:37:20, 11.89s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_95934
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.84 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.85 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.86 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.87 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.88 RANDOM:  3/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_95934, THRESHOLD:0.89 RANDOM:  3/13; HERO:  2/13
-[1,0]<stderr>:Computing moment similarity:   1%|          | 110/10895 [15:47<47:31:11, 15.86s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_87397
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.82 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.84 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.85 RANDOM:  1/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.86 RANDOM:  2/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.87 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_87397, THRESHOLD:0.88 RANDOM:  2/10; HERO:  2/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 111/10895 [16:00<45:04:17, 15.05s/it][1,0]<stdout>:DESC_87397, THRESHOLD:0.89 RANDOM:  4/11; HERO:  2/11
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_87792
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.80 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.81 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.82 RANDOM:  1/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.83 RANDOM:  1/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.84 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.85 RANDOM:  2/ 9; HERO:  2/ 9
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.86 RANDOM:  2/10; HERO:  2/10
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.87 RANDOM:  2/11; HERO:  3/11
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.88 RANDOM:  3/15; HERO:  3/15
-[1,0]<stdout>:DESC_87792, THRESHOLD:0.89 RANDOM:  4/16; HERO:  3/16
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_88423
-[1,0]<stderr>:Computing moment similarity:   1%|          | 112/10895 [16:14<44:15:10, 14.77s/it][1,0]<stdout>:DESC_88423, THRESHOLD:0.80 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.85 RANDOM:  4/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.86 RANDOM:  5/10; HERO:  4/10
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.87 RANDOM:  5/12; HERO:  5/12
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.88 RANDOM: -1/-1; HERO:  6/-1
-[1,0]<stdout>:DESC_88423, THRESHOLD:0.89 RANDOM:  7/-1; HERO:  6/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 113/10895 [16:18<34:17:38, 11.45s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_94858
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.83 RANDOM:  4/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.84 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.86 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.87 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_94858, THRESHOLD:0.88 RANDOM:  5/10; HERO:  1/10
-[1,0]<stderr>:Computing moment similarity:   1%|          | 114/10895 [16:21<26:27:12,  8.83s/it][1,0]<stdout>:DESC_94858, THRESHOLD:0.89 RANDOM:  9/16; HERO:  1/16
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_93614
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.81 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.82 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.83 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.84 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.85 RANDOM:  3/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.86 RANDOM:  3/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.87 RANDOM:  6/10; HERO:  2/10
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.88 RANDOM:  3/-1; HERO:  2/-1
-[1,0]<stdout>:DESC_93614, THRESHOLD:0.89 RANDOM:  1/-1; HERO:  2/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 115/10895 [16:24<21:32:24,  7.19s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_87388
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.83 RANDOM:  1/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.84 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.85 RANDOM:  2/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.86 RANDOM:  3/ 8; HERO:  3/ 8
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.87 RANDOM:  5/11; HERO:  3/11
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.88 RANDOM:  7/15; HERO:  4/15
-[1,0]<stdout>:DESC_87388, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  8/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 116/10895 [16:26<17:00:19,  5.68s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_91087
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.80 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.85 RANDOM:  1/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.86 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.87 RANDOM:  1/ 9; HERO:  1/ 9
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.88 RANDOM:  2/16; HERO:  1/16
-[1,0]<stdout>:DESC_91087, THRESHOLD:0.89 RANDOM:  2/19; HERO:  1/19
-[1,0]<stderr>:Computing moment similarity:   1%|          | 117/10895 [16:38<22:41:13,  7.58s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_92474
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.81 RANDOM:  3/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.82 RANDOM:  4/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.83 RANDOM:  3/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.84 RANDOM:  4/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.85 RANDOM:  7/10; HERO:  1/10
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.86 RANDOM:  3/11; HERO:  1/11
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.87 RANDOM:  6/15; HERO:  1/15
-[1,0]<stdout>:DESC_92474, THRESHOLD:0.88 RANDOM:  1/-1; HERO:  1/-1
-[1,0]<stderr>:Computing moment similarity:   1%|          | 118/10895 [16:44<20:58:25,  7.01s/it][1,0]<stdout>:DESC_92474, THRESHOLD:0.89 RANDOM: -1/-1; HERO:  2/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_97717
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.80 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.83 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.84 RANDOM:  1/ 7; HERO:  2/ 7
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.85 RANDOM:  4/11; HERO:  2/11
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.86 RANDOM:  2/12; HERO:  2/12
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.87 RANDOM:  4/-1; HERO:  4/-1
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.88 RANDOM:  4/-1; HERO:  6/-1
-[1,0]<stdout>:DESC_97717, THRESHOLD:0.89 RANDOM:  6/-1; HERO:  6/-1
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_92687
-[1,0]<stderr>:Computing moment similarity:   1%|          | 119/10895 [16:52<21:51:57,  7.30s/it][1,0]<stdout>:DESC_92687, THRESHOLD:0.80 RANDOM:  1/ 3; HERO:  1/ 3
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.81 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.82 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.83 RANDOM:  2/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.85 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.86 RANDOM:  1/ 7; HERO:  1/ 7
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.87 RANDOM:  2/ 8; HERO:  1/ 8
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.88 RANDOM:  3/13; HERO:  1/13
-[1,0]<stdout>:DESC_92687, THRESHOLD:0.89 RANDOM:  6/16; HERO:  1/16
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_94864
-[1,0]<stderr>:Computing moment similarity:   1%|          | 120/10895 [16:55<17:53:49,  5.98s/it][1,0]<stdout>:DESC_94864, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.81 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.82 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.83 RANDOM:  1/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.84 RANDOM:  3/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  2/ 6
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.86 RANDOM:  2/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.87 RANDOM:  4/ 6; HERO:  3/ 6
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.88 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_94864, THRESHOLD:0.89 RANDOM:  4/ 9; HERO:  4/ 9
-[1,0]<stderr>:Computing moment similarity:   1%|          | 121/10895 [17:18<32:52:28, 10.98s/it][1,0]<stdout>:
-[1,0]<stdout>:DESC_97402
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.80 RANDOM:  1/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.81 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.82 RANDOM:  2/ 3; HERO:  2/ 3
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.83 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.84 RANDOM:  3/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.85 RANDOM:  2/ 4; HERO:  2/ 4
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.86 RANDOM:  2/ 5; HERO:  2/ 5
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.87 RANDOM:  3/ 7; HERO:  3/ 7
-[1,0]<stdout>:DESC_97402, THRESHOLD:0.88 RANDOM:  2/ 7; HERO:  4/ 7
-[1,0]<stderr>:Computing moment similarity:   1%|          | 122/10895 [17:21<26:01:51,  8.70s/it][1,0]<stdout>:DESC_97402, THRESHOLD:0.89 RANDOM:  1/12; HERO:  4/12
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_89278
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.80 RANDOM:  2/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.81 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.82 RANDOM:  1/ 4; HERO:  1/ 4
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.83 RANDOM:  3/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.84 RANDOM:  1/ 5; HERO:  1/ 5
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.85 RANDOM:  2/ 6; HERO:  1/ 6
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.86 RANDOM:  2/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.87 RANDOM:  3/ 8; HERO:  2/ 8
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.88 RANDOM:  4/ 9; HERO:  3/ 9
-[1,0]<stdout>:DESC_89278, THRESHOLD:0.89 RANDOM:  6/14; HERO:  3/14
-[1,0]<stdout>:
-[1,0]<stdout>:DESC_96580
-[1,0]<stderr>:Computing moment similarity:   1%|          | 123/10895 [17:40<35:14:15, 11.78s/it][1,0]<stderr>:Traceback (most recent call last):
-[1,0]<stderr>:  File "build_graph.py", line 665, in <module>
-[1,0]<stderr>:    main(args)
-[1,0]<stderr>:  File "build_graph.py", line 635, in main
-[1,0]<stderr>:    process_query(val_loader, vr_pred, vcmr_pred, opts)
-[1,0]<stderr>:  File "build_graph.py", line 577, in process_query
-[1,0]<stderr>:    assert "orange" in v_color
-[1,0]<stderr>:AssertionError
-[1,0]<stderr>:
---------------------------------------------------------------------------
-Primary job  terminated normally, but 1 process returned
-a non-zero exit code. Per user-direction, the job has been aborted.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-mpirun detected that one or more processes exited with non-zero status, thus causing
-the job to be terminated. The first process to do so was:
-
-  Process name: [[2412,1],0]
-  Exit code:    1
---------------------------------------------------------------------------
