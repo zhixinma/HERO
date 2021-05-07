@@ -1,3 +1,9 @@
+log/
+desc_graph/
+wt.sh
+*log*
+cmds.txt
+
 # ctags
 tags
 
