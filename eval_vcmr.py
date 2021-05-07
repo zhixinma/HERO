@@ -22,9 +22,11 @@ from data import (VcmrFullEvalDataset, vcmr_full_eval_collate,
                   VcmrVideoOnlyFullEvalDataset,
                   PrefetchLoader, QueryTokLmdb,
                   video_collate)
-from load_data import (
-    get_video_ids, load_video_sub_dataset,
-    load_video_only_dataset)
+
+from load_data import (get_video_ids,
+                       load_video_sub_dataset,
+                       load_video_only_dataset)
+
 from data.loader import move_to_cuda
 from model.vcmr import HeroForVcmr
 
@@ -48,9 +50,7 @@ def main(opts):
     device = torch.device("cuda", hvd.local_rank())
     torch.cuda.set_device(hvd.local_rank())
     rank = hvd.rank()
-    LOGGER.info("device: {} n_gpu: {}, rank: {}, "
-                "16-bits training: {}".format(
-                    device, n_gpu, hvd.rank(), opts.fp16))
+    LOGGER.info("device: {} n_gpu: {}, rank: {}, 16-bits training: {}".format(device, n_gpu, hvd.rank(), opts.fp16))
     if hvd.rank() != 0:
         LOGGER.disabled = True
     hps_file = f'{opts.output_dir}/log/hps.json'
@@ -60,25 +60,18 @@ def main(opts):
     # load DBs and image dirs
     video_ids = get_video_ids(opts.query_txt_db)
     if opts.task != "didemo_video_only":
-        video_db = load_video_sub_dataset(
-            opts.vfeat_db, opts.sub_txt_db, model_opts.vfeat_interval,
-            model_opts)
+        video_db = load_video_sub_dataset(opts.vfeat_db, opts.sub_txt_db, model_opts.vfeat_interval, model_opts)
     else:
-        txt_meta = load_json(
-            os.path.join(opts.query_txt_db, "meta.json"))
-        video_db = load_video_only_dataset(
-            opts.vfeat_db, txt_meta,
-            model_opts.vfeat_interval,
-            model_opts)
+        txt_meta = load_json(os.path.join(opts.query_txt_db, "meta.json"))
+        video_db = load_video_only_dataset(opts.vfeat_db, txt_meta, model_opts.vfeat_interval, model_opts)
     assert opts.split in opts.query_txt_db
     q_txt_db = QueryTokLmdb(opts.query_txt_db, -1)
     if opts.task != "didemo_video_only":
         inf_dataset = VcmrFullEvalDataset
     else:
         inf_dataset = VcmrVideoOnlyFullEvalDataset
-    eval_dataset = inf_dataset(
-        video_ids, video_db, q_txt_db,
-        distributed=model_opts.distributed_eval)
+
+    eval_dataset = inf_dataset(video_ids, video_db, q_txt_db, distributed=model_opts.distributed_eval)
 
     # Prepare model
     if exists(opts.checkpoint):
@@ -86,9 +79,7 @@ def main(opts):
     else:
         ckpt_file = f'{opts.output_dir}/ckpt/model_step_{opts.checkpoint}.pt'
     checkpoint = torch.load(ckpt_file)
-    img_pos_embed_weight_key = (
-        "v_encoder.f_encoder.img_embeddings" +
-        ".position_embeddings.weight")
+    img_pos_embed_weight_key = ("v_encoder.f_encoder.img_embeddings.position_embeddings.weight")
     assert img_pos_embed_weight_key in checkpoint
     max_frm_seq_len = len(checkpoint[img_pos_embed_weight_key])
 
@@ -115,15 +106,15 @@ def main(opts):
                                  collate_fn=vcmr_full_eval_collate)
     eval_dataloader = PrefetchLoader(eval_dataloader)
 
-    _, results = validate_full_vcmr(
-        model, eval_dataloader, opts.split, opts, model_opts)
+    _, results = validate_full_vcmr(model, eval_dataloader, opts.split, opts, model_opts)
     result_dir = f'{opts.output_dir}/results_{opts.split}'
 
     if not exists(result_dir) and rank == 0:
         os.makedirs(result_dir)
 
     all_results_list = all_gather_list(results)
-    if hvd.rank() == 0:
+
+    if hvd.rank() == 0:  # save for only one time
         all_results = {"video2idx": all_results_list[0]["video2idx"]}
         for rank_id in range(hvd.size()):
             for key, val in all_results_list[rank_id].items():
@@ -134,16 +125,50 @@ def main(opts):
                 all_results[key].extend(all_results_list[rank_id][key])
         LOGGER.info('All results joined......')
 
-        save_json(
-            all_results,
-            f'{result_dir}/results_{opts.checkpoint}_all.json')
-        LOGGER.info('All results written......')
+        save_vr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vr.json')
+        save_vcmr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vcmr.json')
+
+        # save_json(
+        #     all_results,
+        #     f'{result_dir}/results_{opts.checkpoint}_all.json')
+
+
+def save_vr(results, target):  # add by zhixin
+    k = 10
+    vidx2vid = {results["video2idx"][vid]: vid for vid in results["video2idx"]}
+    vr_submission = {item["desc_id"]: [vidx2vid[s[0]] for s in item["predictions"][:k]] for item in results["VR"]}
+    save_json(vr_submission, target)
+    LOGGER.info('VR results written......')
+
+
+def save_vcmr(results, target):  # add by zhixin
+    k = 4
+    vidx2vid = {results["video2idx"][vid]: vid for vid in results["video2idx"]}
+    vr_result = {item["desc_id"]: [vidx2vid[s[0]] for s in item["predictions"][:k]] for item in results["VR"]}
+    vcmr_result = results["VCMR"]
+    vcmr_submission = {}
+    found = False
+    for i, item in enumerate(vcmr_result):
+        desc_id = item["desc_id"]
+        for rank, vcmr_proposal in enumerate(item["predictions"]):
+            vidx, st, ed, s = vcmr_proposal
+            vid = vidx2vid[vidx]
+            if vid in vr_result[desc_id]:
+                rank_in_vr = vr_result[desc_id].index(vid)
+                vcmr_submission[desc_id] = (rank, rank_in_vr, st, ed)
+                found = True
+                break
+
+    if not found:
+        assert False
+
+    save_json(vcmr_submission, target)
+    LOGGER.info('VCMR results written......')
 
 
 @torch.no_grad()
 def validate_full_vcmr(model, val_loader, split, opts, model_opts):
-    LOGGER.info("start running  full VCMR evaluation"
-                f"on {opts.task} {split} split...")
+    LOGGER.info("start running full VCMR evaluation on {opts.task} {split} split...")
     model.eval()
     n_ex = 0
     st = time()
@@ -162,27 +187,32 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
     total_frame_embeddings = None
     video_batch, video_idx = [], []
     max_clip_len = 0
-    for video_i, (vid, vidx) in tqdm(enumerate(video2idx_local.items()),
-                                     desc="Computing Video Embeddings",
-                                     total=len(video2idx_local)):
+    feat_dim, session_dtype, session_device = None, None, None
+    for video_i, (vid, vidx) in tqdm(enumerate(video2idx_local.items()), desc="Computing Video Embeddings", total=len(video2idx_local)):
         video_item = val_loader.dataset.video_db[vid]
         video_batch.append(video_item)
         video_idx.append(vidx)
-        if len(video_batch) == opts.vcmr_eval_video_batch_size or\
-                video_i == len(video2idx_local) - 1:
+        if len(video_batch) == opts.vcmr_eval_video_batch_size or video_i == len(video2idx_local) - 1:
             video_batch = move_to_cuda(video_collate(video_batch))
             # Safeguard fp16
             for k, item in video_batch.items():
-                if isinstance(item, torch.Tensor) and\
-                        item.dtype == torch.float32:
-                    video_batch[k] = video_batch[k].to(
-                        dtype=next(model.parameters()).dtype)
+                if isinstance(item, torch.Tensor) and item.dtype == torch.float32:
+                    video_batch[k] = video_batch[k].to(dtype=next(model.parameters()).dtype)
+
+            # if feat_dim is None:
+            #     curr_frame_embeddings = model.v_encoder(video_batch, 'repr')
+            #     _shape = curr_frame_embeddings.shape
+            # else:
+            #     assert feat_dim is not None and session_dtype is not None and session_device is not None
+            #     curr_frame_embeddings = torch.zeros((video_batch["c_v_feats"].shape[0], video_batch["c_v_feats"].shape[1], feat_dim), dtype=session_dtype, device=session_device)
+
             curr_frame_embeddings = model.v_encoder(video_batch, 'repr')
             curr_c_attn_masks = video_batch['c_attn_masks']
             curr_clip_len = curr_frame_embeddings.size(-2)
             assert curr_clip_len <= model_opts.max_clip_len
 
             if total_frame_embeddings is None:
+                session_dtype, session_device = curr_frame_embeddings.dtype, curr_frame_embeddings.device
                 feat_dim = curr_frame_embeddings.size(-1)
                 total_frame_embeddings = torch.zeros(
                     (len(video2idx_local), model_opts.max_clip_len, feat_dim),
@@ -192,16 +222,17 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                     (len(video2idx_local), model_opts.max_clip_len),
                     dtype=curr_c_attn_masks.dtype,
                     device=curr_frame_embeddings.device)
+
             indices = torch.LongTensor(video_idx)
-            total_frame_embeddings[indices, :curr_clip_len] =\
-                curr_frame_embeddings
-            total_c_attn_masks[indices, :curr_clip_len] =\
-                curr_c_attn_masks
+            total_frame_embeddings[indices, :curr_clip_len] = curr_frame_embeddings
+            total_c_attn_masks[indices, :curr_clip_len] = curr_c_attn_masks
             max_clip_len = max(max_clip_len, curr_clip_len)
             video_batch, video_idx = [], []
+
     total_frame_embeddings = total_frame_embeddings[:, :max_clip_len, :]
     total_c_attn_masks = total_c_attn_masks[:, :max_clip_len]
 
+    total_c_attn_masks = total_c_attn_masks[:, :max_clip_len]
     svmr_st_probs_total, svmr_ed_probs_total = None, None
     sorted_q2c_indices, sorted_q2c_scores = None, None
     flat_st_ed_sorted_scores, flat_st_ed_scores_sorted_indices = None, None
@@ -212,8 +243,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         targets = batch['targets']
         if has_gt_target and targets.min() < 0:
             has_gt_target = False
-            LOGGER.info(
-                "No GT annotations provided, only generate predictions")
+            LOGGER.info("No GT annotations provided, only generate predictions")
         del batch['targets']
         del batch['qids']
         del batch['vids']
@@ -225,8 +255,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         # Safeguard fp16
         for k, item in batch.items():
             if isinstance(item, torch.Tensor) and item.dtype == torch.float32:
-                batch[k] = batch[k].to(
-                    dtype=next(model.parameters()).dtype)
+                batch[k] = batch[k].to(dtype=next(model.parameters()).dtype)
 
         # FIXME
         _q2video_scores, _st_probs, _ed_probs =\
@@ -240,22 +269,15 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
 
         if "SVMR" in opts.full_eval_tasks and has_gt_target:
             row_indices = torch.arange(0, len(_st_probs))
-            svmr_gt_vidx = torch.LongTensor(
-                [video2idx_local[e] for e in vids])
-            svmr_st_probs = _st_probs[
-                row_indices, svmr_gt_vidx].float().cpu().numpy()
-            svmr_ed_probs = _ed_probs[
-                row_indices, svmr_gt_vidx].float().cpu().numpy()
+            svmr_gt_vidx = torch.LongTensor([video2idx_local[e] for e in vids])
+            svmr_st_probs = _st_probs[row_indices, svmr_gt_vidx].float().cpu().numpy()
+            svmr_ed_probs = _ed_probs[row_indices, svmr_gt_vidx].float().cpu().numpy()
             if svmr_st_probs_total is None:
                 svmr_st_probs_total = svmr_st_probs
                 svmr_ed_probs_total = svmr_ed_probs
             else:
-                svmr_st_probs_total = np.concatenate(
-                    (svmr_st_probs_total, svmr_st_probs),
-                    axis=0)
-                svmr_ed_probs_total = np.concatenate(
-                    (svmr_ed_probs_total, svmr_ed_probs),
-                    axis=0)
+                svmr_st_probs_total = np.concatenate((svmr_st_probs_total, svmr_st_probs), axis=0)
+                svmr_ed_probs_total = np.concatenate((svmr_ed_probs_total, svmr_ed_probs), axis=0)
 
         if "VR" not in opts.full_eval_tasks or _q2video_scores is None:
             continue
@@ -264,62 +286,41 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         # To give more importance to top scores,
         # the higher opt.alpha is the more importance will be given
         q2video_scores = torch.exp(model_opts.q2c_alpha * _q2video_scores)
-        _sorted_q2c_scores, _sorted_q2c_indices = \
-            torch.topk(q2video_scores, model_opts.max_vcmr_video,
-                       dim=1, largest=True)
+        _sorted_q2c_scores, _sorted_q2c_indices = torch.topk(q2video_scores, model_opts.max_vcmr_video, dim=1, largest=True)
         if sorted_q2c_indices is None:
             sorted_q2c_indices = _sorted_q2c_indices.cpu().numpy()
             sorted_q2c_scores = _sorted_q2c_scores.cpu().numpy()
         else:
-            sorted_q2c_indices = np.concatenate(
-                (sorted_q2c_indices, _sorted_q2c_indices.cpu().numpy()),
-                axis=0)
-            sorted_q2c_scores = np.concatenate(
-                (sorted_q2c_scores, _sorted_q2c_scores.cpu().numpy()),
-                axis=0)
+            sorted_q2c_indices = np.concatenate((sorted_q2c_indices, _sorted_q2c_indices.cpu().numpy()), axis=0)
+            sorted_q2c_scores = np.concatenate((sorted_q2c_scores, _sorted_q2c_scores.cpu().numpy()), axis=0)
 
         if "VCMR" not in opts.full_eval_tasks:
             continue
 
-        row_indices = torch.arange(
-            0, len(_st_probs), device=_st_probs.device).unsqueeze(1)
-        _st_probs = _st_probs[
-            row_indices, _sorted_q2c_indices]  # (_N_q, max_vcmr_video, L)
+        row_indices = torch.arange(0, len(_st_probs), device=_st_probs.device).unsqueeze(1)
+        _st_probs = _st_probs[row_indices, _sorted_q2c_indices]  # (_N_q, max_vcmr_video, L)
         _ed_probs = _ed_probs[row_indices, _sorted_q2c_indices]
         # (_N_q, max_vcmr_video, L, L)
-        _st_ed_scores = torch.einsum("qvm,qv,qvn->qvmn", _st_probs,
-                                     _sorted_q2c_scores, _ed_probs)
-        valid_prob_mask = generate_min_max_length_mask(
-            _st_ed_scores.shape, min_l=model_opts.min_pred_l,
-            max_l=model_opts.max_pred_l)
-        _st_ed_scores *= torch.from_numpy(
-            valid_prob_mask).to(
-                _st_ed_scores.device)  # invalid location will become zero!
+        _st_ed_scores = torch.einsum("qvm,qv,qvn->qvmn", _st_probs, _sorted_q2c_scores, _ed_probs)
+        valid_prob_mask = generate_min_max_length_mask(_st_ed_scores.shape, min_l=model_opts.min_pred_l, max_l=model_opts.max_pred_l)
+        _st_ed_scores *= torch.from_numpy(valid_prob_mask).to(_st_ed_scores.device)  # invalid location will become zero!
         # sort across the top-max_n_videos videos (by flatten from the 2nd dim)
         # the indices here are local indices, not global indices
         _n_q = _st_ed_scores.shape[0]
-        _flat_st_ed_scores = _st_ed_scores.reshape(
-            _n_q, -1)  # (N_q, max_vcmr_video*L*L)
-        _flat_st_ed_sorted_scores, _flat_st_ed_scores_sorted_indices = \
-            torch.sort(_flat_st_ed_scores, dim=1, descending=True)
+        _flat_st_ed_scores = _st_ed_scores.reshape(_n_q, -1)  # (N_q, max_vcmr_video*L*L)
+        _flat_st_ed_sorted_scores, _flat_st_ed_scores_sorted_indices = torch.sort(_flat_st_ed_scores, dim=1, descending=True)
 
         if flat_st_ed_sorted_scores is None:
             flat_st_ed_scores_sorted_indices =\
-                _flat_st_ed_scores_sorted_indices[
-                    :, :model_opts.max_before_nms].cpu().numpy()
+                _flat_st_ed_scores_sorted_indices[:, :model_opts.max_before_nms].cpu().numpy()
             flat_st_ed_sorted_scores =\
-                _flat_st_ed_sorted_scores[
-                    :, :model_opts.max_before_nms].cpu().numpy()
+                _flat_st_ed_sorted_scores[:, :model_opts.max_before_nms].cpu().numpy()
         else:
             flat_st_ed_scores_sorted_indices = np.concatenate(
-                (flat_st_ed_scores_sorted_indices,
-                 _flat_st_ed_scores_sorted_indices[
-                     :, :model_opts.max_before_nms].cpu().numpy()),
+                (flat_st_ed_scores_sorted_indices, _flat_st_ed_scores_sorted_indices[:, :model_opts.max_before_nms].cpu().numpy()),
                 axis=0)
             flat_st_ed_sorted_scores = np.concatenate(
-                (flat_st_ed_sorted_scores,
-                 _flat_st_ed_sorted_scores[
-                     :, :model_opts.max_before_nms].cpu().numpy()),
+                (flat_st_ed_sorted_scores,  _flat_st_ed_sorted_scores[:, :model_opts.max_before_nms].cpu().numpy()),
                 axis=0)
 
     svmr_res, vr_res, vcmr_res = [], [], []
@@ -361,14 +362,12 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                     desc="[VR] Loop over queries to generate predictions",
                     total=len(total_qids)):
             cur_vr_redictions = []
-            for v_score, v_meta_idx in zip(_sorted_q2c_scores_row,
-                                           _sorted_q2c_indices_row):
+            for v_score, v_meta_idx in zip(_sorted_q2c_scores_row, _sorted_q2c_indices_row):
                 video_idx = video2idx_global[video_ids[v_meta_idx]]
                 cur_vr_redictions.append([video_idx, 0, 0, float(v_score)])
-            cur_query_pred = dict(desc_id=int(total_qids[vr_i]),
-                                  desc="",
-                                  predictions=cur_vr_redictions)
+            cur_query_pred = dict(desc_id=int(total_qids[vr_i]), desc="", predictions=cur_vr_redictions)
             vr_res.append(cur_query_pred)
+
     if "VCMR" in opts.full_eval_tasks:
         for vcmr_i, (
                 _flat_st_ed_scores_sorted_indices,
@@ -416,10 +415,9 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
     eval_res = dict(SVMR=svmr_res, VCMR=vcmr_res, VR=vr_res)
     eval_res = {k: v for k, v in eval_res.items() if len(v) != 0}
     eval_res["video2idx"] = video2idx_global
+    eval_submission = get_submission_top_n(eval_res, top_n=model_opts.max_after_nms)
 
-    eval_submission = get_submission_top_n(
-        eval_res, top_n=model_opts.max_after_nms)
-
+    has_gt_target = False
     if has_gt_target:
         metrics = eval_retrieval(eval_submission, partial_query_data,
                                  iou_thds=VCMR_IOU_THDS,
@@ -448,19 +446,18 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                 gathered_metrics[task_type][k] = gathered_v
                 val_log[
                     f'valid_{split}_{task_type}/{task_type}_{k}'] = gathered_v
+
         if "VCMR" in gathered_metrics:
-            LOGGER.info("metrics_no_nms_VCMR \n{}".format(pprint.pformat(
-                    gathered_metrics["VCMR"], indent=4)))
+            LOGGER.info("metrics_no_nms_VCMR \n{}".format(pprint.pformat(gathered_metrics["VCMR"], indent=4)))
         elif "SVMR" in gathered_metrics:
-            LOGGER.info("metrics_no_nms_SVMR \n{}".format(pprint.pformat(
-                gathered_metrics["SVMR"], indent=4)))
+            LOGGER.info("metrics_no_nms_SVMR \n{}".format(pprint.pformat(gathered_metrics["SVMR"], indent=4)))
+
+        if "VR" in gathered_metrics:
+            LOGGER.info("metrics_no_nms_VR \n{}".format(pprint.pformat(gathered_metrics["VR"], indent=4)))
 
         if model_opts.nms_thd != -1:
-            LOGGER.info(
-                "Performing nms with nms_thd {}".format(
-                    model_opts.nms_thd))
-            eval_res_after_nms = dict(
-                video2idx=eval_res["video2idx"])
+            LOGGER.info("Performing nms with nms_thd {}".format(model_opts.nms_thd))
+            eval_res_after_nms = dict(video2idx=eval_res["video2idx"])
             if "SVMR" in eval_res:
                 eval_res_after_nms["SVMR"] =\
                     post_processing_svmr_nms(
@@ -493,23 +490,17 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                         continue
                     gathered_v_nms = 0
                     for idx, n in enumerate(n_ex_per_rank):
-                        gathered_v_nms += (
-                            n*metrics_nms_per_rank[idx][task_type][k])
+                        gathered_v_nms += (n * metrics_nms_per_rank[idx][task_type][k])
                     gathered_v_nms = gathered_v_nms / n_ex
                     gathered_metrics_nms[task_type][k] = gathered_v_nms
-                    val_log[f'valid_{split}_{task_type}'
-                            f'_nms_{model_opts.nms_thd}/'
-                            f'{task_type}_{k}'] = gathered_v_nms
+                    val_log[f'valid_{split}_{task_type}_nms_{model_opts.nms_thd}/{task_type}_{k}'] = gathered_v_nms
             if "VCMR" in gathered_metrics_nms:
-                LOGGER.info("metrics_nms_VCMR \n{}".format(pprint.pformat(
-                    gathered_metrics_nms["VCMR"], indent=4)))
+                LOGGER.info("metrics_nms_VCMR \n{}".format(pprint.pformat(gathered_metrics_nms["VCMR"], indent=4)))
             elif "SVMR" in gathered_metrics_nms:
-                LOGGER.info("metrics_nms_SVMR \n{}".format(pprint.pformat(
-                    gathered_metrics_nms["SVMR"], indent=4)))
+                LOGGER.info("metrics_nms_SVMR \n{}".format(pprint.pformat(gathered_metrics_nms["SVMR"], indent=4)))
 
         tot_time = time()-st
-        val_log.update(
-            {f'valid/vcmr_{split}_ex_per_s': n_ex/tot_time})
+        val_log.update({f'valid/vcmr_{split}_ex_per_s': n_ex/tot_time})
         LOGGER.info(f"validation finished in {int(tot_time)} seconds")
     model.train()
     return val_log, eval_submission
@@ -530,7 +521,7 @@ if __name__ == "__main__":
                         default="/txt/tvr_val.db",
                         type=str,
                         help="The input test query corpus. (LMDB)")
-    parser.add_argument("--split", choices=["val", "test_public", "test"],
+    parser.add_argument("--split", choices=["val", "test_public", "test", "train"],
                         default="val", type=str,
                         help="The input query split")
     parser.add_argument("--task", choices=["tvr", "how2r", "didemo_video_sub",

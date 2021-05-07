@@ -1,0 +1,64 @@
+ - Main Branch:
+
+bash scripts/download_pretrained.sh  ~/zxma/hero_feature
+
+bash scripts/download_tvr.sh ~/zxma/hero_feature
+
+source launch_container.sh ~/zxma/hero_feature/txt_db ~/zxma/hero_feature/video_db ~/zxma/hero_feature/finetune ~/zxma/hero_feature/pretrained
+. vcml.sh hero
+source launch_container.sh ~/zxma/hero_feature/txt_db ~/zxma/hero_feature/video_db ~/zxma/hero_feature/finetune ~/zxma/hero_feature/pretrained ~/zxma/tvr
+
+
+# build graph
+horovodrun -np 4 python build_graph.py --query_txt_db /txt/tvr_val.db/ --split val \
+    --vfeat_db /video/tv/ --sub_txt_db /txt/tv_subtitles.db/ \
+    --output_dir /storage/tvr_default/ --checkpoint 4800 --fp16 --pin_mem
+
+# build graph background
+nohup horovodrun -np 4 python -u build_graph.py --query_txt_db /txt/tvr_val.db/ --split val \
+    --vfeat_db /video/tv/ --sub_txt_db /txt/tv_subtitles.db/ \
+    --output_dir /storage/tvr_default/ --checkpoint 4800 --fp16 --pin_mem >  2>&1 &
+
+log.txt
+
+
+
+# inference for TVR task, inside the container
+horovodrun -np 4 python eval_vcmr.py --query_txt_db /txt/tvr_val.db/ --split val \
+    --vfeat_db /video/tv/ --sub_txt_db /txt/tv_subtitles.db/ \
+    --output_dir /storage/tvr_default/ --checkpoint 4800 --fp16 --pin_mem
+
+
+# inference training data for TVR task, inside the container
+horovodrun -np 4 python eval_vcmr.py --query_txt_db /txt/tvr_train.db/ --split train \
+    --vfeat_db /video/tv/ --sub_txt_db /txt/tv_subtitles.db/ \
+    --output_dir /storage/tvr_default/ --checkpoint 4800 --fp16 --pin_mem
+
+horovodrun -np 4 python eval_vr.py \
+    --sub_txt_db /txt/tv_subtitles.db/ \
+    --vfeat_db /video/tv/ \
+    --query_txt_db /txt/tvr_val.db/ \
+    --split val \
+    --task msrvtt_video_sub \
+    --checkpoint 4800 \
+    --batch_size 80 \
+    --vr_eval_video_batch_size 50 \
+    --output_dir /storage/tvr_default/ \
+    --fp16 \
+    --n_workers 4 \
+    --pin_mem
+
+
+
+
+
+
+ - Feature Extraction:
+
+cd /src/slowfast
+
+CUDA_VISIBLE_DEVICES=0 source launch_container.sh ~/zxma/tvr/raw_video_dir ~/zxma/tvr/feature_output_dir
+
+python extract_feature/gather_video_paths.py
+
+python extract_feature/extract.py --dataflow --csv /output/csv/slowfast_info.csv --batch_size 45 --num_decoding_thread 4 --clip_len 2 TEST.CHECKPOINT_FILE_PATH /models/SLOWFAST_8x8_R50.pkl
