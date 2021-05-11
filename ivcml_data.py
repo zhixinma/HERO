@@ -154,3 +154,7 @@ def build_dataloader(opts):
     eval_dataloader = DataLoader(eval_dataset, batch_size=opts.batch_size, num_workers=opts.n_workers, pin_memory=opts.pin_mem, collate_fn=vcmr_full_eval_collate)
     eval_dataloader = PrefetchLoader(eval_dataloader)
     return eval_dataloader
+
+
+def build_ivcml_ground_truth():
+    return

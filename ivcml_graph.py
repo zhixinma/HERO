@@ -3,7 +3,7 @@ from ivcml_util import save_plt
 import networkx as nx
 import random
 import numpy as np
-from ivcml_util import pairwise_equation, expand_window, mean, random_color
+from ivcml_util import pairwise_equation, expand_window, mean, random_color, is_overlap, subtract
 
 
 NODE_COLOR = {"target": "orange",
@@ -166,16 +166,15 @@ def group_clique_nodes(cliques, vertices, v_color, v_shape, edges, e_color, e_co
     v_redirect = [i for i in range(len(vertices))]
     for clique in cliques:
         if pairwise_equation(np.array([sub_2_vid[i] for i in clique])).sum() == (len(clique) * (len(clique) - 1) / 2):
-            # center = int(sum(clique)*1.0/len(clique))
             center = random.choice(clique)
-            group_color = "white"  # nodes to remove
-            # group_color = random_color()
-            v_shape[center] = "*"
 
             # center coordinates
             x_center = mean([vertices[v][0] for v in clique])
-            y_center = mean([vertices[v][1] for v in clique]) + random.uniform(0.4, 0.6)
+            y_center = mean([vertices[v][1] for v in clique]) + random.uniform(0.8, 1.2)
             vertices[center] = (x_center, y_center)
+
+            # center shape
+            v_shape[center] = "*"
 
             # center color
             clique_colors = [v_color[v] for v in clique]
@@ -193,6 +192,7 @@ def group_clique_nodes(cliques, vertices, v_color, v_shape, edges, e_color, e_co
             v_color[center] = center_color
 
             # other nodes in the clique
+            group_color = "white"  # nodes to remove
             for v in clique:
                 if v == center:
                     continue
@@ -266,8 +266,6 @@ def plot_graph(v, e, markers=None, v_colors=None, e_colors=None, confidence=None
 
 
 # NetworkX functions
-
-
 def get_src_node(nodes_color):
     if "cyan" in nodes_color:
         node_src_hero = nodes_color.index("cyan")
@@ -318,20 +316,30 @@ def graph_shortest_distance(g: nx.Graph, src: int, tar: int):
     return dis
 
 
+def graph_shortest_path(g: nx.Graph, src: int, tar: int):
+    """
+    :param g: instance of NetworkX graph
+    :param src: source node
+    :param tar: target node
+    :return: the shortest path from src to tar
+    """
+    try:
+        sp = nx.algorithms.shortest_paths.generic.shortest_path(g, source=src, target=tar)
+    except nx.exception.NetworkXNoPath:
+        sp = None
+    return sp
+
+
 def get_cliques(g: nx.Graph):
-    def is_overlap(a, b):
-        shorter = a if len(a) < len(b) else b
-        for e in shorter:
-            if e in b:
-                return True
-        return False
 
     cliques = nx.algorithms.find_cliques(g)
     cliques = sorted(cliques, key=lambda x: len(x))
     unique_cliques = []
     while cliques:
         max_clique = cliques.pop()
-        if len(max_clique) >= 3:
+        if len(max_clique) > 3:
             unique_cliques.append(max_clique)
-        cliques = [c for c in cliques if not is_overlap(c, max_clique)]
+        # cliques = [c for c in cliques if not is_overlap(c, max_clique)]  # incorrect logic
+        cliques = [subtract(c, max_clique) for c in cliques]
+        cliques = sorted(cliques, key=lambda x: len(x))
     return unique_cliques

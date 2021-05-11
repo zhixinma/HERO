@@ -10,6 +10,7 @@ import random
 import numpy as np
 import math
 import copy
+import pprint
 from ivcml_util import cosine_sim, uniform_normalize, show_type_tree
 from ivcml_util import sample_dict, percentile, list_histogram, pairwise_equation
 from ivcml_graph import complement_sub_unit, plot_graph, build_static_graph, get_src_node, get_tar_node
@@ -148,7 +149,7 @@ def set_params(mode):
     elif mode == "no io":
         plot_graph_mode = False
         plot_sta_mode = False
-        sample_mode = True
+        sample_mode = False
 
     else:
         assert False
@@ -158,24 +159,34 @@ def set_params(mode):
 
 def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, model_opts):
     model.eval()
+
+    # super parameters
     feature_types = ["v", "vt"]
     feature_type = feature_types[1]
-
     sim_funcs = ["cosine"]
     sim_func = sim_funcs[0]
-
     modes = ["vis graph", "vis sta", "toy sta", "no io"]
-    mode = modes[0]
+    mode = modes[-1]
     plot_graph_mode, plot_sta_mode, sample_mode = set_params(mode)
-
-    is_group_clique = False
+    is_group_clique = True
+    group_folder_tag = "grouped/" if is_group_clique else "ungrouped/"
     curve_functions = {
-        "double sqrt": lambda x: math.sqrt(math.sqrt(x)),
+        "double_sqrt": lambda x: math.sqrt(math.sqrt(x)),
         "sqrt": lambda x: math.sqrt(x),
         "linear": lambda x: x
     }
-    f_curve = curve_functions["double sqrt"]
+    curve_tag = "linear"
+    f_curve = curve_functions[curve_tag]
 
+    pprint.pprint({
+        "feature_types": feature_types,
+        "sim_func": sim_func,
+        "mode": mode,
+        "is_group_clique": is_group_clique,
+        "curve_tag": curve_tag,
+    })
+
+    # start process
     try:
         is_to_write = hvd.rank() == 0
     except ValueError:
@@ -191,7 +202,7 @@ def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, mode
     if feature_type == "v":
         thds = {t / 100: [] for t in range(95, 84, -1)}
     elif feature_type == "vt":
-        thds = {t / 100: [] for t in range(85, 64, -2)}
+        thds = {t / 100: [] for t in range(85, 34, -2)}
     else:
         assert False, feature_type
 
@@ -200,8 +211,6 @@ def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, mode
     dis_hero_count = {thd: [] for thd in thds}
 
     for desc_idx, desc_id in tqdm(enumerate(vr_pred), desc="Processing Moment", total=len(vr_pred)):
-        # desc_id = "90143"  # "cyan" bad example
-        # desc_id = "96580"  # "orange" bad example
         print("\nDESC_%s" % desc_id)
         pred_vids = vr_pred[desc_id]
         query_item = query_data[desc_id]
@@ -257,14 +266,11 @@ def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, mode
             e_conf = []
             e_conf += uniform_normalize(sim[ind_cross.nonzero(as_tuple=True)] - thd_cross * 0.9).tolist() if edges_cross else []
             e_conf += uniform_normalize(sim[ind_inner.nonzero(as_tuple=True)] - thd_inner * 0.9).tolist() if edges_inner else []
-            # show_type_tree([vertices_grouped, v_color_grouped, v_shape_grouped, edges_grouped, e_color_grouped, e_conf_grouped])
 
             if plot_graph_mode and is_to_write:  # sample and plot graph
                 # print("GRAPH-PLOT DESC_%s, THRESHOLD:%.2f |E|:%3d |V|:%3d |En|: %3d" % (desc_id, thd_cross, len(edges), len(vertices), len(static_edges)))
 
-                group_tag = ""
                 if is_group_clique:
-                    group_tag = "grouped/"
                     cliques = get_cliques(nx_graph)
                     vertices_grouped, v_color_grouped, v_shape_grouped, edges_grouped, e_color_grouped, e_conf_grouped = \
                         group_clique_nodes(
@@ -279,31 +285,9 @@ def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, mode
                     v_plot, v_color_plot, v_shape_plot = vertices_grouped, v_color_grouped, v_shape_grouped
                     e_plot, e_color_plot, e_conf_plot = edges_grouped, e_color_grouped, e_conf_grouped
 
-                    # group_tag = "grouped/"
-                    # plot_graph(vertices_grouped,
-                    #            edges_grouped,
-                    #            markers=v_shape_grouped,
-                    #            v_colors=v_color_grouped,
-                    #            e_colors=e_color_grouped,
-                    #            confidence=e_conf_grouped,
-                    #            title=f"Graph of description {desc_id} with cross-θ {thd_cross:.2f} and inner-θ {thd_inner:.2f} . '{query_text}'",
-                    #            fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_tag}desc_{desc_id}/desc_{desc_id}_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_graph.png",
-                    #            mute=False)
-
                 else:
-                    group_tag = ""
                     v_plot, v_color_plot, v_shape_plot = vertices, v_color, v_shape
                     e_plot, e_color_plot, e_conf_plot = edges + static_edges, e_color + static_edges_color, e_conf + static_edges_conf
-
-                    # plot_graph(vertices,
-                    #            edges + static_edges,
-                    #            markers=v_shape,
-                    #            v_colors=v_color,
-                    #            e_colors=e_color + static_edges_color,
-                    #            confidence=e_conf + static_edges_conf,
-                    #            title=f"Graph of description {desc_id} with cross-θ {thd_cross:.2f} and inner-θ {thd_inner:.2f} . '{query_text}'",
-                    #            fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_tag}desc_{desc_id}/desc_{desc_id}_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_graph.png",
-                    #            mute=False)
 
                 plot_graph(v_plot,
                            e_plot,
@@ -312,7 +296,7 @@ def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, mode
                            e_colors=e_color_plot,
                            confidence=e_conf_plot,
                            title=f"Graph of description {desc_id} with cross-θ {thd_cross:.2f} and inner-θ {thd_inner:.2f} . '{query_text}'",
-                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_tag}desc_{desc_id}/desc_{desc_id}_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_graph.png",
+                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_folder_tag}desc_{desc_id}/desc_{desc_id}_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_graph.png",
                            mute=False)
 
             if plot_sta_mode:  # build network and analyze statistic
@@ -331,28 +315,29 @@ def process_query(model, val_loader, vr_pred, vcmr_pred, vid_to_subs, opts, mode
                 dis_rand_count[thd_cross].append(dis_rand)
 
     if plot_sta_mode and is_to_write:  # global statistic
-        toy_marker = "_toy" if (mode == "toy sta") else ""
+        toy_tag = "_toy" if (mode == "toy sta") else ""
         for thd_cross in thds:
             p = 0.9
             b_dia, b_dis = percentile(dia_count[thd_cross], p), percentile(dis_rand_count[thd_cross], p)
+            thd_inner = f_curve(thd_cross)
 
             list_histogram(dia_count[thd_cross],
                            x_label="Diameter",
-                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{opts.split}_diameter{toy_marker}/graph_diameter_hist_t_{thd_cross:.2f}_p{p:.2f}_{b_dia}.png")
+                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_folder_tag}{opts.split}_diameter{toy_tag}/graph_diameter_hist_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_p{p:.2f}_{b_dia}.png")
 
             list_histogram(dis_rand_count[thd_cross],
                            x_label="Shortest Distance (Random)",
-                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{opts.split}_distance_random{toy_marker}/graph_distance_hist_t_{thd_cross:.2f}_p{p:.2f}_{b_dis}.png")
+                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_folder_tag}{opts.split}_distance_random{toy_tag}/graph_distance_hist_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_p{p:.2f}_{b_dis}.png")
 
             list_histogram(dis_hero_count[thd_cross],
                            x_label="Shortest Distance (HERO)",
-                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{opts.split}_distance_hero_vcmr{toy_marker}/graph_distance_hist_t_{thd_cross:.2f}_p{p:.2f}_{b_dis}.png")
+                           fig_name=f"desc_graph/{sim_func}_{feature_type}/{group_folder_tag}{opts.split}_distance_hero_vcmr{toy_tag}/graph_distance_hist_tc_{thd_cross:.2f}_ti_{thd_inner:.2f}_{b_dis}.png")
 
 
 def main(opts):
     # hvd.init()
     # device = torch.device("cuda", hvd.local_rank())
-    device = torch.device("cuda:0")
+    device = torch.device("cuda")
     # torch.cuda.set_device(hvd.local_rank())
 
     vr_pred = load_hero_pred(opts, task="vr")

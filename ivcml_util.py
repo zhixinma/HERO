@@ -16,7 +16,36 @@ def deduplicate(arr: list):
     return list(set(arr))
 
 
+def is_overlap(a, b):
+    """
+    :param a: list to compare
+    :param b: list to compare
+    :return: True if there are common element in a and b
+    """
+    a, b = deduplicate(a), deduplicate(b)
+    shorter, longer = (a, b) if len(a) < len(b) else (b, a)
+    for e in shorter:
+        if e in longer:
+            return True
+    return False
+
+
+def subtract(tbs, ts):
+    """
+    :param tbs: list to be subtracted
+    :param ts: list to subtract
+    :return: subtracted list a
+    """
+    ts = deduplicate(ts)
+    return [e for e in tbs if e not in ts]
+
+
 def expand_window(data, window_set=1):
+    """
+    :param data: the original list
+    :param window_set: int or list of int
+    :return: a list of lists shifted by the bias which is specified by window_set
+    """
     if isinstance(window_set, int):
         window_set = [window_set]
     window_list = []
@@ -100,6 +129,9 @@ def uniform_normalize(t: torch.Tensor):
     return t
 
 
+# def
+
+
 # List statistic
 def percentile(data: list, p=0.5):
     """
@@ -162,6 +194,13 @@ def list_histogram(data: list, color="b", title="Histogram of element frequency.
 
 
 def show_type_tree(data, indentation=4, depth=0, no_leaf=True):
+    """
+    :param data: the data to show the structure
+    :param indentation: number of space of indentation
+    :param depth: variable used for recursive
+    :param no_leaf: don't display the leaf (non-iterable) node if True
+    :return: None
+    """
     def _indent(content: str):
         if depth == 0:
             print()
