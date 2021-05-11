@@ -155,9 +155,7 @@ def main(opts):
     # Prepare optimizer
     optimizer = build_optimizer(model, opts)
     task2scaler = {t: i for i, t in enumerate(train_dataloaders.keys())}
-    model, optimizer = amp.initialize(model, optimizer,
-                                      num_losses=len(task2scaler),
-                                      enabled=opts.fp16, opt_level='O2')
+    model, optimizer = amp.initialize(model, optimizer, num_losses=len(task2scaler), enabled=opts.fp16, opt_level='O2')
     restorer = TrainingRestorer(opts, model, optimizer)
     global_step = restorer.global_step
     TB_LOGGER.global_step = global_step

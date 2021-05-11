@@ -18,8 +18,7 @@ from .data import VideoFeatSubTokDataset, _check_ngpu, video_collate
 
 
 class VsmDataset(Dataset):
-    def __init__(self, video_ids, vid_sub_db, query_per_video=5,
-                 sub_ctx_len=0):
+    def __init__(self, video_ids, vid_sub_db, query_per_video=5, sub_ctx_len=0):
         assert isinstance(vid_sub_db, VideoFeatSubTokDataset)
         self.query_per_video = query_per_video
         self.vid_sub_db = vid_sub_db
@@ -51,22 +50,18 @@ class VsmDataset(Dataset):
             # text input
             if self.sub_ctx_len >= 0:
                 curr_sub_ctx_input_ids = []
-                for tmp_sub_idx in range(sub_idx-self.sub_ctx_len,
-                                         sub_idx+1):
-                    if tmp_sub_idx >= 0 and tmp_sub_idx < num_subs\
-                            and tmp_sub_idx not in query_sub_ids:
+                for tmp_sub_idx in range(sub_idx-self.sub_ctx_len, sub_idx+1):
+                    if 0 <= tmp_sub_idx < num_subs and tmp_sub_idx not in query_sub_ids:
                         in_ids = example['input_ids'][tmp_sub_idx]
                         if self.vid_sub_db.max_txt_len != -1:
                             in_ids = in_ids[:self.vid_sub_db.max_txt_len]
                         curr_sub_ctx_input_ids.extend(copy.deepcopy(in_ids))
-            curr_sub_ctx_input_ids = [
-                self.vid_sub_db.txt_db.sep] + curr_sub_ctx_input_ids
+            curr_sub_ctx_input_ids = [self.vid_sub_db.txt_db.sep] + curr_sub_ctx_input_ids
 
             n_frame = len(matched_frames)
             attn_masks_fill_0_pos = None
             if n_frame:
-                matched_v_feats = torch.index_select(
-                    v_feat, 0, torch.tensor(matched_frames))
+                matched_v_feats = torch.index_select(v_feat, 0, torch.tensor(matched_frames))
 
                 if sub_idx in query_sub_ids:
                     in_ids = example['input_ids'][sub_idx]
@@ -85,26 +80,26 @@ class VsmDataset(Dataset):
                     sub_queries_and_targets.append(
                         (sub_quries_input_ids, sub_query_attn_masks,
                          vid, targets))
+
                 if len(curr_sub_ctx_input_ids) == 0:
                     curr_sub_ctx_input_ids = [self.vid_sub_db.txt_db.mask]
                     attn_masks_fill_0_pos = -1
-                attn_masks = torch.ones(
-                    len(curr_sub_ctx_input_ids) + n_frame,
-                    dtype=torch.long)
+                attn_masks = torch.ones(len(curr_sub_ctx_input_ids) + n_frame, dtype=torch.long)
             else:
                 matched_v_feats = torch.zeros(1, v_feat.shape[1])
-                attn_masks = torch.ones(
-                    len(curr_sub_ctx_input_ids) + 1, dtype=torch.long)
+                attn_masks = torch.ones(len(curr_sub_ctx_input_ids) + 1, dtype=torch.long)
                 attn_masks_fill_0_pos = 0
+
             if attn_masks_fill_0_pos is not None:
                 attn_masks.data[attn_masks_fill_0_pos].fill_(0)
 
             frame_level_input_ids.append(torch.tensor(curr_sub_ctx_input_ids))
             frame_level_attn_masks.append(attn_masks)
             frame_level_v_feats.append(matched_v_feats)
+
         while len(sub_queries_and_targets) < self.query_per_video:
-            sub_queries_and_targets.append(
-                copy.deepcopy(sub_queries_and_targets[-1]))
+            sub_queries_and_targets.append(copy.deepcopy(sub_queries_and_targets[-1]))
+
         clip_level_v_feats = v_feat
         clip_level_attn_masks = [1] * len(clip_level_v_feats)
         clip_level_attn_masks = torch.tensor(clip_level_attn_masks)

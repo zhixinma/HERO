@@ -91,33 +91,25 @@ def load_pretrained_weight(model, state_dict):
         state_dict._metadata = metadata
 
     def load(module, prefix=''):
-        local_metadata = ({} if metadata is None
-                          else metadata.get(prefix[:-1], {}))
-        module._load_from_state_dict(
-            state_dict, prefix, local_metadata, True, missing_keys,
-            unexpected_keys, error_msgs)
+        local_metadata = ({} if metadata is None else metadata.get(prefix[:-1], {}))
+        module._load_from_state_dict(state_dict, prefix, local_metadata, True, missing_keys, unexpected_keys, error_msgs)
         for name, child in module._modules.items():
             if child is not None:
                 load(child, prefix + name + '.')
+
     start_prefix = ''
-    if not hasattr(model, 'roberta') and\
-            any(s.startswith('roberta.') for s in state_dict.keys()):
+    if not hasattr(model, 'roberta') and any(s.startswith('roberta.') for s in state_dict.keys()):
         start_prefix = 'roberta.'
 
     load(model, prefix=start_prefix)
     if len(missing_keys) > 0:
-        logger.info("Weights of {} not initialized from "
-                    "pretrained model: {}".format(
-                        model.__class__.__name__, missing_keys))
+        logger.info("Weights of {} not initialized from pretrained model: {}".format(model.__class__.__name__, missing_keys))
+
     if len(unexpected_keys) > 0:
-        logger.info("Weights from pretrained model not used in "
-                    "{}: {}".format(
-                        model.__class__.__name__, unexpected_keys))
+        logger.info("Weights from pretrained model not used in  {}: {}".format(model.__class__.__name__, unexpected_keys))
+
     if len(error_msgs) > 0:
-        raise RuntimeError('Error(s) in loading state_dict for '
-                            '{}:\n\t{}'.format(
-                                model.__class__.__name__,
-                                "\n\t".join(error_msgs)))
+        raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(model.__class__.__name__, "\n\t".join(error_msgs)))
     return model
 
 

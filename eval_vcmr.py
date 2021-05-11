@@ -134,7 +134,7 @@ def main(opts):
 
 
 def save_vr(results, target):  # add by zhixin
-    k = 10
+    k = 4
     vidx2vid = {results["video2idx"][vid]: vid for vid in results["video2idx"]}
     vr_submission = {item["desc_id"]: [vidx2vid[s[0]] for s in item["predictions"][:k]] for item in results["VR"]}
     save_json(vr_submission, target)
@@ -155,7 +155,7 @@ def save_vcmr(results, target):  # add by zhixin
             vid = vidx2vid[vidx]
             if vid in vr_result[desc_id]:
                 rank_in_vr = vr_result[desc_id].index(vid)
-                vcmr_submission[desc_id] = (rank, rank_in_vr, st, ed)
+                vcmr_submission[desc_id] = (rank, rank_in_vr, vid, st, ed)
                 found = True
                 break
 
@@ -184,10 +184,9 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
     query_data = val_loader.dataset.query_data
 
     partial_query_data = []
-    total_frame_embeddings = None
+    total_frame_embeddings, total_c_attn_masks = None, None
     video_batch, video_idx = [], []
     max_clip_len = 0
-    feat_dim, session_dtype, session_device = None, None, None
     for video_i, (vid, vidx) in tqdm(enumerate(video2idx_local.items()), desc="Computing Video Embeddings", total=len(video2idx_local)):
         video_item = val_loader.dataset.video_db[vid]
         video_batch.append(video_item)
@@ -199,20 +198,12 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                 if isinstance(item, torch.Tensor) and item.dtype == torch.float32:
                     video_batch[k] = video_batch[k].to(dtype=next(model.parameters()).dtype)
 
-            # if feat_dim is None:
-            #     curr_frame_embeddings = model.v_encoder(video_batch, 'repr')
-            #     _shape = curr_frame_embeddings.shape
-            # else:
-            #     assert feat_dim is not None and session_dtype is not None and session_device is not None
-            #     curr_frame_embeddings = torch.zeros((video_batch["c_v_feats"].shape[0], video_batch["c_v_feats"].shape[1], feat_dim), dtype=session_dtype, device=session_device)
-
             curr_frame_embeddings = model.v_encoder(video_batch, 'repr')
             curr_c_attn_masks = video_batch['c_attn_masks']
             curr_clip_len = curr_frame_embeddings.size(-2)
             assert curr_clip_len <= model_opts.max_clip_len
 
             if total_frame_embeddings is None:
-                session_dtype, session_device = curr_frame_embeddings.dtype, curr_frame_embeddings.device
                 feat_dim = curr_frame_embeddings.size(-1)
                 total_frame_embeddings = torch.zeros(
                     (len(video2idx_local), model_opts.max_clip_len, feat_dim),
@@ -417,7 +408,6 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
     eval_res["video2idx"] = video2idx_global
     eval_submission = get_submission_top_n(eval_res, top_n=model_opts.max_after_nms)
 
-    has_gt_target = False
     if has_gt_target:
         metrics = eval_retrieval(eval_submission, partial_query_data,
                                  iou_thds=VCMR_IOU_THDS,

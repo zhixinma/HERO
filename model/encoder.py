@@ -236,9 +236,25 @@ class CrossModalTrm(RobertaPreTrainedModel):
 
     def _compute_txt_embeddings(self, input_ids, position_ids,
                                 txt_type_ids=None):
+
         output = self.embeddings(
             input_ids=input_ids, position_ids=position_ids,
             token_type_ids=txt_type_ids)
+
+        # print("input_ids", input_ids.shape)
+        # print("position_ids", position_ids.shape)
+        # if txt_type_ids:
+        #     print("txt_type_ids", txt_type_ids.shape)
+        #
+        # print("input_ids", input_ids[0][:10].tolist())
+        # print("position_ids", position_ids[0][:10].tolist())
+        # if txt_type_ids:
+        #     print("txt_type_ids", txt_type_ids[0][:10].tolist())
+
+        # print("output", output.shape)
+        # print("output", output[0][0][:10].tolist())
+        # exit()
+
         return output
 
     def _compute_img_embeddings(self, img_feat, img_pos_ids,
@@ -261,21 +277,40 @@ class CrossModalTrm(RobertaPreTrainedModel):
         # embedding layer
         if input_ids is not None:
             # txt only
-            txt_emb = self._compute_txt_embeddings(
-                input_ids, position_ids, txt_type_ids)
+            txt_emb = self._compute_txt_embeddings(input_ids, position_ids, txt_type_ids)
+
         if img_feat is not None:
             # image only
-            img_emb = self._compute_img_embeddings(
-                img_feat, img_pos_ids, img_type_ids, img_masks)
+            img_emb = self._compute_img_embeddings(img_feat, img_pos_ids, img_type_ids, img_masks)
+
+        # print("-"*30)
+        # print("txt_emb:", type(txt_emb), "img_emb:", type(img_emb))
+        # print("txt_emb", txt_emb.shape)
+        # print("img_emb", img_emb.shape)
+        # print("txt_emb", txt_emb[0][0][:10].tolist())
+        # print("img_emb", img_emb[0][0][:10].tolist())
+        # exit()
 
         if txt_emb is not None and img_emb is not None:
             assert gather_index is not None
             # align back to most compact input
-            gather_index = gather_index.unsqueeze(-1).expand(
-                -1, -1, self.config.hidden_size)
-            embedding_output = torch.gather(
-                torch.cat([img_emb, txt_emb], dim=1),
-                dim=1, index=gather_index)
+            gather_index = gather_index.unsqueeze(-1).expand(-1, -1, self.config.hidden_size)
+
+            # print("gather_index", gather_index.shape)
+            # print("gather_index", gather_index[0][:10, 0].tolist())
+            # exit()
+
+            _embedding_output = torch.cat([img_emb, txt_emb], dim=1)
+            embedding_output = torch.gather(_embedding_output, dim=1, index=gather_index)
+
+            # print("-" * 30)
+            # print("cat embedding_output   ", _embedding_output.shape)
+            # print("gather embedding_output", embedding_output.shape)
+            # print("cat embedding_output   ", _embedding_output[0][0][:10].tolist())
+            # print("gather embedding_output", embedding_output[0][0][:10].tolist())
+            # print("-" * 30)
+            # exit()
+
             return embedding_output
         elif txt_emb is not None:
             return txt_emb
@@ -337,9 +372,21 @@ class CrossModalTrm(RobertaPreTrainedModel):
                      attention_mask, gather_index=None,
                      txt_type_ids=None, img_type_ids=None, img_masks=None):
         # embedding layer
+
+        # print("input_ids", input_ids.shape)
+        # print("img_feat", img_feat.shape)
+        #
+        # print("input_ids", input_ids[0][:10].tolist())
+        # print("img_feat", img_feat[0][0][:10].tolist())
+        # exit()
+
         embedding_output = self._compute_img_txt_embeddings(
             input_ids, position_ids, img_feat, img_pos_ids,
             gather_index, txt_type_ids, img_type_ids, img_masks)
+
+        # print("embedding_output", embedding_output.shape)
+        # print("embedding_output", embedding_output[0][0][:10])
+        # exit()
 
         encoder_outputs = self.encoder(embedding_output, attention_mask)
 

@@ -19,8 +19,7 @@ from .data import (VideoFeatSubTokDataset, QueryTokLmdb,
 
 
 class VcmrDataset(Dataset):
-    def __init__(self, video_ids, video_db, query_db, max_num_query=5,
-                 sampled_by_q=True):
+    def __init__(self, video_ids, video_db, query_db, max_num_query=5, sampled_by_q=True):
         assert isinstance(query_db, QueryTokLmdb)
         assert isinstance(video_db, VideoFeatSubTokDataset)
         self.video_db = video_db
@@ -75,27 +74,19 @@ class VcmrDataset(Dataset):
         vid, qids = self.getids(i)
 
         video_inputs = self.video_db.__getitem__(vid)
-        (frame_level_input_ids, frame_level_v_feats,
-         frame_level_attn_masks,
-         clip_level_v_feats, clip_level_attn_masks, num_subs,
-         sub_idx2frame_idx) = video_inputs
-        nframes = len(clip_level_v_feats)
+        (frame_level_input_ids, frame_level_v_feats, frame_level_attn_masks,
+         clip_level_v_feats, clip_level_attn_masks, num_subs, sub_idx2frame_idx) = video_inputs
 
+        nframes = len(clip_level_v_feats)
         query_and_targets = []
         for qid in qids:
             example = self.query_db[qid]
-            st_idx, ed_idx = self.get_st_ed_label(
-                example['target'], max_idx=nframes-1)
-            target = torch.LongTensor(
-                [st_idx, ed_idx])
+            st_idx, ed_idx = self.get_st_ed_label(example['target'], max_idx=nframes-1)
+            target = torch.LongTensor([st_idx, ed_idx])
             query_input_ids = example["input_ids"]
-            query_input_ids = torch.tensor(
-                [self.query_db.cls_] + query_input_ids)
-
+            query_input_ids = torch.tensor([self.query_db.cls_] + query_input_ids)
             query_attn_mask = torch.tensor([1]*len(query_input_ids))
-
-            query_and_targets.append(
-                (query_input_ids, query_attn_mask, vid, target))
+            query_and_targets.append((query_input_ids, query_attn_mask, vid, target))
 
         return (video_inputs, vid, tuple(query_and_targets))
 
@@ -104,7 +95,7 @@ class VcmrDataset(Dataset):
             return len(self.qids)
         return len(self.vids)
 
-    def get_st_ed_label(self, ts, max_idx):
+    def get_st_ed_label(self, ts, max_idx) -> [int, int]:
         """
         Args:
             ts: [st (float), ed (float)] in seconds, ed > st
@@ -119,8 +110,7 @@ class VcmrDataset(Dataset):
         # TODO which one is better, [2: 5] or [2: 6)
         """
         st_idx = min(math.floor(ts[0]/self.frame_interval), max_idx)
-        ed_idx = min(max(math.ceil(ts[1]/self.frame_interval)-1,
-                         st_idx+1), max_idx)
+        ed_idx = min(max(math.ceil(ts[1]/self.frame_interval)-1, st_idx+1), max_idx)
         return st_idx, ed_idx
 
 
@@ -179,8 +169,7 @@ def vcmr_eval_collate(inputs):
 
 
 class VcmrFullEvalDataset(VcmrDataset):
-    def __init__(self, video_ids, video_db, query_db, max_num_query=5,
-                 distributed=False):
+    def __init__(self, video_ids, video_db, query_db, max_num_query=5, distributed=False):
         super().__init__([], video_db, query_db, sampled_by_q=True)
         qlens, qids = get_ids_and_lens(query_db)
         # this dataset does not support multi GPU
@@ -216,29 +205,28 @@ class VcmrFullEvalDataset(VcmrDataset):
         vid, qids = self.getids(i)
         if vid != -1:
             video_inputs = self.video_db.__getitem__(vid)
-            (frame_level_input_ids, frame_level_v_feats,
+            (frame_level_input_ids,
+             frame_level_v_feats,
              frame_level_attn_masks,
-             clip_level_v_feats, clip_level_attn_masks, num_subs,
+             clip_level_v_feats,
+             clip_level_attn_masks,
+             num_subs,
              sub_idx2frame_idx) = video_inputs
             nframes = len(clip_level_v_feats)
         query_and_targets = []
         for qid in qids:
             example = self.query_db[qid]
             if example['target'] is not None:
-                st_idx, ed_idx = self.get_st_ed_label(
-                    example['target'], max_idx=nframes-1)
-                target = torch.LongTensor(
-                    [st_idx, ed_idx])
+                st_idx, ed_idx = self.get_st_ed_label(example['target'], max_idx=nframes-1)
+                target = torch.LongTensor([st_idx, ed_idx])
             else:
                 target = torch.LongTensor([-1, -1])
             query_input_ids = example["input_ids"]
-            query_input_ids = torch.tensor(
-                [self.query_db.cls_] + query_input_ids)
+            query_input_ids = torch.tensor([self.query_db.cls_] + query_input_ids)
 
             query_attn_mask = torch.tensor([1]*len(query_input_ids))
+            query_and_targets.append((query_input_ids, query_attn_mask, vid, target))
 
-            query_and_targets.append(
-                (query_input_ids, query_attn_mask, vid, target))
         return (qid, query_and_targets)
 
 

@@ -94,6 +94,7 @@ class TvcTrainDataset(Dataset):
         cap_ids = self.vid2caps[vid]
         if self.max_cap_per_vid != -1 and len(cap_ids) > self.max_cap_per_vid:
             # random sample some captions if too many
+            print("data/tvc.py - line 97")
             cap_ids = random.sample(cap_ids, self.max_cap_per_vid)
         return vid, cap_ids
 

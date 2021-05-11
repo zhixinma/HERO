@@ -215,10 +215,8 @@ class SubTokLmdb(TxtTokLmdb):
     def __init__(self, db_dir, max_clip_len=-1):
         super().__init__(db_dir, max_txt_len=-1)
         self.max_clip_len = max_clip_len
-        self.vid2max_len = json.load(
-            open(f'{db_dir}/vid2max_frame_sub_len.json'))
-        self.id2len = json.load(
-            open(f'{db_dir}/vid2len.json'))
+        self.vid2max_len = json.load(open(f'{db_dir}/vid2max_frame_sub_len.json'))
+        self.id2len = json.load(open(f'{db_dir}/vid2len.json'))
         self.vid2dur, self.vid2idx = {}, {}
         video_data_file = f'{db_dir}/vid2dur_idx.json'
         if os.path.exists(video_data_file):
@@ -404,12 +402,8 @@ class VideoFeatSubTokDataset(Dataset):
 
 
 def video_collate(inputs):
-    (frame_level_input_ids,
-     frame_level_v_feats,
-     frame_level_attn_masks,
-     clip_level_v_feats,
-     clip_level_attn_masks, num_subs,
-     sub_idx2frame_idx) = map(list, unzip(inputs))
+    (frame_level_input_ids, frame_level_v_feats, frame_level_attn_masks,
+     clip_level_v_feats, clip_level_attn_masks, num_subs, sub_idx2frame_idx) = map(list, unzip(inputs))
 
     # all_f_sub_input_ids: list[tensor(sep, w0, w1)]
     # whose list size = total number of subs
@@ -421,30 +415,24 @@ def video_collate(inputs):
 
     txt_lens = [i.size(0) for i in all_f_sub_input_ids]  # len. of each sub
     # hard_coded padding value, TODO: check correctness
-    all_f_sub_input_ids = pad_sequence(
-        all_f_sub_input_ids, batch_first=True, padding_value=1)
+    all_f_sub_input_ids = pad_sequence(all_f_sub_input_ids, batch_first=True, padding_value=1)
 
-    all_f_sub_pos_ids = torch.arange(0, all_f_sub_input_ids.size(1),
-                                     dtype=torch.long).unsqueeze(0)
+    all_f_sub_pos_ids = torch.arange(0, all_f_sub_input_ids.size(1), dtype=torch.long).unsqueeze(0)
     all_f_sub_pos_ids.data[all_f_sub_pos_ids > 511] = 511  # FIXME quick hack
-    all_f_attn_masks = pad_sequence(
-        all_f_attn_masks, batch_first=True, padding_value=0)
+    all_f_attn_masks = pad_sequence(all_f_attn_masks, batch_first=True, padding_value=0)
 
     v_lens = [i.size(0) for i in all_f_v_feats]
     all_f_v_feats = pad_tensors(all_f_v_feats, v_lens, 0)
-    all_f_v_pos_ids = torch.arange(0, all_f_v_feats.size(1), dtype=torch.long
-                                   ).unsqueeze(0)
+    all_f_v_pos_ids = torch.arange(0, all_f_v_feats.size(1), dtype=torch.long).unsqueeze(0)
 
     # all_f_sub_input_attn_masks (total_subs, max_sl) for subtitles only
     all_f_sub_input_attn_masks = [torch.tensor([1] * tl) for tl in txt_lens]
-    all_f_sub_input_attn_masks = pad_sequence(
-        all_f_sub_input_attn_masks, batch_first=True, padding_value=0)
+    all_f_sub_input_attn_masks = pad_sequence(all_f_sub_input_attn_masks, batch_first=True, padding_value=0)
 
     # TODO: How to calculate gather index at frame_level
     bs, max_vl, _ = all_f_v_feats.size()
     out_size = all_f_attn_masks.size(1)
-    frame_level_gather_index = get_gather_index(
-        txt_lens, v_lens, bs, max_vl, out_size)
+    frame_level_gather_index = get_gather_index(txt_lens, v_lens, bs, max_vl, out_size)
 
     num_frames = [i.size(0) for i in clip_level_v_feats]
     clip_level_v_feats = pad_tensors(

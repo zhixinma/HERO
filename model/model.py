@@ -118,8 +118,7 @@ class HierarchicalVlModel(VideoPreTrainedModel):
     def __init__(self, config, vfeat_dim, max_frm_seq_len,
                  max_clip_len=100, nce_temp=1.0):
         super().__init__(config)
-        self.f_encoder = CrossModalTrm(
-            config.f_config, vfeat_dim, max_frm_seq_len)
+        self.f_encoder = CrossModalTrm(config.f_config, vfeat_dim, max_frm_seq_len)
         self.frame_transform = LinearLayer(
             vfeat_dim, config.f_config.hidden_size,
             layer_norm=True, dropout=config.f_config.hidden_dropout_prob,
@@ -204,8 +203,7 @@ class HierarchicalVlModel(VideoPreTrainedModel):
 
         # (bz, #frames, 768)
         shape = list(c_v_feats.size()[:2]) + [frame_sequence_output.size(-1)]
-        matched_v_feats = self.collect_frame_outputs(
-            shape, frame_sequence_output, num_subs, sub_idx2frame_idx)
+        matched_v_feats = self.collect_frame_outputs(shape, frame_sequence_output, num_subs, sub_idx2frame_idx)
 
         # residual connection (transformed_v_feat = raw_v_feat + fused_v_feat)
         transformed_c_v_feats = self.frame_transform(c_v_feats)
@@ -271,8 +269,7 @@ class HierarchicalVlModel(VideoPreTrainedModel):
             else:
                 return prediction_feat, neg_pred_feat
 
-    def mfm_nce(self, masked_output, pos_output, neg_output,
-                compute_loss=True):
+    def mfm_nce(self, masked_output, pos_output, neg_output, compute_loss=True):
         # dot product of ground truth feature
         masked_score = masked_output.matmul(pos_output.t())
         # dot product of neative samples
@@ -349,8 +346,7 @@ class HeroModel(VideoPreTrainedModel):
     def __init__(self, config, vfeat_dim, max_frm_seq_len):
         super().__init__(config)
         self.config = config
-        self.v_encoder = HierarchicalVlModel(
-            config, vfeat_dim, max_frm_seq_len)
+        self.v_encoder = HierarchicalVlModel(config, vfeat_dim, max_frm_seq_len)
         self.v_encoder.initialize()
 
     def load_partial_pretrained(self, checkpoint, vfeat_dim, max_frm_seq_len,
