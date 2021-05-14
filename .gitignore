@@ -4,6 +4,8 @@ wt.sh
 *log*
 cmds.txt
 
+*.png
+
 # ctags
 tags
 
