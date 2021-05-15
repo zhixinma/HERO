@@ -73,6 +73,7 @@ class VideoFeatLmdb(object):
                              readahead=False)
         self.txn = self.env.begin(buffers=True)
         if self.name2nframe is None:
+            print("Calculate name to frame number")
             self.name2nframe = self._compute_nframe()
 
     def _compute_nframe(self):
@@ -81,15 +82,14 @@ class VideoFeatLmdb(object):
         for fname in tqdm(fnames, desc='reading images'):
             dump = self.txn.get(fname.encode('utf-8'))
             if self.compress:
-                with io.BytesIO(dump) as reader:
-                    img_dump = np.load(reader, allow_pickle=True)
+                with io.BytesIO(dump) as fea_reader:
+                    img_dump = np.load(fea_reader, allow_pickle=True)
                     features = img_dump['features']
             else:
                 img_dump = msgpack.loads(dump, raw=False)
                 features = img_dump['features']
             nframe = len(features)
-            name2nframe[fname] = self.max_clip_len\
-                if nframe > self.max_clip_len else nframe
+            name2nframe[fname] = self.max_clip_len if nframe > self.max_clip_len else nframe
 
         return name2nframe
 

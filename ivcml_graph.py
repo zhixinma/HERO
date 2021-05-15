@@ -6,31 +6,69 @@ import numpy as np
 from ivcml_util import pairwise_equation, expand_window, mean, random_color, is_overlap, subtract
 
 
-NODE_COLOR = {"target": "orange",
-              "default": "green",
-              "ini": "cyan",
-              "ini_and_tar": "yellow"}
-
 COLOR = {
     "dark red": "#CD2424",
     "light green": "#9FF689"
 }
 
+NODE_COLOR = {
+    "target": "orange",
+    "default": "black",
+    "ini": "cyan",
+    "ini_and_tar": "yellow",
+    "empty": "grey"
+}
+
+EDGE_COLOR = {
+    # "default": COLOR["dark red"],
+    "default": "grey",
+    "subject": COLOR["light green"],
+    "horizontal I": "blue",
+    "horizontal II": "magenta",
+    "path": "red",
+}
+
 
 # Graph function
-def build_static_graph(video_db, vid_to_subs, vid_pool, tar_vid, range_gt, ini_vid, frame_idx_ini):
+def is_overlap_range(_range, _range_gt):
+    """
+    :param _range: range to test
+    :param _range_gt: the ground truth range
+    :return: True if there are overlap between the two ranges
+    """
+    _st, _ed = _range[0], _range[-1]
+    st_gt, ed_gt = _range_gt[0], _range_gt[-1]
+    case_1 = _st <= st_gt <= _ed
+    case_2 = _st <= ed_gt <= _ed
+    case_3 = st_gt <= _st <= _ed <= ed_gt
+    return case_1 or case_2 or case_3
+
+
+def get_mid_frame(_st, _ed, _duration, _frame_num):
+    return int((_st + _ed) / 2 / _duration * _frame_num)
+
+
+def get_frame_range(_st, _ed, _duration, _frame_num):
+    """
+    :param _st:
+    :param _ed:
+    :param _duration:
+    :param _frame_num:
+    :return:
+    """
+    return int(_st / _duration * _frame_num), int(_ed / _duration * _frame_num)
+
+
+def build_static_graph(video_db, vid_pool, tar_vid, range_gt, ini_vid, frame_idx_ini, vid_to_subs=None):
+
     def get_node_color(_vid, _range, _vid_tar, _range_gt, _ini_vid, _frame_ini):
         if not _range:
-            return "grey"
+            return NODE_COLOR["empty"]
 
         _st, _ed = _range[0], _range[-1]
-        st_gt, ed_gt = _range_gt
 
         is_tar_video = (_vid == _vid_tar)
-        case_1 = _st <= st_gt <= _ed
-        case_2 = _st <= ed_gt <= _ed
-        case_3 = st_gt <= _st <= _ed <= ed_gt
-        is_part_of_target = (case_1 or case_2 or case_3) and is_tar_video
+        is_part_of_target = is_tar_video and is_overlap_range(_range, _range_gt)
 
         is_ini_video = (_vid == _ini_vid)
         is_ini = (_st <= _frame_ini <= _ed) and is_ini_video
@@ -53,13 +91,20 @@ def build_static_graph(video_db, vid_to_subs, vid_pool, tar_vid, range_gt, ini_v
 
     vertices, v_color, v_shape = [], [], []
     boundary_indicator = []
-    sub_2_vid = []
+    unit_idx_to_v_id = []
+    frame_to_unit = {}
+    frame_counter = 0
     for i, vid in enumerate(vid_pool):
         _, _, _, frame_fea_cur, _, _, sub_idx2frame_idx = video_db[vid]
         frame_num_cur = frame_fea_cur.shape[0]
+        assert frame_num_cur == video_db.img_db.name2nframe[vid], f"Error: Inconsistent frame number: {frame_num_cur} and {video_db.img_db.name2nframe[vid]}"
         sub_idx2frame_idx = complement_sub_unit(sub_idx2frame_idx, frame_num_cur)
+        frame_to_unit_cur = [-1] * frame_num_cur
         for j, (sub_idx, frame_range) in enumerate(sub_idx2frame_idx):
-            sub_2_vid.append(vid)
+            for i_frame in frame_range:
+                frame_to_unit_cur[i_frame] = frame_counter
+            frame_counter += 1
+            unit_idx_to_v_id.append(vid)
             vertices.append([j * 3, i * 5])
             color = get_node_color(vid, frame_range, tar_vid, range_gt, ini_vid, frame_idx_ini)
             shape = get_node_shape(sub_idx)
@@ -83,32 +128,38 @@ def build_static_graph(video_db, vid_to_subs, vid_pool, tar_vid, range_gt, ini_v
             v_color.append(color)
             v_shape.append(shape)
             boundary_indicator.append(1)
-        boundary_indicator[-1] = 0
-
-    edges_subj = build_subject_edge(vid_pool, vid_to_subs)
-    edges_subj_color = [COLOR["light green"]] * len(edges_subj)  # a green
-    edges_subj_conf = [0.2] * len(edges_subj)
-
-    temporal_edges = [(node_i, node_i+1) for node_i, is_not_boundary in enumerate(boundary_indicator) if is_not_boundary]
-    # temporal_edges_color = ["blue" if st % 2 else "magenta" for st, ed in temporal_edges]
-    temporal_edges_color = [COLOR["dark red"]] * len(temporal_edges)
-    temporal_edges_conf = [1] * len(temporal_edges)
+        frame_to_unit[vid] = frame_to_unit_cur
+        boundary_indicator[-1] = 0  # the last one indicates the boundary
 
     static_edges = []
     static_edges_color = []
     static_edges_conf = []
 
+    temporal_edges = [(node_i, node_i+1) for node_i, is_not_boundary in enumerate(boundary_indicator) if is_not_boundary]
+    # temporal_edges_color = [EDGE_COLOR["horizontal I"] if st % 2 else EDGE_COLOR["horizontal II"]for st, ed in temporal_edges]
+    temporal_edges_color = [EDGE_COLOR["default"]] * len(temporal_edges)
+    temporal_edges_conf = [1] * len(temporal_edges)
+
     static_edges += temporal_edges
     static_edges_color += temporal_edges_color
     static_edges_conf += temporal_edges_conf
 
-    # static_edges += edges_subj
-    # static_edges_color += edges_subj_color
-    # static_edges_conf += edges_subj_conf
+    if vid_to_subs is not None:
+        edges_subj = build_subject_edge(vid_pool, vid_to_subs)
+        edges_subj_color = [EDGE_COLOR["subject"]] * len(edges_subj)  # a green
+        edges_subj_conf = [0.2] * len(edges_subj)
 
-    print("|E_subject|: %d" % len(edges_subj))
+        static_edges += edges_subj
+        static_edges_color += edges_subj_color
+        static_edges_conf += edges_subj_conf
 
-    return vertices, v_color, v_shape, static_edges, static_edges_color, static_edges_conf, sub_2_vid
+        print("|E_subject|: %d" % len(edges_subj))
+
+    for vid in frame_to_unit:
+        for i in frame_to_unit[vid]:
+            assert i >= 0, i
+
+    return vertices, v_color, v_shape, static_edges, static_edges_color, static_edges_conf, unit_idx_to_v_id, frame_to_unit
 
 
 def build_subject_edge(vid_pool, vid_to_subs):
@@ -134,6 +185,24 @@ def build_subject_edge(vid_pool, vid_to_subs):
     for x, y in zip(*eq_mat.nonzero()):
         edges.append((x, y))
     return edges
+
+
+def build_vcmr_edges(moment_pool, frame_to_unit, vid_to_duration, vid_to_frame_num, frame_interval=None):
+    edges = []
+    old_unit = None
+    for vid, _st, _ed, _score in moment_pool:
+        _frame_num = vid_to_frame_num[vid]
+        _duration = vid_to_duration[vid]
+        _i_frame = get_mid_frame(_st, _ed, _duration, _frame_num)
+        assert _i_frame <= _frame_num, f"INITIALIZATION: {_i_frame}/{_frame_num}"
+        _unit = frame_to_unit[vid][_i_frame]
+        if old_unit is not None:
+            edges.append((old_unit, _unit))
+        old_unit = _unit
+
+    e_color = [EDGE_COLOR["default"]] * len(edges)
+    e_conf = [1] * len(edges)
+    return edges, e_color, e_conf
 
 
 def complement_sub_unit(sub_idx2frame_idx, frame_num):
@@ -238,11 +307,12 @@ def plot_graph(v, e, markers=None, v_colors=None, e_colors=None, confidence=None
 
     for i, (st, ed) in enumerate(e):
         p = confidence[i] if confidence is not None else None
-        color = e_colors[i] if e_colors is not None else "red"
+        color = e_colors[i] if e_colors is not None else EDGE_COLOR["default"]
 
         if y[st] != y[ed] or (st == ed-1 and y[st] == y[ed]):  # lines with overlap
             if st == ed-1 and y[st] == y[ed]:
-                continue
+                if color != EDGE_COLOR["path"]:
+                    continue
             ax.plot([x[st], x[ed]], [y[st], y[ed]], color=color, marker='', alpha=p)
         else:
             tmp_x, tmp_y = (x[st] + x[ed]) / 2, y[st] + random.uniform(1, 2)
@@ -250,9 +320,10 @@ def plot_graph(v, e, markers=None, v_colors=None, e_colors=None, confidence=None
             ax.plot([tmp_x, x[ed]], [tmp_y, y[ed]], color=color, marker='', alpha=p)
 
     for i, v in enumerate(v):
-        color = "green" if v_colors is None else v_colors[i]
+        color = NODE_COLOR["default"] if v_colors is None else v_colors[i]
         marker = "o" if markers is None else markers[i]
-        ax.scatter(v[0], v[1], color=color, marker=marker, s=30)
+        facecolor = "none" if color == NODE_COLOR["default"] else color
+        ax.scatter(v[0], v[1], color=color, facecolors=facecolor, marker=marker, s=30)
 
     title = ax.set_title("Fig. " + title, fontdict={'family': 'serif', "verticalalignment": "bottom"}, loc='center', wrap=True)
     title.set_y(1.05)
@@ -265,23 +336,55 @@ def plot_graph(v, e, markers=None, v_colors=None, e_colors=None, confidence=None
     plt.close()
 
 
-# NetworkX functions
+def render_shortest_path(sp, edges, e_color, e_conf):
+    for edge in sp:
+        i_e = edges.index(edge) if edge in edges else edges.index((edge[1], edge[0]))
+        e_color[i_e] = EDGE_COLOR["path"]
+        e_conf[i_e] = 1
+    return e_color, e_conf
+
+
+def shortest_path_edges(g: nx.Graph, node_src, node_tar):
+    # shortest path
+    sp_hero = graph_shortest_path(g, node_src, node_tar)
+    if sp_hero is None:
+        return None
+    sp_edges_hero = path_to_edges(sp_hero)
+    return sp_edges_hero
+
+
+def path_to_edges(p: list):
+    """
+    :param p: a path in a graph
+    :return: all edges in the path p
+    """
+    e = [(p[i-1], p[i]) for i in range(len(p)) if i > 0]
+    return e
+
+
 def get_src_node(nodes_color):
-    if "cyan" in nodes_color:
-        node_src_hero = nodes_color.index("cyan")
+    if NODE_COLOR["ini"] in nodes_color:
+        node_src_hero = nodes_color.index(NODE_COLOR["ini"])
     else:
-        node_src_hero = nodes_color.index("yellow")
+        try:
+            node_src_hero = nodes_color.index(NODE_COLOR["ini_and_tar"])
+        except ValueError:
+            assert False, f"'{NODE_COLOR['ini']}' and '{NODE_COLOR['ini_and_tar']}' is not in list: {nodes_color}"
     return node_src_hero
 
 
 def get_tar_node(nodes_color):
-    if "orange" in nodes_color:
-        node_tar_hero = nodes_color.index("orange")
+    if NODE_COLOR["target"] in nodes_color:
+        node_tar_hero = nodes_color.index(NODE_COLOR["target"])
     else:
-        node_tar_hero = nodes_color.index("yellow")
+        try:
+            node_tar_hero = nodes_color.index(NODE_COLOR["ini_and_tar"])
+        except ValueError:
+            assert False, f"'{NODE_COLOR['target']}' and '{NODE_COLOR['ini_and_tar']}' is not in list: {nodes_color}"
     return node_tar_hero
 
 
+# NetworkX functions
 def build_network(vertices: list, edges: list) -> nx.Graph:
     g = nx.Graph()
     node_ids = list(range(len(vertices)))

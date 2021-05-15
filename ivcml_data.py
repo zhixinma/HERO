@@ -12,6 +12,11 @@ from load_data import get_video_ids, load_video_sub_dataset
 from data import VcmrFullEvalDataset, vcmr_full_eval_collate, PrefetchLoader, QueryTokLmdb
 from torch.utils.data import DataLoader
 
+import networkx as nx
+from ivcml_graph import shortest_path_edges
+from ivcml_util import build_sparse_adjacent_matrix
+from ivcml_util import flatten
+
 
 def load_tvr_subtitle():
     data_folder = "/raw/"
@@ -69,7 +74,7 @@ def load_tvr_moment(part="train"):
 
 def load_hero_pred(opts, task):
     # TODO: 1. top-k setting may be a problem
-    assert task in {"vr", "vcmr"}
+    assert task in {"vr", "vcmr_base_on_vr", "vcmr"}
     result_dir = f'{opts.output_dir}/results_{opts.split}'
     pred_dir = f'{result_dir}/results_{opts.checkpoint}_{opts.split}_{task}.json'
     with open(pred_dir, "r") as f:
@@ -92,6 +97,8 @@ def load_subtitle_range(val_loader, opts):
 
 
 def load_video2duration(split="train"):
+    """ The map from video id to the video duration
+    """
     folder_p = "/raw/"
     f_name = "tvr_video2dur_idx.json"
     video_duration = {}
@@ -107,6 +114,19 @@ def load_video2duration(split="train"):
                 for clip_id in clips[split]:
                     video_duration[clip_id] = clips[split][clip_id][0]
     return video_duration
+
+
+def build_vid_to_frame_num(video_db):
+    """ The map from video id to frame number of the video
+    """
+    v_id_to_frame_number = {}
+    for _id in video_db.img_db.name2nframe:
+        print(_id)
+        v_id_to_frame_number[_id] = video_db[_id][3].shape[0]
+        n = min(video_db.img_db.max_clip_len, video_db[_id][3].shape[0])
+        n_1 = min(video_db.img_db.max_clip_len, video_db.img_db.name2nframe[_id])
+        assert n_1 == n, f"Inconsistent {_id}: {n_1} and {n}; min({video_db.img_db.name2nframe[_id]}, {video_db.img_db.max_clip_len}) and min({video_db[_id][3].shape[0]}, {video_db.img_db.max_clip_len})"
+    return v_id_to_frame_number
 
 
 def load_model(opts, device):
@@ -156,5 +176,20 @@ def build_dataloader(opts):
     return eval_dataloader
 
 
-def build_ivcml_ground_truth():
-    return
+def ivcml_preprocessing(g: nx.Graph, node_src, node_tar):
+    sp = shortest_path_edges(g, node_src, node_tar)
+    node_num = g.number_of_nodes()
+    adj_mat_sparse = build_sparse_adjacent_matrix(list(g.edges), node_num)  # directed adjacency matrix
+    for _st, _ed in sp:
+        state = _st
+        ground_truth = _ed
+        print(f"NEIGHBORS OF {state:3}:", end=" ")
+        for _nei in g.adj[state]:
+            if _nei == ground_truth:
+                print(f"({_nei})", end=" ")
+            else:
+                print(f"{_nei}", end=" ")
+        print()
+    exit()
+    # g.remove_edge()
+    return 0

@@ -5,6 +5,7 @@ import random
 from collections import Counter
 from collections.abc import Iterable   # import directly from collections for Python < 3.3
 import numpy as np
+import networkx as nx
 
 
 # List operation
@@ -69,6 +70,14 @@ def mean(data: list):
     return res
 
 
+def flatten(list_of_lists):
+    """
+    :param list_of_lists: a list of sub-lists like "[[e_{00}, ...], ..., [e_{n0}, ...]]"
+    :return: flatten all sub-lists into single list
+    """
+    return [item for sublist in list_of_lists for item in sublist]
+
+
 # Numpy operation
 def pairwise_equation(data: np.ndarray, tok_illegal=None):
     """
@@ -129,7 +138,16 @@ def uniform_normalize(t: torch.Tensor):
     return t
 
 
-# def
+def build_sparse_adjacent_matrix(edges: list, n: int):
+    """
+    :param edges: list of edges, for example (st, ed)
+    :param n: number of vertices
+    :return: the sparse adjacent matrix
+    """
+    i = torch.tensor(list(zip(*edges)))
+    v = torch.tensor([1] * len(edges))
+    sparse = torch.sparse_coo_tensor(i, v, (n, n))
+    return sparse
 
 
 # List statistic

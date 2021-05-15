@@ -125,9 +125,9 @@ def main(opts):
                 all_results[key].extend(all_results_list[rank_id][key])
         LOGGER.info('All results joined......')
 
-        save_vr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vr.json')
+        # save_vr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vr.json')
+        # save_vcmr_base_on_vr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vcmr_base_on_vr.json')
         save_vcmr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vcmr.json')
-
         # save_json(
         #     all_results,
         #     f'{result_dir}/results_{opts.checkpoint}_all.json')
@@ -141,7 +141,7 @@ def save_vr(results, target):  # add by zhixin
     LOGGER.info('VR results written......')
 
 
-def save_vcmr(results, target):  # add by zhixin
+def save_vcmr_base_on_vr(results, target):  # add by zhixin
     k = 4
     vidx2vid = {results["video2idx"][vid]: vid for vid in results["video2idx"]}
     vr_result = {item["desc_id"]: [vidx2vid[s[0]] for s in item["predictions"][:k]] for item in results["VR"]}
@@ -163,7 +163,36 @@ def save_vcmr(results, target):  # add by zhixin
         assert False
 
     save_json(vcmr_submission, target)
+    LOGGER.info('VCMR (based on VR) results written......')
+
+
+def save_vcmr(results, target):  # add by zhixin
+    def __format_vcmr_prediction(pred, top_k):
+        _v_idx, _st, _ed, _score = zip(*pred)
+        # map video index to video id
+        _v_id = [vidx2vid[_idx] for _idx in _v_idx]
+        # precess score
+        _score = torch.tensor(_score).softmax(-1).tolist()
+        pred = list(map(list, zip(_v_id, _st, _ed, _score)))[:top_k]  # list of list
+        return pred
+
+    k = 200
+    vidx2vid = {results["video2idx"][vid]: vid for vid in results["video2idx"]}
+    vcmr_result = results["VCMR"]
+    vcmr_pred = {}
+    for i, item in enumerate(vcmr_result):
+        vcmr_pred[item["desc_id"]] = __format_vcmr_prediction(item["predictions"], k)  # [[vid, st, ed, score], ...]
+
+    save_json(vcmr_pred, target)
     LOGGER.info('VCMR results written......')
+
+
+def is_score_ndarray(arr: np.ndarray):
+    assert ((0 <= arr) * (arr <= 1)).sum() / arr.size, arr
+
+
+def is_score_tensor(arr: torch.Tensor):
+    assert ((0 <= arr) * (arr <= 1)).sum() / arr.numel(), arr
 
 
 @torch.no_grad()
@@ -214,7 +243,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                     dtype=curr_c_attn_masks.dtype,
                     device=curr_frame_embeddings.device)
 
-            indices = torch.LongTensor(video_idx)
+            indices = torch.tensor(video_idx)
             total_frame_embeddings[indices, :curr_clip_len] = curr_frame_embeddings
             total_c_attn_masks[indices, :curr_clip_len] = curr_c_attn_masks
             max_clip_len = max(max_clip_len, curr_clip_len)
@@ -235,9 +264,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         if has_gt_target and targets.min() < 0:
             has_gt_target = False
             LOGGER.info("No GT annotations provided, only generate predictions")
-        del batch['targets']
-        del batch['qids']
-        del batch['vids']
+        del batch['targets'], batch['qids'], batch['vids']  # for the following input
 
         total_qids.extend(qids)
         total_vids.extend(vids)
@@ -249,10 +276,8 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
                 batch[k] = batch[k].to(dtype=next(model.parameters()).dtype)
 
         # FIXME
-        _q2video_scores, _st_probs, _ed_probs =\
-            model.get_pred_from_raw_query(
-                total_frame_embeddings, total_c_attn_masks, **batch,
-                cross=True, val_gather_gpus=False)
+        _q2video_scores, _st_probs, _ed_probs = \
+            model.get_pred_from_raw_query(total_frame_embeddings, total_c_attn_masks, **batch, cross=True, val_gather_gpus=False)
 
         _st_probs = F.softmax(_st_probs, dim=-1)
         _ed_probs = F.softmax(_ed_probs, dim=-1)
@@ -260,7 +285,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
 
         if "SVMR" in opts.full_eval_tasks and has_gt_target:
             row_indices = torch.arange(0, len(_st_probs))
-            svmr_gt_vidx = torch.LongTensor([video2idx_local[e] for e in vids])
+            svmr_gt_vidx = torch.tensor([video2idx_local[e] for e in vids])
             svmr_st_probs = _st_probs[row_indices, svmr_gt_vidx].float().cpu().numpy()
             svmr_ed_probs = _ed_probs[row_indices, svmr_gt_vidx].float().cpu().numpy()
             if svmr_st_probs_total is None:
@@ -292,6 +317,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         _st_probs = _st_probs[row_indices, _sorted_q2c_indices]  # (_N_q, max_vcmr_video, L)
         _ed_probs = _ed_probs[row_indices, _sorted_q2c_indices]
         # (_N_q, max_vcmr_video, L, L)
+
         _st_ed_scores = torch.einsum("qvm,qv,qvn->qvmn", _st_probs, _sorted_q2c_scores, _ed_probs)
         valid_prob_mask = generate_min_max_length_mask(_st_ed_scores.shape, min_l=model_opts.min_pred_l, max_l=model_opts.max_pred_l)
         _st_ed_scores *= torch.from_numpy(valid_prob_mask).to(_st_ed_scores.device)  # invalid location will become zero!
@@ -302,79 +328,53 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         _flat_st_ed_sorted_scores, _flat_st_ed_scores_sorted_indices = torch.sort(_flat_st_ed_scores, dim=1, descending=True)
 
         if flat_st_ed_sorted_scores is None:
-            flat_st_ed_scores_sorted_indices =\
-                _flat_st_ed_scores_sorted_indices[:, :model_opts.max_before_nms].cpu().numpy()
-            flat_st_ed_sorted_scores =\
-                _flat_st_ed_sorted_scores[:, :model_opts.max_before_nms].cpu().numpy()
+            flat_st_ed_scores_sorted_indices = _flat_st_ed_scores_sorted_indices[:, :model_opts.max_before_nms].cpu().numpy()
+            flat_st_ed_sorted_scores = _flat_st_ed_sorted_scores[:, :model_opts.max_before_nms].cpu().numpy()
         else:
-            flat_st_ed_scores_sorted_indices = np.concatenate(
-                (flat_st_ed_scores_sorted_indices, _flat_st_ed_scores_sorted_indices[:, :model_opts.max_before_nms].cpu().numpy()),
-                axis=0)
-            flat_st_ed_sorted_scores = np.concatenate(
-                (flat_st_ed_sorted_scores,  _flat_st_ed_sorted_scores[:, :model_opts.max_before_nms].cpu().numpy()),
-                axis=0)
+            flat_st_ed_scores_sorted_indices = \
+                np.concatenate((flat_st_ed_scores_sorted_indices, _flat_st_ed_scores_sorted_indices[:, :model_opts.max_before_nms].cpu().numpy()), axis=0)
+            flat_st_ed_sorted_scores = \
+                np.concatenate((flat_st_ed_sorted_scores, _flat_st_ed_sorted_scores[:, :model_opts.max_before_nms].cpu().numpy()), axis=0)
 
     svmr_res, vr_res, vcmr_res = [], [], []
     if "SVMR" in opts.full_eval_tasks and has_gt_target:
-        st_ed_prob_product = np.einsum(
-            "bm,bn->bmn", svmr_st_probs_total,
-            svmr_ed_probs_total)  # (N, L, L)
-        valid_prob_mask = generate_min_max_length_mask(
-            st_ed_prob_product.shape, min_l=model_opts.min_pred_l,
-            max_l=model_opts.max_pred_l)
+        st_ed_prob_product = np.einsum("bm,bn->bmn", svmr_st_probs_total, svmr_ed_probs_total)  # (N, L, L)
+        valid_prob_mask = generate_min_max_length_mask(st_ed_prob_product.shape, min_l=model_opts.min_pred_l, max_l=model_opts.max_pred_l)
         # invalid location will become zero!
         st_ed_prob_product *= valid_prob_mask
-        batched_sorted_triples =\
-            find_max_triples_from_upper_triangle_product(
-                st_ed_prob_product, top_n=model_opts.max_before_nms,
-                prob_thd=None)
-        for svmr_i, (qid, vid) in tqdm(
-                enumerate(zip(total_qids, total_vids)),
-                desc="[SVMR] Loop over queries to generate predictions",
-                total=len(total_qids)):
+        batched_sorted_triples = find_max_triples_from_upper_triangle_product(st_ed_prob_product, top_n=model_opts.max_before_nms, prob_thd=None)
+        for svmr_i, (qid, vid) in tqdm(enumerate(zip(total_qids, total_vids)), desc="[SVMR] Loop over queries to generate predictions", total=len(total_qids)):
             vidx = video2idx_global[vid]
             _sorted_triples = batched_sorted_triples[svmr_i]
             # as we redefined ed_idx, which is inside the moment.
-            _sorted_triples[:, 1] += 1
-            _sorted_triples[:, :2] = (_sorted_triples[:, :2]
-                                      * model_opts.vfeat_interval)
-            cur_ranked_predictions = [
-                [vidx, ] + row for row in _sorted_triples.tolist()]
-            cur_query_pred = dict(desc_id=int(qid),
-                                  desc="",
-                                  predictions=cur_ranked_predictions)
+            _sorted_triples[:, 1] += 1  # why 1 bias?
+            _sorted_triples[:, :2] = (_sorted_triples[:, :2] * model_opts.vfeat_interval)  # frame duration in down sampling
+            cur_ranked_predictions = [[vidx, ] + row for row in _sorted_triples.tolist()]
+            cur_query_pred = dict(desc_id=int(qid), desc="", predictions=cur_ranked_predictions)
             svmr_res.append(cur_query_pred)
 
     if "VR" in opts.full_eval_tasks:
         for vr_i, (_sorted_q2c_scores_row, _sorted_q2c_indices_row) in tqdm(
-                    enumerate(
-                        zip(sorted_q2c_scores[:, :100],
-                            sorted_q2c_indices[:, :100])),
-                    desc="[VR] Loop over queries to generate predictions",
-                    total=len(total_qids)):
-            cur_vr_redictions = []
+                enumerate(zip(sorted_q2c_scores[:, :100], sorted_q2c_indices[:, :100])),
+                desc="[VR] Loop over queries to generate predictions",
+                total=len(total_qids)):
+            cur_vr_predictions = []
             for v_score, v_meta_idx in zip(_sorted_q2c_scores_row, _sorted_q2c_indices_row):
                 video_idx = video2idx_global[video_ids[v_meta_idx]]
-                cur_vr_redictions.append([video_idx, 0, 0, float(v_score)])
-            cur_query_pred = dict(desc_id=int(total_qids[vr_i]), desc="", predictions=cur_vr_redictions)
+                cur_vr_predictions.append([video_idx, 0, 0, float(v_score)])
+            cur_query_pred = dict(desc_id=int(total_qids[vr_i]), desc="", predictions=cur_vr_predictions)
             vr_res.append(cur_query_pred)
 
     if "VCMR" in opts.full_eval_tasks:
-        for vcmr_i, (
-                _flat_st_ed_scores_sorted_indices,
-                _flat_st_ed_sorted_scores) in tqdm(
-                enumerate(zip(
-                    flat_st_ed_scores_sorted_indices,
-                    flat_st_ed_sorted_scores)),
-                desc="[VCMR] Loop over queries to generate predictions",
-                total=len(total_qids)):  # i is query_idx
+        for vcmr_i, (_flat_st_ed_scores_sorted_indices, _flat_st_ed_sorted_scores) in \
+                tqdm(enumerate(zip(flat_st_ed_scores_sorted_indices, flat_st_ed_sorted_scores)),
+                     desc="[VCMR] Loop over queries to generate predictions",
+                     total=len(total_qids)):  # i is query_idx
             # list([video_idx(int), st(float),
             #       ed(float), score(float)])
             video_meta_indices_local, pred_st_indices, pred_ed_indices = \
-                np.unravel_index(
-                    _flat_st_ed_scores_sorted_indices,
-                    shape=(model_opts.max_vcmr_video, model_opts.max_clip_len,
-                           model_opts.max_clip_len))
+                np.unravel_index(_flat_st_ed_scores_sorted_indices,
+                                 shape=(model_opts.max_vcmr_video, model_opts.max_clip_len, model_opts.max_clip_len))
             # video_meta_indices_local refers to
             # the indices among the top-max_vcmr_video
             # video_meta_indices refers to

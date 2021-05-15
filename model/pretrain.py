@@ -29,7 +29,7 @@ class HeroForPretraining(HeroModel):
         self.config = config
 
         # VCMR related configs
-        self.lw_st_ed = lw_st_ed
+        self.lw_st_ed = lw_st_ed  # loss weight
         self.lw_neg_q = lw_neg_q
         self.lw_neg_ctx = lw_neg_ctx
         self.ranking_loss_type = ranking_loss_type
@@ -78,9 +78,7 @@ class HeroForPretraining(HeroModel):
                         modularized_query)
 
             if self.lw_neg_ctx != 0 or self.lw_neg_q != 0:
-                q2video_scores = self.get_video_level_scores(
-                    modularized_query, frame_embeddings,
-                    batch['c_attn_masks'])
+                q2video_scores = self.get_video_level_scores(modularized_query, frame_embeddings, batch['c_attn_masks'])
 
             if compute_loss:
                 dtype = frame_embeddings.dtype
@@ -146,8 +144,8 @@ class HeroForPretraining(HeroModel):
                 "md,nld->mnl", query, context_feat2)
             n_q, n_c, len_ = similarity.shape
             similarity = similarity.view(n_q * n_c, 1, len_)
-            st_prob = self.video_st_predictor(
-                similarity).view(n_q, n_c, len_)  # (Nq, Nv, L)
+            st_prob = self.video_st_predictor(similarity)
+            st_prob = st_prob.view(n_q, n_c, len_)  # (Nq, Nv, L)
             ed_prob = self.video_ed_predictor(
                 similarity).view(n_q, n_c, len_)  # (Nq, Nv, L)
             context_mask = context_mask.unsqueeze(0)  # (1, Nv, L)

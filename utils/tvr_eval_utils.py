@@ -98,17 +98,14 @@ def top_n_array_2d(array_2d, top_n):
     return a tuple of indices and their values,
     ranked by the value
     """
-    row_indices, column_indices = np.unravel_index(
-        np.argsort(array_2d, axis=None), array_2d.shape)
+    row_indices, column_indices = np.unravel_index(np.argsort(array_2d, axis=None), array_2d.shape)
     row_indices = row_indices[::-1][:top_n]
     column_indices = column_indices[::-1][:top_n]
     sorted_values = array_2d[row_indices, column_indices]
-    return np.stack([row_indices, column_indices, sorted_values],
-                    axis=1)  # (N, 3)
+    return np.stack([row_indices, column_indices, sorted_values], axis=1)  # (N, 3)
 
 
-def find_max_triples_from_upper_triangle_product(
-        upper_product, top_n=5, prob_thd=None):
+def find_max_triples_from_upper_triangle_product(upper_product, top_n=5, prob_thd=None):
     """
     Find a list of (k1, k2) where k1 < k2
         with the maximum values of p1[k1] * p2[k2]

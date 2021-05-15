@@ -27,10 +27,8 @@ class HeroForVcmr(HeroForPretraining):
             hard_neg_weight, use_all_neg)
 
     def forward(self, batch, task='tvr', compute_loss=True):
-        if task in ['tvr', 'how2r', 'didemo_video_sub',
-                    'didemo_video_only']:
-            return super().forward(
-                batch, task='vsm', compute_loss=compute_loss)
+        if task in ['tvr', 'how2r', 'didemo_video_sub', 'didemo_video_only']:
+            return super().forward(batch, task='vsm', compute_loss=compute_loss)
         else:
             raise ValueError(f'Unrecognized task {task}')
 
@@ -38,19 +36,15 @@ class HeroForVcmr(HeroForPretraining):
                                 query_input_ids, query_pos_ids,
                                 query_attn_masks, cross=False,
                                 val_gather_gpus=False):
-        modularized_query = self.encode_txt_inputs(
-                    query_input_ids, query_pos_ids,
-                    query_attn_masks, attn_layer=self.q_feat_attn,
-                    normalized=False)
 
-        st_prob, ed_prob = self.get_pred_from_mod_query(
-            frame_embeddings, c_attn_masks,
-            modularized_query, cross=cross)
+        modularized_query = self.encode_txt_inputs(query_input_ids, query_pos_ids, query_attn_masks,
+                                                   attn_layer=self.q_feat_attn,
+                                                   normalized=False)
 
-        if self.lw_neg_ctx != 0 or self.lw_neg_q != 0:
-            q2video_scores = self.get_video_level_scores(
-                modularized_query, frame_embeddings, c_attn_masks,
-                val_gather_gpus)
+        st_prob, ed_prob = self.get_pred_from_mod_query(frame_embeddings, c_attn_masks, modularized_query, cross=cross)
+
+        if self.lw_neg_ctx != 0 or self.lw_neg_q != 0:  # loss weight
+            q2video_scores = self.get_video_level_scores(modularized_query, frame_embeddings, c_attn_masks, val_gather_gpus)
         else:
             q2video_scores = None
         return q2video_scores, st_prob, ed_prob
