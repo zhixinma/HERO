@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/pytorch:19.10-py3
+`FROM nvcr.io/nvidia/pytorch:19.10-py3
 
 # basic python packages
 RUN pip install transformers==2.0.0 \

@@ -50,10 +50,12 @@ def get_subtitle_level_unit_feature(video_db, vid_pool, mode="vt", model=None):
         video_batch = [video_db[vid] for vid in vid_pool]
         batch_frame_emb, batch_c_attn_masks = calc_single_video_repr(model, video_batch)
         sub_fea = []
+        c = 0
         for i, vid in enumerate(vid_pool):
             _, _, _, _, mask, _, sub_idx2frame_idx = video_db[vid]
             frame_num = mask.shape[0]
             sub_idx2frame_idx = complement_sub_unit(sub_idx2frame_idx, frame_num)
+            c += len(sub_idx2frame_idx)
             for j, (sub_idx, frame_range) in enumerate(sub_idx2frame_idx):
                 if frame_range:
                     sub_level_fea = batch_frame_emb[i][frame_range].mean(dim=0)
@@ -187,7 +189,7 @@ def set_params(mode):
     elif mode == "no io":
         plot_graph_mode = False
         plot_sta_mode = False
-        sample_mode = True
+        sample_mode = False
         ivcml_mode = False
 
     else:
@@ -407,11 +409,15 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
     model.eval()
 
     # super parameters
+    feature_types = ["v", "vt"]
+    feature_type = feature_types[1]
     modes = ["vis graph", "vis sta", "toy sta", "no io", "preprocess"]
     mode = modes[-1]
     plot_graph_mode, plot_sta_mode, sample_mode, ivcml_mode = set_params(mode)
     plot_shortest_path = True
+    plot_ev_sta_mode = True
     shortest_path_tag = "_sp" if plot_shortest_path else ""
+    toy_tag = "_toy" if (mode == "toy sta") else ""
 
     pprint.pprint({
         "mode": mode,
@@ -439,8 +445,14 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
     dia_count = []
     dis_rand_count = []
     dis_hero_count = []
+    v_count, e_count = [], []
+    exceed_id = []
 
+    states_ver_id, tar_idx = [], []
+    nei_node_id, nei_adj_indices, nei_adj_values = [], [], []
     for desc_idx, desc_id in tqdm(enumerate(desc_to_video_pools), desc="Processing Moment", total=len(desc_to_video_pools)):
+        # if desc_idx == 3:
+        #     desc_id = "91022"
         print("\nDESC_%s" % desc_id)
         query_item = query_data[desc_id]
         query_text = query_item["desc"]
@@ -468,6 +480,10 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
         vertices, v_color, v_shape, edges, e_color, e_conf, sub_2_vid, frame_to_unit = \
             build_static_graph(video_db, video_pool, vid_tar, tar_range, vid_ini, frame_ini)
 
+        if len(vertices) > 1000:
+            exceed_id.append((desc_id, len(vertices)))
+            continue
+
         edges_vcmr, e_color_vcmr, e_conf_vcmr = \
             build_vcmr_edges(moment_pool, frame_to_unit, v_id_to_duration, vid_to_frame_num, frame_interval=model_opts.vfeat_interval)
 
@@ -475,11 +491,23 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
 
         edges, e_color, e_conf = edges + edges_vcmr, e_color + e_color_vcmr, e_conf + e_conf_vcmr
         edges = list(map(tuple, edges))  # unify list and tuple coordinates into tuple
+        v_count.append(len(vertices))
+        e_count.append(len(edges))
 
         if ivcml_mode:
             node_tar = get_tar_node(v_color)
             node_src_hero = get_src_node(v_color)
-            ivcml_preprocessing(nx_graph, node_src_hero, node_tar)
+            unit_fea = get_subtitle_level_unit_feature(video_db, video_pool, feature_type, model)
+            print("Unit:", unit_fea.shape)
+            states_ver_id_batch, tar_idx_batch, nei_node_id_batch, nei_adj_indices_batch = \
+                ivcml_preprocessing(nx_graph, node_src_hero, node_tar, unit_fea)
+            states_ver_id += states_ver_id_batch
+            tar_idx += tar_idx_batch
+            nei_node_id += nei_node_id_batch
+            nei_adj_indices += nei_adj_indices_batch
+            del unit_fea
+            del states_ver_id_batch, tar_idx_batch
+            del nei_node_id_batch, nei_adj_indices_batch
 
         if plot_graph_mode and is_to_write:  # sample and plot graph
 
@@ -515,7 +543,6 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
             dis_rand_count.append(dis_rand)
 
     if plot_sta_mode and is_to_write:  # global statistic
-        toy_tag = "_toy" if (mode == "toy sta") else ""
         p = 0.9
         x = percentile(dia_count, p)
         list_histogram(dia_count,
@@ -527,13 +554,29 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
         list_histogram(dis_rand_count,
                        x_label="Shortest Distance (Random)",
                        fig_name=f"desc_graph/vcmr_based/statistic_{moment_proposal_size}_proposal{toy_tag}/"
-                                f"{opts.split}_graph_distance_hist_p{p:.2f}_{x}.png")
+                                f"{opts.split}_graph_distance_random_hist_p{p:.2f}_{x}.png")
 
         x = percentile(dis_hero_count, p)
         list_histogram(dis_hero_count,
                        x_label="Shortest Distance (HERO)",
                        fig_name=f"desc_graph/vcmr_based/statistic_{moment_proposal_size}_proposal{toy_tag}/"
-                                f"{opts.split}_graph_distance_hist_p{p:.2f}_{x}.png")
+                                f"{opts.split}_graph_distance_hist_hero_p{p:.2f}_{x}.png")
+
+    if plot_ev_sta_mode and is_to_write:
+        p = 0.9
+        x = percentile(v_count, p)
+        list_histogram(v_count,
+                       x_label="Number of Vertices (moment based)",
+                       fig_name=f"desc_graph/vcmr_based/statistic_{moment_proposal_size}_proposal{toy_tag}/"
+                                f"{opts.split}_graph_vertices_num_hist_p{p:.2f}_{x}.png")
+
+        x = percentile(e_count, p)
+        list_histogram(e_count,
+                       x_label="Number of Edges (moment based)",
+                       fig_name=f"desc_graph/vcmr_based/statistic_{moment_proposal_size}_proposal{toy_tag}/"
+                                f"{opts.split}_graph_edges_num_hist_p{p:.2f}_{x}.png")
+
+    print("The following (description id, number of vertices) pairs contains too many (> 1000) vertices:\n", exceed_id)
 
 
 def get_desc_video_pool(vcmr):

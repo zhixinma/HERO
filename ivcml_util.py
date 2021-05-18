@@ -5,6 +5,7 @@ import random
 from collections import Counter
 from collections.abc import Iterable   # import directly from collections for Python < 3.3
 import numpy as np
+from typing import Union
 import networkx as nx
 
 
@@ -94,6 +95,21 @@ def pairwise_equation(data: np.ndarray, tok_illegal=None):
     return indicator_matrix
 
 
+def indicator_vec(indices: Union[int, list], n: int, device=None, dtype=torch.float):
+    """
+    :param indices: indices which is one
+    :param n: number of classes
+    :param device:
+    :param dtype:
+    :return: an indicator vector
+    """
+    vec = torch.zeros(n, dtype=dtype)
+    vec[indices] = 1
+    if device is not None:
+        vec = vec.to(device)
+    return vec
+
+
 # Dict operation
 def sample_dict(d: dict, n: int, seed=None):
     """
@@ -129,25 +145,31 @@ def uniform_normalize(t: torch.Tensor):
     >>> uniform_normalize(a)
     tensor([0.2843, 0.9730, 0.0000, 0.0740, 1.0000])
     """
-    # print(t.shape)
-    # print(t.min(-1, keepdim=True)[0].shape)
     t -= t.min(-1, keepdim=True)[0]
-    # print(t.max(-1, keepdim=True)[0].shape)
-    # print()
     t /= t.max(-1, keepdim=True)[0]
     return t
 
 
-def build_sparse_adjacent_matrix(edges: list, n: int):
+def build_sparse_adjacent_matrix(edges: list, n: int, device=None, dtype=torch.float, undirectional=True):
     """
+    Return adjacency matrix
     :param edges: list of edges, for example (st, ed)
     :param n: number of vertices
+    :param device:
+    :param dtype:
+    :param undirectional: make adjacency matrix un-directional
     :return: the sparse adjacent matrix
     """
     i = torch.tensor(list(zip(*edges)))
-    v = torch.tensor([1] * len(edges))
+    v = torch.ones(i.shape[1], dtype=dtype)
     sparse = torch.sparse_coo_tensor(i, v, (n, n))
-    return sparse
+    if device is not None:
+        sparse = sparse.to(device)
+    a = sparse.to_dense()
+    if undirectional:
+        ud_a = ((a > 0) | (a.transpose(-2, -1) > 0)).to(dtype)
+        a = ud_a
+    return a
 
 
 # List statistic

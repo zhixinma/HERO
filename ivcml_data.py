@@ -13,9 +13,12 @@ from data import VcmrFullEvalDataset, vcmr_full_eval_collate, PrefetchLoader, Qu
 from torch.utils.data import DataLoader
 
 import networkx as nx
+import numpy as np
+
 from ivcml_graph import shortest_path_edges
-from ivcml_util import build_sparse_adjacent_matrix
+from ivcml_util import build_sparse_adjacent_matrix, indicator_vec
 from ivcml_util import flatten
+from ivcml_util import show_type_tree
 
 
 def load_tvr_subtitle():
@@ -176,20 +179,84 @@ def build_dataloader(opts):
     return eval_dataloader
 
 
-def ivcml_preprocessing(g: nx.Graph, node_src, node_tar):
+def ivcml_preprocessing(g: nx.Graph, node_src, node_tar, feature_embedding):
+    def aggregate(_adj, _state_vec, _fea_emb, alpha, step_num):
+        """
+        Aggregation function for single state
+        :param _adj: Adjacency matrix [N, N]
+        :param _state_vec: State vector [N, ]
+        :param _fea_emb: Feature embedding [N, d]
+        :param alpha: decay rate
+        :param step_num: number of steps to aggregate
+        :return: Aggregated feature of _s given _a
+        """
+        _fea = torch.einsum('nd,n->d', _fea_emb, _state_vec) * alpha
+        cover = None
+        for j in range(step_num):
+            neis_leq_j_step = torch.einsum('io,i->o', _adj, _state_vec)
+            cover = ((_state_vec > 0) | (neis_leq_j_step > 0)).to(dtype=dtype)
+            new_explore = cover - _state_vec
+            _state_vec = cover
+            num_new_nodes = new_explore.sum().item()
+            if num_new_nodes:
+                weight_sum = torch.einsum('nd,n->d', _fea_emb, new_explore) * (alpha ** (j + 2))
+                _fea += weight_sum
+        _fea /= cover.sum().item()
+        return _fea
+
+    def get_adj_nei(_g: nx.Graph, _center, _nei):
+        edges = [_e for _e in g.edges if not (_center in _e and _nei not in _e)]
+        return build_sparse_adjacent_matrix(edges, node_num, undirectional=True)
+
+    states, targets = [], []
+    nei_vectors, nei_adj_indices = [], []
     sp = shortest_path_edges(g, node_src, node_tar)
     node_num = g.number_of_nodes()
-    adj_mat_sparse = build_sparse_adjacent_matrix(list(g.edges), node_num)  # directed adjacency matrix
+    device = feature_embedding.device
+    dtype = feature_embedding.dtype
+
+    adj_mat = build_sparse_adjacent_matrix(list(g.edges), node_num, device=device, dtype=dtype, undirectional=True)  # directed adjacency matrix
     for _st, _ed in sp:
-        state = _st
-        ground_truth = _ed
-        print(f"NEIGHBORS OF {state:3}:", end=" ")
-        for _nei in g.adj[state]:
-            if _nei == ground_truth:
-                print(f"({_nei})", end=" ")
-            else:
-                print(f"{_nei}", end=" ")
-        print()
-    exit()
-    # g.remove_edge()
-    return 0
+        # a training sample
+        state, ground_truth = _st, _ed
+        # vec_state = indicator_vec(state, node_num, device=device, dtype=dtype)
+        # fea_state = aggregate(adj_mat, vec_state, feature_embedding, alpha=0.5, step_num=10)
+
+        # build input sample
+        states.append(state)
+        nei_tmp, nei_adj_coo_tmp, nei_adj_val_tmp = [], [], []
+        for i, nei in enumerate(g.adj[state]):
+            if nei == ground_truth:
+                # build input sample
+                targets.append(i)
+            adj_mat_nei = get_adj_nei(g, state, nei)
+            # vec_nei = indicator_vec(nei, node_num, device=device, dtype=dtype)
+            # fea_nei = aggregate(adj_mat_nei, vec_nei, feature_embedding, alpha=0.5, step_num=10)
+
+            # build input sample
+            adj_mat_nei = adj_mat_nei.tril(-1)  # remove the duplicated edges
+            coo = adj_mat_nei.nonzero(as_tuple=True)
+            coo = torch.stack(coo, dim=0)
+            nei_tmp.append(nei)
+            nei_adj_coo_tmp.append(coo)
+        nei_vectors.append(nei_tmp)
+        nei_adj_indices.append(nei_adj_coo_tmp)
+
+    return states, targets, nei_vectors, nei_adj_indices
+
+
+if __name__ == "__main__":
+    num_class = 5
+    st, ed = 1, 4
+    decay_rate = 0.5
+    n_step = 6
+    emb = torch.eye(num_class)
+
+    v = [_ for _ in range(num_class)]
+    e = [(0, 1), (1, 2), (2, 3), (3, 4)]
+    g = nx.Graph()
+    g.add_nodes_from(v)
+    g.add_edges_from(e)
+
+    x = ivcml_preprocessing(g, 1, 4, emb)
+    show_type_tree(x)

@@ -101,8 +101,7 @@ class ImageEmbeddings(nn.Module):
     def forward(self, img_feat, type_embeddings, img_pos_ids=None,
                 img_masks=None):
         if img_pos_ids is None:
-            img_pos_ids = self.create_position_ids_from_inputs_embeds(
-                img_feat)
+            img_pos_ids = self.create_position_ids_from_inputs_embeds(img_feat)
 
         if img_masks is not None:
             mask = self.mask_embedding(img_masks.long())

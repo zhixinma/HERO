@@ -283,33 +283,12 @@ class CrossModalTrm(RobertaPreTrainedModel):
             # image only
             img_emb = self._compute_img_embeddings(img_feat, img_pos_ids, img_type_ids, img_masks)
 
-        # print("-"*30)
-        # print("txt_emb:", type(txt_emb), "img_emb:", type(img_emb))
-        # print("txt_emb", txt_emb.shape)
-        # print("img_emb", img_emb.shape)
-        # print("txt_emb", txt_emb[0][0][:10].tolist())
-        # print("img_emb", img_emb[0][0][:10].tolist())
-        # exit()
-
         if txt_emb is not None and img_emb is not None:
             assert gather_index is not None
             # align back to most compact input
             gather_index = gather_index.unsqueeze(-1).expand(-1, -1, self.config.hidden_size)
-
-            # print("gather_index", gather_index.shape)
-            # print("gather_index", gather_index[0][:10, 0].tolist())
-            # exit()
-
             _embedding_output = torch.cat([img_emb, txt_emb], dim=1)
             embedding_output = torch.gather(_embedding_output, dim=1, index=gather_index)
-
-            # print("-" * 30)
-            # print("cat embedding_output   ", _embedding_output.shape)
-            # print("gather embedding_output", embedding_output.shape)
-            # print("cat embedding_output   ", _embedding_output[0][0][:10].tolist())
-            # print("gather embedding_output", embedding_output[0][0][:10].tolist())
-            # print("-" * 30)
-            # exit()
 
             return embedding_output
         elif txt_emb is not None:
@@ -340,6 +319,8 @@ class CrossModalTrm(RobertaPreTrainedModel):
             f_gather_index = batch['f_gather_index']
             # handle mfm (frame mask)
             f_v_mask = batch['f_v_masks']
+            # print("Feat:", f_v_feats.shape)
+            # print("Subt:", f_sub_input_ids.shape)
             return self.forward_repr(f_sub_input_ids, f_sub_pos_ids,
                                      f_v_feats, f_v_pos_ids,
                                      f_attn_masks, f_gather_index,
