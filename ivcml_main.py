@@ -24,10 +24,12 @@ from ivcml_graph import build_vcmr_edges
 from ivcml_graph import get_mid_frame, get_frame_range
 from ivcml_graph import render_shortest_path, shortest_path_edges
 
-from ivcml_data import load_hero_pred, load_model, build_dataloader
-from ivcml_data import load_video2duration, build_vid_to_frame_num
-from ivcml_data import load_tvr_subtitle
-from ivcml_data import ivcml_preprocessing
+from ivcml_load import load_hero_pred, load_model, build_dataloader
+from ivcml_load import load_video2duration, build_vid_to_frame_num
+from ivcml_load import load_tvr_subtitle
+from ivcml_load import ivcml_preprocessing
+from ivcml_load import compress_adj_mat
+from ivcml_data import HEROUnitFeaLMDB
 
 
 def get_subtitle_level_unit_feature(video_db, vid_pool, mode="vt", model=None):
@@ -432,6 +434,7 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
     if sample_mode:
         desc_to_video_pools = sample_dict(desc_to_video_pools, 10, seed=2)
 
+    hero_fea_reader = HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, "unit_fea", readonly=True)
     query_data = data_loader.dataset.query_data
     video_db = data_loader.dataset.video_db
     v_id_to_duration = load_video2duration(opts.split)
@@ -448,8 +451,10 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
     v_count, e_count = [], []
     exceed_id = []
 
-    states_ver_id, tar_idx = [], []
-    nei_node_id, nei_adj_indices, nei_adj_values = [], [], []
+    state_idx, tar_bias = [], []
+    neis_idx = []
+    nei_adj_temporal_coo, nei_adj_mom_coo = [], []
+    edge_to_remove = []
     for desc_idx, desc_id in tqdm(enumerate(desc_to_video_pools), desc="Processing Moment", total=len(desc_to_video_pools)):
         # if desc_idx == 3:
         #     desc_id = "91022"
@@ -494,23 +499,53 @@ def process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc
         v_count.append(len(vertices))
         e_count.append(len(edges))
 
+        # adj_mat = build_sparse_adjacent_matrix(list(nx_graph.edges), nx_graph.number_of_nodes(), undirectional=True)  # directed adjacency matrix
+        coo_adj_zero, coo_mom = compress_adj_mat(nx_graph)
+
         if ivcml_mode:
             node_tar = get_tar_node(v_color)
             node_src_hero = get_src_node(v_color)
-            unit_fea = get_subtitle_level_unit_feature(video_db, video_pool, feature_type, model)
-            print("Unit:", unit_fea.shape)
-            states_ver_id_batch, tar_idx_batch, nei_node_id_batch, nei_adj_indices_batch = \
+            if hero_fea_reader:
+                unit_fea = hero_fea_reader[video_pool]
+            else:
+                unit_fea = get_subtitle_level_unit_feature(video_db, video_pool, feature_type, model)
+
+            # states_node_idx_batch, tar_idx_batch, nei_node_id_batch, nei_adj_temporal_coo_batch, nei_adj_mom_coo_batch = \
+            #     ivcml_preprocessing(nx_graph, node_src_hero, node_tar, unit_fea)
+            # nei_adj_temporal_coo += nei_adj_temporal_coo_batch
+            # nei_adj_mom_coo += nei_adj_mom_coo_batch
+
+            states_node_idx_batch, tar_idx_batch, nei_node_id_batch, nei_edge_to_remove_batch = \
                 ivcml_preprocessing(nx_graph, node_src_hero, node_tar, unit_fea)
-            states_ver_id += states_ver_id_batch
-            tar_idx += tar_idx_batch
-            nei_node_id += nei_node_id_batch
-            nei_adj_indices += nei_adj_indices_batch
+            edge_to_remove += nei_edge_to_remove_batch
+
+            state_idx += states_node_idx_batch
+            tar_bias += tar_idx_batch
+            neis_idx += nei_node_id_batch
+
+            # print("coo_adj_zero:", coo_adj_zero)
+            # print("coo_mom:", coo_mom)
+            # print("states_node_idx_batch", states_node_idx_batch)
+            # print("tar_idx_batch", tar_idx_batch)
+            # print("nei_node_id_batch", nei_node_id_batch)
+            # print("nei_edge_to_remove_batch", nei_edge_to_remove_batch)
+            # exit()
+
             del unit_fea
-            del states_ver_id_batch, tar_idx_batch
-            del nei_node_id_batch, nei_adj_indices_batch
+            del states_node_idx_batch, tar_idx_batch
+            del nei_node_id_batch
+            del nei_edge_to_remove_batch
+            # del nei_adj_temporal_coo_batch, nei_adj_mom_coo_batch
+
+        assert len(state_idx) == len(tar_bias) == len(neis_idx) == len(edge_to_remove), (len(state_idx), len(tar_bias), len(neis_idx), len(nei_adj_temporal_coo))
+
+        # assert len(state_idx) == len(tar_bias) == len(neis_idx) == len(nei_adj_temporal_coo), (len(state_idx), len(tar_bias), len(neis_idx), len(nei_adj_temporal_coo))
+        # for _state_idx, _tar_bias, _neis_idx, _adj_coo_temp, _adj_coo_mom in zip(state_idx, tar_bias, neis_idx, nei_adj_temporal_coo, nei_adj_mom_coo):
+        #     print(_state_idx, _tar_bias, _neis_idx)
+        #     for i in _adj_coo_temp:
+        #         print(" "*4, i)
 
         if plot_graph_mode and is_to_write:  # sample and plot graph
-
             if plot_shortest_path:
                 node_tar = get_tar_node(v_color)
                 node_src_hero = get_src_node(v_color)
@@ -589,14 +624,181 @@ def get_desc_video_pool(vcmr):
     return desc_to_vid_pools
 
 
-def main(opts):
-    # hvd.init()
-    # device = torch.device("cuda", hvd.local_rank())
-    device = torch.device("cuda")
-    # torch.cuda.set_device(hvd.local_rank())
+def dump_hero_unit_fea_lmdb(model, data_loader, data_dir, fea_type, split):
+    model.eval()
+
+    video_db = data_loader.dataset.video_db
+    hero_fea_writer = HEROUnitFeaLMDB(data_dir, fea_type, split, tag="unit_fea", encode_method="ndarray", readonly=False)
+    video_ids = list(video_db.vid2idx[split].keys())
+
+    keys, values = [], []
+    buffer = 2180
+    for i, v_id in tqdm(enumerate(video_ids), total=len(video_ids), desc="Calculating node feature"):
+        fea_unit = get_subtitle_level_unit_feature(video_db, [v_id], fea_type, model)  # torch.tensor with shape [unit_num, d]
+        keys.append(v_id)
+        values.append(fea_unit.detach().cpu().numpy())
+
+        if (i % buffer == 0 and i != 0) or (i == len(video_ids) - 1):
+            hero_fea_writer.put(keys, values)
+            keys, values = [], []
+
+
+def dump_ivcml_query_input(model, data_loader, desc_to_video_pools, desc_to_moment_pools, opts, model_opts):
+    model.eval()
+
+    # super parameters
+    feature_type = "vt"
+    sample_mode = False
+    ivcml_mode = False
+
+    pprint.pprint({
+        "sample_mode": sample_mode,
+        "ivcml_mode": ivcml_mode,
+        "feature_type": feature_type
+    })
+
+    if sample_mode:
+        desc_to_video_pools = sample_dict(desc_to_video_pools, 10, seed=2)
+
+    hero_fea_reader = HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, tag="unit_fea", encode_method="ndarray", readonly=True)
+    ivcml_input_data_writer = HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, tag="input", encode_method="json", readonly=False)
+    node_aggregate_vector_writer = \
+        HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, tag="observe_range_ALPHA_%f_STEPS_%d" % (opts.alpha, opts.observe_steps), encode_method="ndarray", readonly=False)
+
+    query_data = data_loader.dataset.query_data
+    video_db = data_loader.dataset.video_db
+    v_id_to_duration = load_video2duration(opts.split)
+    vid_to_frame_num = video_db.img_db.name2nframe
+    max_frame_num = video_db.img_db.max_clip_len
+    vid_to_frame_num = {k: min(vid_to_frame_num[k], max_frame_num) for k in vid_to_frame_num}
+    video_db.img_db.name2nframe = vid_to_frame_num
+
+    exceed_id = []
+    path_len = []
+    nei_nums = []
+    for desc_idx, desc_id in tqdm(enumerate(desc_to_video_pools), desc="Processing Moment", total=len(desc_to_video_pools)):
+        # print("\nDESC_%s" % desc_id)
+        query_item = query_data[desc_id]
+        vid_tar = query_item["vid_name"]
+        desc = query_item["desc"]
+
+        # Target moment information
+        frame_num_tar = vid_to_frame_num[vid_tar]
+        st_tar, ed_tar = query_item["ts"]
+        duration_tar = v_id_to_duration[vid_tar]
+        frame_st_gt, frame_ed_gt = get_frame_range(st_tar, ed_tar, duration_tar, frame_num_tar)
+        assert ed_tar <= duration_tar, f"TARGET: {ed_tar}/{duration_tar}"
+
+        # Initialization Video Information
+        vid_ini, st_ini, ed_ini, score_ini = desc_to_moment_pools[desc_id][0]
+        frame_num_ini = vid_to_frame_num[vid_ini]
+        duration_ini = v_id_to_duration[vid_ini]
+        frame_ini = get_mid_frame(st_ini, ed_ini, duration_ini, frame_num_ini)
+        assert frame_ini <= frame_num_ini, f"INITIALIZATION: {frame_ini}/{frame_num_ini}"
+
+        video_pool, moment_pool, is_modified = complete_video_and_moment_pool(desc_to_video_pools[desc_id], desc_to_moment_pools[desc_id], vid_tar, duration_tar)
+        tar_range = (frame_st_gt, frame_ed_gt)
+        vertices, v_color, v_shape, edges, e_color, e_conf, sub_2_vid, frame_to_unit = \
+            build_static_graph(video_db, video_pool, vid_tar, tar_range, vid_ini, frame_ini)
+
+        if len(vertices) > 1000:
+            exceed_id.append((desc_id, len(vertices)))
+            continue
+
+        edges_vcmr, e_color_vcmr, e_conf_vcmr = \
+            build_vcmr_edges(moment_pool, frame_to_unit, v_id_to_duration, vid_to_frame_num, frame_interval=model_opts.vfeat_interval)
+
+        nx_graph = build_network(vertices, edges + edges_vcmr)  # initialize the networkx graph
+        # max_nei_num = max(max_nei_num, max([len(nx_graph.adj[v]) for v in range(nx_graph.number_of_nodes())]))
+        # print(max_nei_num)
+        coo_adj_zero, coo_mom = compress_adj_mat(nx_graph)
+
+        node_tar = get_tar_node(v_color)
+        node_src_hero = get_src_node(v_color)
+        if hero_fea_reader:
+            unit_fea = hero_fea_reader[video_pool]
+        else:
+            unit_fea = get_subtitle_level_unit_feature(video_db, video_pool, feature_type, model)
+
+        sp = shortest_path_edges(nx_graph, node_src_hero, node_tar)
+        path_len.append(len(sp))
+
+        for _st, _ed in sp:
+            state, ground_truth = _st, _ed
+            nei_num = len(nx_graph.adj[state].keys()) + 1
+            nei_nums.append(nei_num)
+
+        states_node_idx_batch, tar_bias_batch, nei_node_idx_batch, nei_edge_to_remove_batch, neis_rewards_batch = \
+            ivcml_preprocessing(nx_graph, node_src_hero, node_tar, unit_fea)
+
+        data_sample = {
+            "video_pool": video_pool,
+            "num_node": nx_graph.number_of_nodes(),
+            "coo_adj_zero": coo_adj_zero,
+            "coo_mom": coo_mom,
+            "nei_edge_to_remove": nei_edge_to_remove_batch,
+            "state_node_idx": states_node_idx_batch,
+            "nei_node_idx": nei_node_idx_batch,
+            "tar_bias": tar_bias_batch,
+            "desc": desc,
+            "reward": neis_rewards_batch
+        }
+
+        # ivcml_input_data_writer.put([desc_id], [data_sample])
+
+        del unit_fea
+        del coo_adj_zero, coo_mom
+        # del states_node_idx_batch, tar_bias_batch
+        # del nei_node_idx_batch
+        # del nei_edge_to_remove_batch
+        # del neis_rewards_batch
+
+    e9 = percentile(path_len, 0.9)
+    e5 = percentile(path_len, 0.5)
+    list_histogram(path_len, fig_name="dist_shortest_path_length_P_%.1f_LEN_%d_%.1f_LEN_%d.png" % (0.9, e9, 0.5, e5))
+    e9 = percentile(nei_nums, 0.9)
+    e5 = percentile(nei_nums, 0.5)
+    list_histogram(nei_nums, fig_name="dist_node_nei_num_P_%.1f_LEN_%d_%.1f_LEN_%d.png" % (0.9, e9, 0.5, e5))
+    print("Average neighbor number:", sum(nei_nums) / len(nei_nums))
+
+
+def dump(opts):
+
+    use_hvd = False
+    if use_hvd:
+        hvd.init()
+        device = torch.device("cuda", hvd.local_rank())
+        torch.cuda.set_device(hvd.local_rank())
+    else:
+        device = torch.device("cuda")
+
     model, model_opts = load_model(opts, device)
     data_loader = build_dataloader(opts)
 
+    # Dump adjacent matrix
+    desc_to_moment_pools = load_hero_pred(opts, task="vcmr")
+    desc_to_video_pools = get_desc_video_pool(desc_to_moment_pools)
+    dump_ivcml_query_input(model, data_loader, desc_to_video_pools, desc_to_moment_pools, opts, model_opts)
+
+
+def main(opts):
+    dump(opts)
+
+    # use_hvd = False
+    # if use_hvd:
+    #     hvd.init()
+    #     device = torch.device("cuda", hvd.local_rank())
+    #     torch.cuda.set_device(hvd.local_rank())
+    # else:
+    #     device = torch.device("cuda")
+    #
+    # model, model_opts = load_model(opts, device)
+    # data_loader = build_dataloader(opts)
+    #
+    # # Process and save LMDB
+    # preprocess_hero_unit_fea_lmdb(model, data_loader, opts.output_dir, "vt", opts.split)
+    #
+    # # similarity-based ad-hoc graph
     # desc_to_video_pools = load_hero_pred(opts, task="vr")
     # desc_to_moment_pools = load_hero_pred(opts, task="vcmr_base_on_vr")
     # data_loader = build_dataloader(opts)
@@ -604,10 +806,21 @@ def main(opts):
     # # vid_sub_range = load_subtitle_range(data_loader, opts)
     # vid_to_subs = load_tvr_subtitle()
     # process_ad_hoc_query_graph(model, data_loader, desc_to_video_pools, desc_to_moment_pools, vid_to_subs, opts, model_opts)
-
-    desc_to_moment_pools = load_hero_pred(opts, task="vcmr")
-    desc_to_video_pools = get_desc_video_pool(desc_to_moment_pools)
-    process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc_to_moment_pools, opts, model_opts)
+    #
+    # # VCMR based graph
+    # desc_to_moment_pools = load_hero_pred(opts, task="vcmr")
+    # desc_to_video_pools = get_desc_video_pool(desc_to_moment_pools)
+    # process_vcmr_based_query_graph(model, data_loader, desc_to_video_pools, desc_to_moment_pools, opts, model_opts)
+    #
+    # # graph statistic visualization
+    # moment_num = [len(desc_to_moment_pools[k]) for k in desc_to_moment_pools]
+    # p = 0.9
+    # x = percentile(moment_num, p)
+    # list_histogram(moment_num, title="Number of top-100 retrieved moments using HERO.", fig_name=f"dist_mom_num_top_100_p{p:.2f}_{x}.png")
+    #
+    # video_num = [len(desc_to_video_pools[k]) for k in desc_to_video_pools]
+    # x = percentile(video_num, p)
+    # list_histogram(video_num, title="Number of videos in top-100 retrieved moments using HERO.", fig_name=f"dist_vid_num_top_100_p{p:.2f}_{x}.png")
 
 
 if __name__ == "__main__":
@@ -622,8 +835,7 @@ if __name__ == "__main__":
     parser.add_argument("--checkpoint", default=None, type=str, help="pretrained model checkpoint steps")
     parser.add_argument("--batch_size", default=80, type=int, help="number of queries in a batch")
     parser.add_argument("--vcmr_eval_video_batch_size", default=50, type=int, help="number of videos in a batch")
-    parser.add_argument( "--full_eval_tasks", type=str, nargs="+", choices=["VCMR", "SVMR", "VR"], default=["VCMR", "SVMR", "VR"], help="Which tasks to run. VCMR: Video Corpus Moment Retrieval; SVMR: "
-                                                                                                                                        "Single Video Moment Retrieval;" "VR: regular Video Retrieval. "
+    parser.add_argument("--full_eval_tasks", type=str, nargs="+", choices=["VCMR", "SVMR", "VR"], default=["VCMR", "SVMR", "VR"], help="Which tasks to run. VCMR: Video Corpus Moment Retrieval; SVMR: "
                                                                                                                                         "(will be performed automatically with VCMR)")
     parser.add_argument("--output_dir", default=None, type=str, help="The output directory where the model checkpoints will be written.")
 
@@ -631,6 +843,9 @@ if __name__ == "__main__":
     parser.add_argument('--fp16', action='store_true', help="Whether to use 16-bit float precision instead of 32-bit")
     parser.add_argument('--n_workers', type=int, default=4, help="number of data workers")
     parser.add_argument('--pin_mem', action='store_true', help="pin memory")
+
+    parser.add_argument("--alpha", default=0.99, type=float, help="decay rate")
+    parser.add_argument("--observe_steps", default=20, type=int, help="The number of steps which a node can observe")
 
     args = parser.parse_args()
 

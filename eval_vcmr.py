@@ -125,9 +125,13 @@ def main(opts):
                 all_results[key].extend(all_results_list[rank_id][key])
         LOGGER.info('All results joined......')
 
+        # from ivcml_util import list_histogram, show_type_tree
+        # num_vcmr_moment = [len(item["predictions"]) for item in all_results["VCMR"]]
+        # list_histogram(num_vcmr_moment, title="Number of moment number retrieved by HERO (gathered).", fig_name=f"dist_mom_num_full_gathered.png")
+
         # save_vr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vr.json')
         # save_vcmr_base_on_vr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vcmr_base_on_vr.json')
-        save_vcmr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vcmr.json')
+        # save_vcmr(all_results, f'{result_dir}/results_{opts.checkpoint}_{opts.split}_vcmr.json')
         # save_json(
         #     all_results,
         #     f'{result_dir}/results_{opts.checkpoint}_all.json')
@@ -405,8 +409,18 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
 
     eval_res = dict(SVMR=svmr_res, VCMR=vcmr_res, VR=vr_res)
     eval_res = {k: v for k, v in eval_res.items() if len(v) != 0}
+
+    # from ivcml_util import list_histogram, show_type_tree
+    # print("model_opts.max_after_nms:", model_opts.max_after_nms)
+    #
+    # num_vcmr_moment = [len(item["predictions"]) for item in eval_res["VCMR"]]
+    # list_histogram(num_vcmr_moment, title="Number of moment number retrieved by HERO.", fig_name=f"dist_mom_num_full.png")
+
     eval_res["video2idx"] = video2idx_global
     eval_submission = get_submission_top_n(eval_res, top_n=model_opts.max_after_nms)
+
+    # num_vcmr_moment = [len(item["predictions"]) for item in eval_submission["VCMR"]]
+    # list_histogram(num_vcmr_moment, title="Number of moment number retrieved by HERO after NMS.", fig_name=f"dist_mom_num_full_after_nms.png")
 
     if has_gt_target:
         metrics = eval_retrieval(eval_submission, partial_query_data,
@@ -492,6 +506,7 @@ def validate_full_vcmr(model, val_loader, split, opts, model_opts):
         tot_time = time()-st
         val_log.update({f'valid/vcmr_{split}_ex_per_s': n_ex/tot_time})
         LOGGER.info(f"validation finished in {int(tot_time)} seconds")
+
     model.train()
     return val_log, eval_submission
 

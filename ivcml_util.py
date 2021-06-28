@@ -79,6 +79,16 @@ def flatten(list_of_lists):
     return [item for sublist in list_of_lists for item in sublist]
 
 
+def padding(seq: list, max_length: int, pad_tok=None):
+    """
+    :param seq: list to pad
+    :param max_length: length of padded list
+    :param pad_tok: token used to pad
+    :return: padded list
+    """
+    return (seq + [pad_tok] * max_length)[:max_length]
+
+
 # Numpy operation
 def pairwise_equation(data: np.ndarray, tok_illegal=None):
     """
@@ -111,6 +121,14 @@ def indicator_vec(indices: Union[int, list], n: int, device=None, dtype=torch.fl
 
 
 # Dict operation
+def l2_norm(vec: torch.Tensor):
+    """
+    :param vec: feature vector [D] or [N, D]
+    """
+    vec /= torch.norm(vec, dim=-1, keepdim=True)
+    return vec
+
+
 def sample_dict(d: dict, n: int, seed=None):
     """
     :param d: original dict
@@ -172,6 +190,24 @@ def build_sparse_adjacent_matrix(edges: list, n: int, device=None, dtype=torch.f
     return a
 
 
+def undirectionalize(mat: torch.Tensor):
+    dtype = mat.dtype
+    return ((mat > 0) | (mat.T > 0)).to(dtype)
+
+
+def remove_undirectional_edge(mat, edges):
+    if not edges:
+        return mat
+    x, y = zip(*edges)
+    indices = [x+y, y+x]  # undirectional edges
+    mat[indices] = 0  # remove edges
+    return mat
+
+
+def cuda(data, device):
+    return [i.to(device) if isinstance(i, torch.Tensor) else i for i in data]
+
+
 # List statistic
 def percentile(data: list, p=0.5):
     """
@@ -198,9 +234,10 @@ def save_plt(fig_name: str, mute):
     :param mute: mute the output if True
     :return: None
     """
-    fig_dir = fig_name[:fig_name.rfind("/")]
-    if not os.path.exists(fig_dir):
-        os.makedirs(fig_dir)
+    if "/" in fig_name:
+        fig_dir = fig_name[:fig_name.rfind("/")]
+        if not os.path.exists(fig_dir):
+            os.makedirs(fig_dir)
     plt.savefig(fig_name)
     if not mute:
         print("'%s' saved." % fig_name)

@@ -4,7 +4,7 @@ import networkx as nx
 import random
 import numpy as np
 from ivcml_util import pairwise_equation, expand_window, mean, random_color, is_overlap, subtract
-
+from pprint import pprint
 
 COLOR = {
     "dark red": "#CD2424",
@@ -202,6 +202,7 @@ def build_vcmr_edges(moment_pool, frame_to_unit, vid_to_duration, vid_to_frame_n
 
     e_color = [EDGE_COLOR["default"]] * len(edges)
     e_conf = [1] * len(edges)
+
     return edges, e_color, e_conf
 
 
@@ -358,6 +359,8 @@ def path_to_edges(p: list):
     :param p: a path in a graph
     :return: all edges in the path p
     """
+    if len(p) == 1:
+        return [(p[0], p[0])]
     e = [(p[i-1], p[i]) for i in range(len(p)) if i > 0]
     return e
 

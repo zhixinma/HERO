@@ -342,14 +342,14 @@ class VideoFeatSubTokDataset(Dataset):
         return len(self.vids)
 
     def __getitem__(self, vid_):
-        '''
+        """
         matched_sub_frames:
         [[txt, txt_position_ids, v_feat(frames), v_position_ids, attn_masks],
          [txt, txt_position_ids, v_feat(frames), v_position_ids, attn_masks]]
         all_frames:[v_feat(frames)]
         clip_level_position_ids
         clip_level_attn_masks
-        '''
+        """
         example = self.txt_db[vid_]
         v_feat, nframes = self._get_v_feat(vid_)
 
@@ -450,7 +450,7 @@ def video_collate(inputs):
              'f_v_pos_ids': all_f_v_pos_ids,          # (total_sub, max_vl)
              'f_attn_masks': all_f_attn_masks,        # (total_sub, max_vl+max_sl)
              'f_gather_index': frame_level_gather_index,  # (total_sub, max_vl+max_sl)
-             'f_sub_input_attn_masks': all_f_sub_input_attn_masks, # (total_sub, max_sl)
+             'f_sub_input_attn_masks': all_f_sub_input_attn_masks,  # (total_sub, max_sl)
              'c_v_feats': clip_level_v_feats,         # (bz, max_len, k)
              'c_pos_ids': clip_level_pos_ids,         # (bz, max_len) [matched, unmatched]
              'c_attn_masks': clip_level_attn_masks,   # (bz, max_len)
