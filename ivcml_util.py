@@ -1,6 +1,7 @@
 import os
 from matplotlib import pyplot as plt
 import torch
+import torch.nn.functional as F
 import random
 from collections import Counter
 from collections.abc import Iterable   # import directly from collections for Python < 3.3
@@ -206,6 +207,33 @@ def remove_undirectional_edge(mat, edges):
 
 def cuda(data, device):
     return [i.to(device) if isinstance(i, torch.Tensor) else i for i in data]
+
+
+def stack_tenor_list(tensor_list, dim=0, value=0):
+    data_size = len(tensor_list)
+    prob = tensor_list[0]
+    dim_num = len(prob.shape)
+    max_dims = []
+    data_dims = [[] for _ in range(data_size)]
+    for i_dim in range(dim_num):
+        _max_dim = 0
+        for i_data in range(data_size):
+            data = tensor_list[i_data]
+            _max_dim = max(_max_dim, data.shape[i_dim])
+            data_dims[i_data].append(data.shape[i_dim])
+        max_dims.append(_max_dim)
+
+    to_stack = []
+    for i_data in range(data_size):
+        data = tensor_list[i_data]
+        pad = []
+        for i_dim in range(dim_num):
+            num_to_pad = max_dims[i_dim] - data.shape[i_dim]
+            pad = [0, num_to_pad] + pad
+        padded = F.pad(data, pad, mode="constant", value=value)
+        to_stack.append(padded)
+
+    return torch.stack(to_stack, dim=dim)
 
 
 # List statistic

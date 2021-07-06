@@ -7,21 +7,59 @@ from sklearn.metrics import accuracy_score
 
 from ivcml_model import DeepQNetIVCML
 from ivcml_util import cuda
+from ivcml_util import show_type_tree
+from ivcml_util import stack_tenor_list
 from ivcml_data import HEROUnitFeaLMDB
 from ivcml_load import get_desc_input_batch
+from ivcml_load import get_desc_input_batch_wo_aggregate
 
 
 def train(opts):
-    def iterate(_query_id, _input_reader, _fea_reader):
-        batch = get_desc_input_batch(_query_id, _input_reader, _fea_reader)
-        text_ids_batch, adj_mat_nei_batch, nei_vec_batch, unit_fea_batch, nei_mask_batch, _cls_gold_batch, _reward_batch = cuda(batch, device)
-        _cls_pred_batch = dqn(text_ids_batch, adj_mat_nei_batch, nei_vec_batch, unit_fea_batch, nei_mask_batch)
-        _cls_pred_batch = torch.where(nei_mask_batch > 0, _cls_pred_batch, nei_mask_batch)
-        return _cls_pred_batch, _cls_gold_batch, _reward_batch
+    def batch_generator(_query_ids, _input_reader, _fea_reader, _node_observe_weight_reader, batch_size):
+        data_size = len(_query_ids)
+        batch_num = data_size // batch_size + int((data_size % batch_size) != 0)
+        with tqdm(range(batch_num), total=batch_num) as t:
+            for i_batch in t:
+                t.set_description(desc="Training samples: ce_loss %.3f l1_loss: %.3f" % (ce_loss, l1_loss))
+                st = i_batch * batch_size
+                ed = st + batch_size
+                batch_q_ids = _query_ids[st: ed]
+
+                text_ids_batch = []
+                nei_observe_weight_batch = []
+                unit_fea_batch = []
+                tar_mask_batch = []
+                tar_bias_batch = []
+                nei_reward_batch = []
+                for q_id in batch_q_ids:
+                    text_ids_case, nei_observe_weight_case, unit_fea_case, tar_mask_case, tar_bias_case, nei_reward_case = \
+                        get_desc_input_batch_wo_aggregate(q_id, _input_reader, _fea_reader, _node_observe_weight_reader)
+                    text_ids_batch.append(text_ids_case)
+                    nei_observe_weight_batch.append(nei_observe_weight_case)
+                    unit_fea_batch.append(unit_fea_case)
+                    tar_mask_batch.append(tar_mask_case)
+                    tar_bias_batch.append(tar_bias_case)
+                    nei_reward_batch.append(nei_reward_case)
+
+                batch = [text_ids_batch, nei_observe_weight_batch, unit_fea_batch, tar_mask_batch, tar_bias_batch, nei_reward_batch]
+                batch = [stack_tenor_list(data) for data in batch]
+
+                yield i_batch, batch
+
+    def iterate(batch):
+        text_ids_batch, nei_observe_weight_batch, unit_fea_batch, nei_mask_batch, _cls_gold_batch, _reward_batch = cuda(batch, device)
+        _move_pred_batch, _reward_pred_batch = dqn(text_ids_batch, nei_observe_weight_batch, unit_fea_batch, nei_mask_batch, _cls_gold_batch)
+        # use mask to remove padded neighbors
+        invalid_sample_idx = (1 - nei_mask_batch).nonzero(as_tuple=True)
+        _move_pred_batch[invalid_sample_idx] = -1e5
+        _reward_pred_batch[invalid_sample_idx] = 0
+        # build mask to remove padded time steps
+        step_mask_batch = (nei_mask_batch.sum(dim=-1, keepdim=False) > 0).to(nei_mask_batch.dtype)
+        return _move_pred_batch, _reward_pred_batch, _cls_gold_batch, _reward_batch, step_mask_batch
 
     device = torch.device("cuda")
     feature_type = "vt"
-    dqn = DeepQNetIVCML(d_fea=768, alpha=0.99, step_num=20)
+    dqn = DeepQNetIVCML(d_fea=768, alpha=opts.alpha, step_num=opts.observe_steps)
     dqn.to(device)
 
     optimizer = optim.RMSprop(dqn.parameters())
@@ -30,49 +68,67 @@ def train(opts):
 
     input_reader = HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, tag="input", encode_method="json", readonly=True)
     fea_reader = HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, tag="unit_fea", encode_method="ndarray", readonly=True)
+    node_observe_reader = HEROUnitFeaLMDB(opts.output_dir, feature_type, opts.split, tag="observe_range_ALPHA_%f_STEPS_%d" % (opts.alpha, opts.observe_steps), encode_method="ndarray", readonly=True)
+
     query_ids = input_reader.keys()
 
-    # sample
-    random.seed(10)
-    query_ids = random.sample(query_ids, 500)
+    # # sample
+    # random.seed(10)
+    # query_ids = random.sample(query_ids, 500)
 
-    data_size = len(query_ids)
+    data_size_ttl = len(query_ids)
+    boundary = int(data_size_ttl * 0.9)
     random.seed(1)
-    query_ids_val = random.sample(query_ids, int(data_size*0.1))
-    query_ids_trn = [q_id for q_id in query_ids if q_id not in query_ids_val]
-    data_size_trn = len(query_ids_trn)
+    random.shuffle(query_ids)
+    query_ids_trn = query_ids[:boundary]
+    query_ids_val = query_ids[boundary:]
 
     num_epoch = 10
+    batch_size = 256
     evaluate_period = 1
     for i_epoch in range(num_epoch):
         print("Epoch %d" % i_epoch)
         dqn.train()
         ce_loss, l1_loss = 0, 0
-        all_loss = 0
-        with tqdm(query_ids_trn, total=len(query_ids_trn)) as t:
-            for query_id in t:
-                t.set_description(desc="Training samples: ce_loss %.3f l1_loss: %.3f" % (ce_loss, l1_loss))
-                if opts.log:
-                    print("QUERY:", query_id)
-                pred_batch, gold_batch, reward_batch = iterate(query_id, input_reader, fea_reader)
-                pred_batch = pred_batch.squeeze(-1)
+        for i_batch, batch_data in batch_generator(query_ids_trn, input_reader, fea_reader, node_observe_reader, batch_size):
+            move_pred_batch, reward_pred_batch, gold_batch, reward_batch, time_step_mask_batch = iterate(batch_data)
 
-                ce_loss = ce_loss_func(pred_batch, gold_batch)
-                l1_loss = l1_loss_func(pred_batch, reward_batch)
-                loss = ce_loss + l1_loss
+            # use mask to index valid sample
+            valid_sample_idx = time_step_mask_batch.nonzero(as_tuple=True)
+            move_pred_batch = move_pred_batch[valid_sample_idx]
+            reward_pred_batch = reward_pred_batch[valid_sample_idx]
+            gold_batch = gold_batch[valid_sample_idx]
+            reward_batch = reward_batch[valid_sample_idx]
 
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
+            if i_batch == 5:
+                print(torch.softmax(move_pred_batch[0, :], dim=-1))
+                print(gold_batch[0])
+                print(reward_pred_batch[0, :])
+                print(reward_batch[0, :])
+                show_type_tree([move_pred_batch, gold_batch, reward_pred_batch, reward_batch])
+                exit()
+
+            ce_loss = ce_loss_func(move_pred_batch, gold_batch)
+            l1_loss = l1_loss_func(reward_pred_batch, reward_batch)
+            loss = ce_loss + l1_loss
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
         if i_epoch % evaluate_period == 0:
             dqn.eval()
             pred_val, gold_val = [], []
-            for query_id in tqdm(query_ids_val, total=len(query_ids_val), desc="Validating samples"):
-                pred_batch, gold_batch, reward_batch = iterate(query_id, input_reader, fea_reader)
-                pred_batch = pred_batch.squeeze(-1).argmax(dim=-1)
-                pred_val.append(pred_batch)
+            for i_batch, batch_data in batch_generator(query_ids_val, input_reader, fea_reader, node_observe_reader, batch_size):
+                move_pred_batch, reward_pred_batch, gold_batch, reward_batch, time_step_mask_batch = iterate(batch_data)
+                valid_sample_idx = time_step_mask_batch.nonzero(as_tuple=True)
+
+                move_pred_batch = move_pred_batch.argmax(dim=-1)
+                move_pred_batch = move_pred_batch[valid_sample_idx]
+                gold_batch = gold_batch[valid_sample_idx]
+                pred_val.append(move_pred_batch)
                 gold_val.append(gold_batch)
+
             pred_val = torch.cat(pred_val, dim=0)
             gold_val = torch.cat(gold_val, dim=0)
             acc = accuracy_score(gold_val.detach().cpu(), pred_val.detach().cpu())
@@ -93,6 +149,9 @@ if __name__ == "__main__":
     # parser.add_argument("--vcmr_eval_video_batch_size", default=50, type=int, help="number of videos in a batch")
     # parser.add_argument("--full_eval_tasks", type=str, nargs="+", choices=["VCMR", "SVMR", "VR"], default=["VCMR", "SVMR", "VR"], help="Which tasks to run. VCMR: Video Corpus Moment Retrieval; SVMR: "
     parser.add_argument("--output_dir", default=None, type=str, help="The output directory where the model checkpoints will be written.")
+
+    parser.add_argument("--alpha", default=0.99, type=float, help="decay rate")
+    parser.add_argument("--observe_steps", default=20, type=int, help="The number of steps which a node can observe")
 
     # # device parameters
     # parser.add_argument('--fp16', action='store_true', help="Whether to use 16-bit float precision instead of 32-bit")

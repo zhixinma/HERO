@@ -13,8 +13,11 @@ class DeepQNetIVCML(nn.Module):
         self.step_num = step_num
         self.unit_fea_mlp_1 = nn.Linear(d_fea, d_fea)
         self.unit_fea_mlp_2 = nn.Linear(d_fea*2, d_fea)
-        self.unit_fea_mlp_3 = nn.Linear(d_fea, 1)
+        self.unit_fea_mlp_cls = nn.Linear(d_fea, 1)
+        self.unit_fea_mlp_reg = nn.Linear(d_fea, 1)
         self.p_dropout = 0.9
+
+        self.query_upd_mlp = nn.Linear(d_fea*3, d_fea)
 
         self.encode = "bert"
         self.freeze_bert = True
@@ -24,39 +27,80 @@ class DeepQNetIVCML(nn.Module):
             for p in self.bert_encoder.parameters():
                 p.requires_grad = not self.freeze_bert
 
-    def forward(self, query_tok_ids, _a_nei, _vec_nei, _fea_emb, _nei_mask):
+    def forward(self, query_tok_ids, weight_observe, _fea_emb, _nei_mask, _move_gt=None):
         """
         :param query_tok_ids:
-        :param _a_nei: adjacent matrix of neighbors including
-        the current state. [B, NEI, N, N]
-        :param _vec_nei: [B, NEI]
+        :param weight_observe:
         :param _fea_emb: [B, N, D]
         :param _nei_mask:
+        :param _move_gt:
         :return:
         """
         query_fea = self.bert_encode(query_tok_ids)
-        move_pred = self.move(query_fea, _a_nei, _vec_nei, _fea_emb, _nei_mask)
-        return move_pred
+        move_pred, reward_pred = self.move(query_fea, weight_observe, _fea_emb, _nei_mask, _move_gt)
+        return move_pred, reward_pred
 
-    def move(self, query_fea, _a_nei, _nei, _fea_emb, _nei_mask):
-        nei_size = _a_nei.shape[1]
-        nei_fea = self.aggregate(_a_nei, _nei, _fea_emb)
-        nei_fea = torch.where(_nei_mask > 0, nei_fea, _nei_mask)  # remove nan
+    def move(self, query_fea, nei_w_obs, _fea_emb, _nei_mask, _move_gt):
+        batch_size = query_fea.shape[0]
+        nei_fea = torch.einsum('bsnv,bvd->bsnd', nei_w_obs, _fea_emb)
+        seq_len = nei_w_obs.shape[1]
 
-        nei_fea = F.relu(nei_fea)
         nei_fea = self.unit_fea_mlp_1(nei_fea)
         nei_fea = F.relu(nei_fea)
         nei_fea = F.dropout(nei_fea, self.p_dropout)
+        query_fea = query_fea.mean(dim=-2)  # mean of all words
 
-        query_fea = query_fea.mean(dim=-2)
-        query_fea = query_fea.unsqueeze(1).repeat(1, nei_size, 1)
-        nei_fea = torch.cat((nei_fea, query_fea), dim=-1)
-        nei_fea = self.unit_fea_mlp_2(nei_fea)
-        nei_fea = F.relu(nei_fea)
-        nei_fea = F.dropout(nei_fea, self.p_dropout)
+        nei_move_pred_seq = []
+        nei_reward_pred_seq = []
+        for i_step in range(seq_len):
+            nei_move_pred_step, nei_reward_pred_step = self.move_single_step(query_fea, nei_fea[:, i_step, :, :])
+            move_idx_pred = torch.argmax(nei_move_pred_step, dim=-1, keepdim=False)
+            nei_move_pred_seq.append(nei_move_pred_step)
+            nei_reward_pred_seq.append(nei_move_pred_step)
 
-        nei_fea = self.unit_fea_mlp_3(nei_fea)
-        return nei_fea
+            if _move_gt is None:
+                move_idx = move_idx_pred
+            else:
+                # teacher forcing
+                move_idx_gold = _move_gt[:, i_step]
+                move_idx = move_idx_gold
+
+            # Update query feature
+            batch_dim = torch.arange(batch_size)
+            pos_idx = (batch_dim, move_idx)
+            pos_move_fea = nei_fea[:, i_step, :, :][pos_idx]
+
+            # (sum of negative features - positive feature) / number of negative neighbors
+            neg_move_fea = nei_fea[:, i_step, :, :].sum(dim=-2, keepdim=False) - pos_move_fea
+            mask_wo_gt = _nei_mask[:, i_step, :]
+            mask_wo_gt[pos_idx] = 0
+            neg_move_num = mask_wo_gt.sum(dim=-1, keepdim=True)
+            neg_move_num = neg_move_num.where(neg_move_num > 0, torch.ones_like(neg_move_num))
+            neg_move_fea /= neg_move_num
+            assert (neg_move_num > 0).all(), neg_move_num
+
+            query_fea = self.update_query(query_fea, pos_move_fea, neg_move_fea)
+
+        nei_move_pred_seq = torch.stack(nei_move_pred_seq, dim=1)
+        nei_reward_pred_seq = torch.stack(nei_reward_pred_seq, dim=1)
+        return nei_move_pred_seq, nei_reward_pred_seq
+
+    def move_single_step(self, fea_query, fea_nei):
+        nei_size = fea_nei.shape[-2]
+        fea_query = fea_query.unsqueeze(1).repeat(1, nei_size, 1)
+        fea_nei = torch.cat((fea_nei, fea_query), dim=-1)
+        fea_nei = self.unit_fea_mlp_2(fea_nei)
+        fea_nei = F.relu(fea_nei)
+        fea_nei = F.dropout(fea_nei, self.p_dropout)
+        nei_pred_cls = self.unit_fea_mlp_cls(fea_nei).squeeze(dim=-1)  # dense to 1 then squeeze
+        nei_pred_reg = self.unit_fea_mlp_reg(fea_nei).squeeze(dim=-1)  # dense to 1 then squeeze
+        return nei_pred_cls, nei_pred_reg
+
+    def update_query(self, query, pos, neg):
+        query = self.query_upd_mlp(torch.cat((query, pos, neg), dim=-1))
+        query = F.relu(query)
+        query = F.dropout(query, self.p_dropout)
+        return query
 
     def aggregate(self, _a, _s, _fea_emb):
         """

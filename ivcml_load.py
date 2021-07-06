@@ -21,9 +21,14 @@ from ivcml_util import flatten
 from ivcml_util import show_type_tree
 from ivcml_util import undirectionalize, remove_undirectional_edge
 from ivcml_util import l2_norm
+from ivcml_util import stack_tenor_list
 
 from ivcml_data import HEROUnitFeaLMDB
 from ivcml_data import text_to_id_bert
+
+from ivcml_graph import graph_shortest_path
+
+c = 0
 
 
 def load_tvr_subtitle():
@@ -201,94 +206,119 @@ def recover_adj_mat(num_nodes, coo_adj_zero, coo_mom):
     return mat
 
 
-def ivcml_preprocessing(graph: nx.Graph, node_src, node_tar, feature_embedding, alpha, steps):
-    def aggregate(_adj, _src_vec, alpha, step_num, norm=True):
-        """
-        Aggregation function for single state
-        :param _adj: Adjacency matrix [N, N]
-        :param _src_vec: State vector [N, ]
-        :param alpha: decay rate
-        :param norm: do L2 norm if True
-        :param step_num: number of steps to aggregate
-        :return: Aggregated node weight of _s given _a
-        """
-        # _fea = torch.einsum('nd,n->d', _fea_emb, _src_vec) * alpha
-        _w = _src_vec * alpha
-        # cover = None
-        for j in range(step_num):
-            neis_leq_j_step = torch.einsum('io,i->o', _adj, _src_vec)
-            cover = ((_src_vec > 0) | (neis_leq_j_step > 0)).to(dtype=dtype)
-            new_explore = cover - _src_vec
-            _src_vec = cover
-            num_new_nodes = new_explore.sum().item()
-            if num_new_nodes:
-                # weight_sum = torch.einsum('nd,n->d', _fea_emb, new_explore) * (alpha ** (j + 2))
-                # _fea += weight_sum
-                _w += new_explore * (alpha ** (j + 2))
-        # _fea /= cover.sum().item()
-        if norm:
-            _w = l2_norm(_w)
-        return _w
+def aggregate(_adj, _src_vec, _alpha, step_num, norm=True):
+    """
+    Aggregation function for single state
+    :param _adj: Adjacency matrix [N, N]
+    :param _src_vec: State vector [N, ]
+    :param _alpha: decay rate
+    :param norm: do L2 norm if True
+    :param step_num: number of steps to aggregate
+    :return: Aggregated node weight of _s given _a
+    """
+    _w = _src_vec * _alpha
+    dtype = _src_vec.dtype
+    for j in range(step_num):
+        neis_leq_j_step = torch.einsum('io,i->o', _adj, _src_vec)
+        cover = ((_src_vec > 0) | (neis_leq_j_step > 0)).to(dtype=dtype)
+        new_explore = cover - _src_vec
+        _src_vec = cover
+        num_new_nodes = new_explore.sum().item()
+        if num_new_nodes:
+            _w += new_explore * (_alpha ** (j + 2))
+    if norm:
+        _w = l2_norm(_w)
+    return _w
 
-    def get_adj_nei(_g: nx.Graph, _center, _nei):
-        edges = [_e for _e in graph.edges if not (_center in _e and _nei not in _e)]
-        return build_sparse_adjacent_matrix(edges, node_num, undirectional=True)
 
-    def edges_to_remove(_g: nx.Graph, _center, _nei):
-        return [_e for _e in graph.edges if (_center in _e and _nei not in _e)]
+def aggregate_batch(_a, _s, alpha, steps, norm=True):
+    """
+    Aggregation function in batch
+    :param _a: Adjacency matrix [B, N, N] or [B, A, N, N] where A is dim of neighbors
+    :param _s: State vector [B, N, ] or [B, A, N]
+    :param steps
+    :param alpha
+    :param norm:
+    :return: Aggregated feature of _s given _a
+    """
+    batch_size, nei_size = _a.shape[0], _a.shape[1]
+    device = _a.device
+    # _fea = torch.einsum('band,ban->bad', _fea_emb, _s) * alpha
+    _w = _s * alpha
+    # cover = torch.ones(batch_size, nei_size, 1, device=device)  # initialize TODO check
+    for i in range(steps):
+        neis_leq_i_step = torch.einsum('bio,bi->bo', _a, _s)
+        cover = ((_s > 0) | (neis_leq_i_step > 0)).to(torch.float)
+        new_explore = cover - _s
+        _s = cover
+        num_new_nodes = new_explore.sum().item()
+        if num_new_nodes:
+            # weight_sum = torch.einsum('band,ban->bad', _fea_emb, new_explore) * (lpha ** (i + 2))
+            # _fea += weight_sum
+            _w += new_explore * (alpha ** (i + 2))
 
+    if norm:
+        _w = l2_norm(_w)
+
+    # _fea /= cover.sum(dim=-1, keepdim=True)
+    return _w
+
+
+def get_adj_nei(_g: nx.Graph, _center, _nei):
+    edges = [_e for _e in _g.edges if not (_center in _e and _nei not in _e)]
+    return build_sparse_adjacent_matrix(edges, _g.number_of_nodes(), undirectional=True)
+
+
+def ivcml_preprocessing(graph: nx.Graph, node_src, node_tar):
     states_idx, targets_bias = [], []
     neis_unit_idx = []
-    neis_edge_to_remove = []
     neis_rewards = []
-    # nei_adj_temporal_zero_coo, nei_adj_mom_coo = [], []
     sp = shortest_path_edges(graph, node_src, node_tar)
-    node_num = graph.number_of_nodes()
-    device = feature_embedding.device
-    dtype = feature_embedding.dtype
-
-    adj_mat = build_sparse_adjacent_matrix(list(graph.edges), node_num, device=device, dtype=dtype, undirectional=True)  # directed adjacency matrix
 
     for _st, _ed in sp:
-        # a training sample
         state, ground_truth = _st, _ed
-        vec_state = indicator_vec(state, node_num, device=device, dtype=dtype)
-        fea_state = aggregate(adj_mat, vec_state, feature_embedding, alpha=alpha, step_num=steps)
-
-        # build input sample
         states_idx.append(state)
-
         nei_tmp = []
-        nei_edge_to_remove_tmp = []
         rewards_tmp = []
         actions = [state] + list(graph.adj[state].keys())
-        # nei_adj_temporal_zero_coo_tmp, nei_adj_mom_coo_tmp = [], []
-        # print("adj:", len(actions)-1, actions)
         for i, nei in enumerate(actions):
             reward = 0
             if nei == ground_truth:
                 targets_bias.append(i)
                 reward = 1
 
-            # # aggregation test
-            adj_mat_nei = get_adj_nei(graph, state, nei)
-            vec_nei = indicator_vec(nei, node_num, device=device, dtype=dtype)
-            weights = aggregate(adj_mat_nei, vec_nei, alpha=0.5, step_num=10, norm=True)
-            _w_sum = torch.einsum('nd,n->d', feature_embedding, weights)
-
             # edge to remove in adjacent matrix of neighbors
-            nei_edge_to_remove_tmp.append(edges_to_remove(graph, _st, nei))
             nei_tmp.append(nei)
             rewards_tmp.append(reward)
 
-        # nei_adj_temporal_zero_coo.append(nei_adj_temporal_zero_coo_tmp)
-        # nei_adj_mom_coo.append(nei_adj_mom_coo_tmp)
-        neis_edge_to_remove.append(nei_edge_to_remove_tmp)
         neis_unit_idx.append(nei_tmp)
         neis_rewards.append(rewards_tmp)
 
-    # return states_idx, targets_bias, neis_unit_idx, nei_adj_temporal_zero_coo, nei_adj_mom_coo
-    return states_idx, targets_bias, neis_unit_idx, neis_edge_to_remove, neis_rewards
+    return states_idx, targets_bias, neis_unit_idx, neis_rewards
+
+
+def ivcml_node_observe_feature(query_id: str, graph: nx.Graph, node_src, node_tar, feature_embedding):
+    sp = graph_shortest_path(graph, node_src, node_tar)
+    edges = []
+    for _n in sp:
+        actions = [_n] + list(graph.adj[_n].keys())
+        edges += [(_n, _nei) for _nei in actions]
+
+    node_num = graph.number_of_nodes()
+    dtype = feature_embedding.dtype
+
+    _a_batch = []
+    _vec_batch = []
+    _keys_batch = []
+    for center, neighbor in edges:
+        adj_mat_nei = get_adj_nei(graph, center, neighbor)
+        vec_nei = indicator_vec(center, node_num, dtype=dtype)
+        key = "%s_%d_%d" % (query_id, center, neighbor)
+        _a_batch.append(adj_mat_nei)
+        _vec_batch.append(vec_nei)
+        _keys_batch.append(key)
+
+    return _a_batch, _vec_batch, _keys_batch
 
 
 def get_desc_input_batch(query_id, input_reader, fea_reader):
@@ -363,8 +393,54 @@ def get_desc_input_batch(query_id, input_reader, fea_reader):
 
     tmp = [text_ids_batch, adj_mat_nei_batch, nei_vec_batch, unit_fea_batch, tar_mask_batch, tar_bias_batch, nei_reward_batch]
     show_type_tree(tmp)
+    exit()
 
     return text_ids_batch, adj_mat_nei_batch, nei_vec_batch, unit_fea_batch, tar_mask_batch, tar_bias_batch, nei_reward_batch
+
+
+def get_desc_input_batch_wo_aggregate(query_id, input_reader, fea_reader, node_observe_weight_reader):
+    query_data = input_reader[query_id]
+    video_pool = query_data["video_pool"]
+    node_num = query_data["num_node"]
+    state_node_idx = query_data["state_node_idx"]
+    nei_node_idx = query_data["nei_node_idx"]
+    tar_bias = query_data["tar_bias"]
+    query_text = query_data["desc"]
+    neis_rewards = query_data["reward"]
+
+    unit_fea = fea_reader[video_pool]
+    text_id_bert, mask = text_to_id_bert(query_text)
+
+    nei_observe_weight_batch = []
+    tar_mask_batch = []
+    nei_reward_batch = []
+    for state, neis, reward in zip(state_node_idx, nei_node_idx, neis_rewards):
+        nei_num = len(neis)
+        tar_mask_step = torch.ones(nei_num)
+        nei_reward = torch.tensor(reward, dtype=torch.float)
+        weight_node_obs_step = torch.zeros(nei_num, node_num)
+
+        for i, nei in enumerate(neis):
+            key = "%s_%d_%d" % (query_id, state, nei)
+            weight_node_obs = node_observe_weight_reader[key]
+            if weight_node_obs is not None:
+                weight_node_obs_step[i] = weight_node_obs
+            # else:
+            #     print("Error:", key, "is missing.")
+
+        nei_observe_weight_batch.append(weight_node_obs_step)
+        tar_mask_batch.append(tar_mask_step)
+        nei_reward_batch.append(nei_reward)
+
+    unit_fea_batch = unit_fea
+    text_ids_batch = text_id_bert
+    tar_bias_batch = torch.tensor(tar_bias)
+
+    nei_observe_weight_batch = stack_tenor_list(nei_observe_weight_batch, dim=0)
+    tar_mask_batch = stack_tenor_list(tar_mask_batch, dim=0)
+    nei_reward_batch = stack_tenor_list(nei_reward_batch, dim=0)
+
+    return text_ids_batch, nei_observe_weight_batch, unit_fea_batch, tar_mask_batch, tar_bias_batch, nei_reward_batch
 
 
 if __name__ == "__main__":
@@ -380,5 +456,5 @@ if __name__ == "__main__":
     g.add_nodes_from(v)
     g.add_edges_from(e)
 
-    x = ivcml_preprocessing(g, 1, 4, emb)
+    x = ivcml_preprocessing(g, 1, 4)
     show_type_tree(x)

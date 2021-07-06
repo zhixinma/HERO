@@ -21,7 +21,7 @@ class HEROUnitFeaLMDB(object):
     def __init__(self, data_dir, fea_type, split, tag, encode_method="ndarray", readonly=True):
         f_path = "/%s/hero_unit_fea_lmdb/%s_%s_%s_lmdb" % (data_dir.strip("/"), split, fea_type, tag)
         create = not readonly
-        self.env = lmdb.open(f_path, readonly=readonly, create=create, readahead=False, map_size=int(1e9))
+        self.env = lmdb.open(f_path, readonly=readonly, create=create, readahead=False, map_size=int(5e10))
         self.txn = self.env.begin()
         self.encode_method = encode_method
         print("LMDB file created: %s" % f_path)
@@ -35,6 +35,8 @@ class HEROUnitFeaLMDB(object):
 
     def get(self, v_id):
         v_enc = self.txn.get(v_id.encode('utf-8'))
+        if v_enc is None:
+            return None
         v = self._decode_(v_enc)
         return v
 
